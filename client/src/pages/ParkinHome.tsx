@@ -164,20 +164,20 @@ export default function ParkinHome() {
             <div className="absolute top-0 left-0" style={{width:'calc(100% - 40px)', height:'calc(100% - 50px)'}}>
               <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
               <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
-              {/* Car cutout - carved into the image bottom-right corner */}
-              <svg className="absolute bottom-0 right-0" width="140" height="90" viewBox="0 0 140 90" fill="#00565B" xmlns="http://www.w3.org/2000/svg" style={{zIndex:5}}>
-                {/* Car body */}
-                <path d="M20 55 C20 55 28 30 35 22 C42 14 52 10 70 10 C88 10 98 14 105 22 C112 30 120 55 120 55 Z" fill="#00565B"/>
-                {/* Car bottom/chassis */}
-                <rect x="10" y="52" width="120" height="25" rx="8" fill="#00565B"/>
-                {/* Wheels - circles that show teal bg */}
-                <circle cx="38" cy="75" r="12" fill="#00565B"/>
-                <circle cx="102" cy="75" r="12" fill="#00565B"/>
-                {/* Wheel inner circles */}
-                <circle cx="38" cy="75" r="5" fill="#3ECDC6"/>
-                <circle cx="102" cy="75" r="5" fill="#3ECDC6"/>
-                {/* Window */}
-                <path d="M45 50 C45 50 50 28 55 22 C60 18 65 16 70 16 C75 16 80 18 85 22 C90 28 95 50 95 50 Z" fill="#004A4F" opacity="0.5"/>
+              {/* Car cutout - matching original parkin.ae design */}
+              <svg className="absolute bottom-[-10px] right-[-10px]" width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg" style={{zIndex:5}}>
+                {/* Car body - simple rounded shape */}
+                <path d="M15 50 L15 38 C15 38 20 15 30 10 C35 7 45 5 60 5 C75 5 85 7 90 10 C100 15 105 38 105 38 L105 50 C105 55 100 58 95 58 L25 58 C20 58 15 55 15 50 Z" fill="#00565B"/>
+                {/* Window - lighter teal dome */}
+                <path d="M30 38 C30 38 35 18 42 13 C47 10 53 8 60 8 C67 8 73 10 78 13 C85 18 90 38 90 38 Z" fill="#3ECDC6" opacity="0.35"/>
+                {/* Bottom chassis */}
+                <rect x="10" y="55" width="100" height="16" rx="6" fill="#00565B"/>
+                {/* Wheels */}
+                <circle cx="32" cy="68" r="10" fill="#00565B"/>
+                <circle cx="88" cy="68" r="10" fill="#00565B"/>
+                {/* Wheel inner - teal dots */}
+                <circle cx="32" cy="68" r="4.5" fill="#3ECDC6"/>
+                <circle cx="88" cy="68" r="4.5" fill="#3ECDC6"/>
               </svg>
             </div>
             <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
