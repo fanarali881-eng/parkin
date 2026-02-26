@@ -1,0 +1,1376 @@
+{
+  "products": [
+    {
+      "id": 1001,
+      "title": "Full Cream Milk 250ml",
+      "titleAr": "حليب كامل الدسم 250 مل",
+      "handle": "full-cream-milk-250ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2001,
+          "title": "250 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/fullcream-200ml.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين الطازج كامل الدسم 250 مل - 100% حليب طازج</p>",
+      "descriptionAr": "حليب العين الطازج كامل الدسم 250 مل - 100% حليب طازج",
+      "image": "/product-images/fullcream-200ml.jpg"
+    },
+    {
+      "id": 1002,
+      "title": "Full Cream Milk 500ml",
+      "titleAr": "حليب كامل الدسم 500 مل",
+      "handle": "full-cream-milk-500ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2002,
+          "title": "500 مل",
+          "price": "4.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/fullcream-500ml.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين الطازج كامل الدسم 500 مل</p>",
+      "descriptionAr": "حليب العين الطازج كامل الدسم 500 مل",
+      "image": "/product-images/fullcream-500ml.jpg"
+    },
+    {
+      "id": 1003,
+      "title": "Full Cream Milk 1 Litre",
+      "titleAr": "حليب كامل الدسم 1 لتر",
+      "handle": "full-cream-milk-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh",
+        "Best Seller"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2003,
+          "title": "1 لتر",
+          "price": "8.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/fullcream-500ml.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين الطازج كامل الدسم 1 لتر - الأكثر مبيعاً</p>",
+      "descriptionAr": "حليب العين الطازج كامل الدسم 1 لتر - الأكثر مبيعاً",
+      "image": "/product-images/fullcream-500ml.jpg"
+    },
+    {
+      "id": 1004,
+      "title": "Full Cream Milk 2 Litre",
+      "titleAr": "حليب كامل الدسم 2 لتر",
+      "handle": "full-cream-milk-2l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2004,
+          "title": "2 لتر",
+          "price": "15.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/fullcream-2l.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين الطازج كامل الدسم 2 لتر - حجم عائلي</p>",
+      "descriptionAr": "حليب العين الطازج كامل الدسم 2 لتر - حجم عائلي",
+      "image": "/product-images/fullcream-2l.jpg"
+    },
+    {
+      "id": 1005,
+      "title": "Double Cream Milk 1 Litre",
+      "titleAr": "حليب دبل كريم 1 لتر",
+      "handle": "double-cream-milk-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2005,
+          "title": "1 لتر",
+          "price": "9.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/doublecream-1l.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين دبل كريم 1 لتر</p>",
+      "descriptionAr": "حليب العين دبل كريم 1 لتر",
+      "image": "/product-images/doublecream-1l.jpg"
+    },
+    {
+      "id": 1006,
+      "title": "Double Cream Milk 2 Litre",
+      "titleAr": "حليب دبل كريم 2 لتر",
+      "handle": "double-cream-milk-2l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2006,
+          "title": "2 لتر",
+          "price": "16.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/doublecream-2l.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين دبل كريم 2 لتر</p>",
+      "descriptionAr": "حليب العين دبل كريم 2 لتر",
+      "image": "/product-images/doublecream-2l.jpg"
+    },
+    {
+      "id": 1007,
+      "title": "Skimmed Milk 1 Litre",
+      "titleAr": "حليب خالي الدسم 1 لتر",
+      "handle": "skimmed-milk-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2007,
+          "title": "1 لتر",
+          "price": "7.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/skimmed-1l.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين خالي الدسم 1 لتر</p>",
+      "descriptionAr": "حليب العين خالي الدسم 1 لتر",
+      "image": "/product-images/skimmed-1l.jpg"
+    },
+    {
+      "id": 1008,
+      "title": "Low Fat Milk 1 Litre",
+      "titleAr": "حليب قليل الدسم 1 لتر",
+      "handle": "low-fat-milk-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2008,
+          "title": "1 لتر",
+          "price": "8.00",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/lowfat-1l.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين قليل الدسم 1 لتر</p>",
+      "descriptionAr": "حليب العين قليل الدسم 1 لتر",
+      "image": "/product-images/lowfat-1l.jpg"
+    },
+    {
+      "id": 1009,
+      "title": "UHT Full Cream Milk 1 Litre",
+      "titleAr": "حليب طويل الأجل كامل الدسم 1 لتر",
+      "handle": "uht-full-cream-milk-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "UHT"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2009,
+          "title": "1 لتر",
+          "price": "5.55",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/uht-fullcream-1l.png"
+      ],
+      "bodyHtml": "<p>حليب العين طويل الأجل كامل الدسم 1 لتر</p>",
+      "descriptionAr": "حليب العين طويل الأجل كامل الدسم 1 لتر",
+      "image": "/product-images/uht-fullcream-1l.png"
+    },
+    {
+      "id": 1010,
+      "title": "Chocolate Milk 250ml",
+      "titleAr": "حليب بالشوكولاتة 250 مل",
+      "handle": "chocolate-milk-250ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Flavored",
+        "New"
+      ],
+      "isNew": true,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2010,
+          "title": "250 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/chocolate-milk.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين بالشوكولاتة 250 مل - طعم لذيذ</p>",
+      "descriptionAr": "حليب العين بالشوكولاتة 250 مل - طعم لذيذ",
+      "image": "/product-images/chocolate-milk.jpg"
+    },
+    {
+      "id": 1011,
+      "title": "Strawberry Milk 250ml",
+      "titleAr": "حليب بالفراولة 250 مل",
+      "handle": "strawberry-milk-250ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Flavored",
+        "New"
+      ],
+      "isNew": true,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2011,
+          "title": "250 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/strawberry-milk.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين بالفراولة 250 مل</p>",
+      "descriptionAr": "حليب العين بالفراولة 250 مل",
+      "image": "/product-images/strawberry-milk.jpg"
+    },
+    {
+      "id": 1012,
+      "title": "Banana Milk 250ml",
+      "titleAr": "حليب بالموز 250 مل",
+      "handle": "banana-milk-250ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Flavored"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2012,
+          "title": "250 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/banana-milk.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين بالموز 250 مل</p>",
+      "descriptionAr": "حليب العين بالموز 250 مل",
+      "image": "/product-images/banana-milk.jpg"
+    },
+    {
+      "id": 1013,
+      "title": "Date Milk 250ml",
+      "titleAr": "حليب بالتمر 250 مل",
+      "handle": "date-milk-250ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Flavored"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2013,
+          "title": "250 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/dates-milk.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين بالتمر 250 مل</p>",
+      "descriptionAr": "حليب العين بالتمر 250 مل",
+      "image": "/product-images/dates-milk.jpg"
+    },
+    {
+      "id": 1014,
+      "title": "Cardamom Milk 250ml",
+      "titleAr": "حليب بالهيل 250 مل",
+      "handle": "cardamom-milk-250ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Dairy",
+      "tags": [
+        "Dairy",
+        "Milk",
+        "Flavored"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2014,
+          "title": "250 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/cardamom-milk.jpg"
+      ],
+      "bodyHtml": "<p>حليب العين بالهيل 250 مل</p>",
+      "descriptionAr": "حليب العين بالهيل 250 مل",
+      "image": "/product-images/cardamom-milk.jpg"
+    },
+    {
+      "id": 1020,
+      "title": "Fresh Yoghurt Full Cream 100g",
+      "titleAr": "زبادي طازج كامل الدسم 100 غرام",
+      "handle": "yoghurt-100g",
+      "vendor": "Al Ain Farms",
+      "productType": "Yoghurt",
+      "tags": [
+        "Yoghurt",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2020,
+          "title": "100 غرام",
+          "price": "1.25",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/yoghurt-fullcream-170g.jpg"
+      ],
+      "bodyHtml": "<p>زبادي العين الطازج كامل الدسم 100 غرام</p>",
+      "descriptionAr": "زبادي العين الطازج كامل الدسم 100 غرام",
+      "image": "/product-images/yoghurt-fullcream-170g.jpg"
+    },
+    {
+      "id": 1021,
+      "title": "Fresh Yoghurt Full Cream 170g",
+      "titleAr": "زبادي طازج كامل الدسم 170 غرام",
+      "handle": "yoghurt-170g",
+      "vendor": "Al Ain Farms",
+      "productType": "Yoghurt",
+      "tags": [
+        "Yoghurt",
+        "Fresh",
+        "Best Seller"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2021,
+          "title": "170 غرام",
+          "price": "1.75",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/yoghurt-fullcream-170g.jpg"
+      ],
+      "bodyHtml": "<p>زبادي العين الطازج كامل الدسم 170 غرام - غني بالكالسيوم</p>",
+      "descriptionAr": "زبادي العين الطازج كامل الدسم 170 غرام - غني بالكالسيوم",
+      "image": "/product-images/yoghurt-fullcream-170g.jpg"
+    },
+    {
+      "id": 1022,
+      "title": "Fresh Yoghurt Full Cream 400g",
+      "titleAr": "زبادي طازج كامل الدسم 400 غرام",
+      "handle": "yoghurt-400g",
+      "vendor": "Al Ain Farms",
+      "productType": "Yoghurt",
+      "tags": [
+        "Yoghurt",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2022,
+          "title": "400 غرام",
+          "price": "4.00",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/yoghurt-lowfat-400g.jpg"
+      ],
+      "bodyHtml": "<p>زبادي العين الطازج كامل الدسم 400 غرام</p>",
+      "descriptionAr": "زبادي العين الطازج كامل الدسم 400 غرام",
+      "image": "/product-images/yoghurt-lowfat-400g.jpg"
+    },
+    {
+      "id": 1023,
+      "title": "Fresh Yoghurt Full Cream 1kg",
+      "titleAr": "زبادي طازج كامل الدسم 1 كجم",
+      "handle": "yoghurt-1kg",
+      "vendor": "Al Ain Farms",
+      "productType": "Yoghurt",
+      "tags": [
+        "Yoghurt",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2023,
+          "title": "1 كجم",
+          "price": "9.00",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/yoghurt-fullcream-1kg.jpg"
+      ],
+      "bodyHtml": "<p>زبادي العين الطازج كامل الدسم 1 كجم</p>",
+      "descriptionAr": "زبادي العين الطازج كامل الدسم 1 كجم",
+      "image": "/product-images/yoghurt-fullcream-1kg.jpg"
+    },
+    {
+      "id": 1024,
+      "title": "Fresh Yoghurt Full Cream 2kg",
+      "titleAr": "زبادي طازج كامل الدسم 2 كجم",
+      "handle": "yoghurt-2kg",
+      "vendor": "Al Ain Farms",
+      "productType": "Yoghurt",
+      "tags": [
+        "Yoghurt",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": true,
+      "variants": [
+        {
+          "id": 2024,
+          "title": "2 كجم",
+          "price": "17.75",
+          "compareAtPrice": "19.00",
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/yoghurt-lowfat-1kg.jpg"
+      ],
+      "bodyHtml": "<p>زبادي العين الطازج كامل الدسم 2 كجم - حجم عائلي</p>",
+      "descriptionAr": "زبادي العين الطازج كامل الدسم 2 كجم - حجم عائلي",
+      "image": "/product-images/yoghurt-lowfat-1kg.jpg"
+    },
+    {
+      "id": 1030,
+      "title": "Fresh Laban Drink 200ml",
+      "titleAr": "مشروب اللبن الطازج 200 مل",
+      "handle": "laban-200ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Laban",
+      "tags": [
+        "Laban",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2030,
+          "title": "200 مل",
+          "price": "1.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/laban-200ml.jpg"
+      ],
+      "bodyHtml": "<p>مشروب اللبن الطازج من العين 200 مل</p>",
+      "descriptionAr": "مشروب اللبن الطازج من العين 200 مل",
+      "image": "/product-images/laban-200ml.jpg"
+    },
+    {
+      "id": 1031,
+      "title": "Fresh Laban Full Cream 500ml",
+      "titleAr": "لبن طازج كامل الدسم 500 مل",
+      "handle": "laban-500ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Laban",
+      "tags": [
+        "Laban",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2031,
+          "title": "500 مل",
+          "price": "4.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/laban-500ml.jpg"
+      ],
+      "bodyHtml": "<p>لبن العين الطازج كامل الدسم 500 مل</p>",
+      "descriptionAr": "لبن العين الطازج كامل الدسم 500 مل",
+      "image": "/product-images/laban-500ml.jpg"
+    },
+    {
+      "id": 1032,
+      "title": "Fresh Laban Full Cream 1 Litre",
+      "titleAr": "لبن طازج كامل الدسم 1 لتر",
+      "handle": "laban-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Laban",
+      "tags": [
+        "Laban",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2032,
+          "title": "1 لتر",
+          "price": "8.00",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/laban-1l.jpg"
+      ],
+      "bodyHtml": "<p>لبن العين الطازج كامل الدسم 1 لتر</p>",
+      "descriptionAr": "لبن العين الطازج كامل الدسم 1 لتر",
+      "image": "/product-images/laban-1l.jpg"
+    },
+    {
+      "id": 1040,
+      "title": "Mozzarella Shredded Cheese 200g",
+      "titleAr": "جبنة موزاريلا مبشورة 200 غرام",
+      "handle": "mozzarella-200g",
+      "vendor": "Al Ain Farms",
+      "productType": "Cheese",
+      "tags": [
+        "Cheese",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2040,
+          "title": "200 غرام",
+          "price": "9.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/cheese-chamy.jpg"
+      ],
+      "bodyHtml": "<p>جبنة موزاريلا مبشورة من مزارع العين 200 غرام</p>",
+      "descriptionAr": "جبنة موزاريلا مبشورة من مزارع العين 200 غرام",
+      "image": "/product-images/cheese-chamy.jpg"
+    },
+    {
+      "id": 1041,
+      "title": "Turkish Labneh 200g",
+      "titleAr": "لبنة تركية 200 غرام",
+      "handle": "turkish-labneh-200g",
+      "vendor": "Al Ain Farms",
+      "productType": "Cheese",
+      "tags": [
+        "Cheese",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2041,
+          "title": "200 غرام",
+          "price": "5.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/cheese-chamy.jpg"
+      ],
+      "bodyHtml": "<p>لبنة تركية من مزارع العين 200 غرام</p>",
+      "descriptionAr": "لبنة تركية من مزارع العين 200 غرام",
+      "image": "/product-images/cheese-chamy.jpg"
+    },
+    {
+      "id": 1042,
+      "title": "Cream Cheese Spread 200g",
+      "titleAr": "جبنة كريمية قابلة للدهن 200 غرام",
+      "handle": "cream-cheese-200g",
+      "vendor": "Al Ain Farms",
+      "productType": "Cheese",
+      "tags": [
+        "Cheese",
+        "Fresh",
+        "New"
+      ],
+      "isNew": true,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2042,
+          "title": "200 غرام",
+          "price": "7.00",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/cheese-chamy.jpg"
+      ],
+      "bodyHtml": "<p>جبنة كريمية قابلة للدهن من مزارع العين 200 غرام</p>",
+      "descriptionAr": "جبنة كريمية قابلة للدهن من مزارع العين 200 غرام",
+      "image": "/product-images/cheese-chamy.jpg"
+    },
+    {
+      "id": 1050,
+      "title": "Orange Juice 1 Litre",
+      "titleAr": "عصير برتقال 1 لتر",
+      "handle": "orange-juice-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Juice",
+      "tags": [
+        "Juice",
+        "Fresh",
+        "Best Seller"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2050,
+          "title": "1 لتر",
+          "price": "9.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/juice-orange.jpg"
+      ],
+      "bodyHtml": "<p>عصير برتقال طازج من مزارع العين 1 لتر - بدون إضافة سكر</p>",
+      "descriptionAr": "عصير برتقال طازج من مزارع العين 1 لتر - بدون إضافة سكر",
+      "image": "/product-images/juice-orange.jpg"
+    },
+    {
+      "id": 1051,
+      "title": "Apple Juice 1 Litre",
+      "titleAr": "عصير تفاح 1 لتر",
+      "handle": "apple-juice-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Juice",
+      "tags": [
+        "Juice",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2051,
+          "title": "1 لتر",
+          "price": "9.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/juice-apple.jpg"
+      ],
+      "bodyHtml": "<p>عصير تفاح طازج من مزارع العين 1 لتر</p>",
+      "descriptionAr": "عصير تفاح طازج من مزارع العين 1 لتر",
+      "image": "/product-images/juice-apple.jpg"
+    },
+    {
+      "id": 1052,
+      "title": "Mango Juice 1 Litre",
+      "titleAr": "عصير مانجو 1 لتر",
+      "handle": "mango-juice-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Juice",
+      "tags": [
+        "Juice",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2052,
+          "title": "1 لتر",
+          "price": "9.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/juice-mango-grape.jpg"
+      ],
+      "bodyHtml": "<p>عصير مانجو طازج من مزارع العين 1 لتر</p>",
+      "descriptionAr": "عصير مانجو طازج من مزارع العين 1 لتر",
+      "image": "/product-images/juice-mango-grape.jpg"
+    },
+    {
+      "id": 1053,
+      "title": "Green Cocktail Juice 1 Litre",
+      "titleAr": "كوكتيل أخضر 1 لتر",
+      "handle": "green-cocktail-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Juice",
+      "tags": [
+        "Juice",
+        "Fresh",
+        "New"
+      ],
+      "isNew": true,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2053,
+          "title": "1 لتر",
+          "price": "10.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/juice-green-cocktail.jpg"
+      ],
+      "bodyHtml": "<p>كوكتيل أخضر طازج من مزارع العين 1 لتر - بدون إضافة سكر</p>",
+      "descriptionAr": "كوكتيل أخضر طازج من مزارع العين 1 لتر - بدون إضافة سكر",
+      "image": "/product-images/juice-green-cocktail.jpg"
+    },
+    {
+      "id": 1054,
+      "title": "Mixed Fruit Cocktail 1 Litre",
+      "titleAr": "كوكتيل فواكه مشكلة 1 لتر",
+      "handle": "mixed-fruit-cocktail-1l",
+      "vendor": "Al Ain Farms",
+      "productType": "Juice",
+      "tags": [
+        "Juice",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": true,
+      "variants": [
+        {
+          "id": 2054,
+          "title": "1 لتر",
+          "price": "8.50",
+          "compareAtPrice": "10.50",
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/juice-fruit-mix.jpg"
+      ],
+      "bodyHtml": "<p>كوكتيل فواكه مشكلة من مزارع العين 1 لتر</p>",
+      "descriptionAr": "كوكتيل فواكه مشكلة من مزارع العين 1 لتر",
+      "image": "/product-images/juice-fruit-mix.jpg"
+    },
+    {
+      "id": 1055,
+      "title": "Orange Juice 200ml",
+      "titleAr": "عصير برتقال 200 مل",
+      "handle": "orange-juice-200ml",
+      "vendor": "Al Ain Farms",
+      "productType": "Juice",
+      "tags": [
+        "Juice",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2055,
+          "title": "200 مل",
+          "price": "2.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/juice-orange.jpg"
+      ],
+      "bodyHtml": "<p>عصير برتقال 200 مل</p>",
+      "descriptionAr": "عصير برتقال 200 مل",
+      "image": "/product-images/juice-orange.jpg"
+    },
+    {
+      "id": 1060,
+      "title": "Fresh Whole Chicken 1kg",
+      "titleAr": "دجاج طازج كامل 1 كجم",
+      "handle": "whole-chicken-1kg",
+      "vendor": "Al Ain Farms",
+      "productType": "Poultry",
+      "tags": [
+        "Poultry",
+        "Fresh",
+        "Best Seller"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2060,
+          "title": "1 كجم",
+          "price": "20.95",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/chicken-whole.jpg"
+      ],
+      "bodyHtml": "<p>دجاج العين الطازج كامل 1 كجم - حلال</p>",
+      "descriptionAr": "دجاج العين الطازج كامل 1 كجم - حلال",
+      "image": "/product-images/chicken-whole.jpg"
+    },
+    {
+      "id": 1061,
+      "title": "Fresh Chicken Breast 500g",
+      "titleAr": "صدور دجاج طازجة 500 غرام",
+      "handle": "chicken-breast-500g",
+      "vendor": "Al Ain Farms",
+      "productType": "Poultry",
+      "tags": [
+        "Poultry",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2061,
+          "title": "500 غرام",
+          "price": "28.65",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/chicken-breast.png"
+      ],
+      "bodyHtml": "<p>صدور دجاج العين الطازجة 500 غرام</p>",
+      "descriptionAr": "صدور دجاج العين الطازجة 500 غرام",
+      "image": "/product-images/chicken-breast.png"
+    },
+    {
+      "id": 1062,
+      "title": "Fresh Chicken Drumstick 500g",
+      "titleAr": "أفخاذ دجاج طازجة 500 غرام",
+      "handle": "chicken-drumstick-500g",
+      "vendor": "Al Ain Farms",
+      "productType": "Poultry",
+      "tags": [
+        "Poultry",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": true,
+      "variants": [
+        {
+          "id": 2062,
+          "title": "500 غرام",
+          "price": "17.15",
+          "compareAtPrice": "19.15",
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/chicken-drumstick.png"
+      ],
+      "bodyHtml": "<p>أفخاذ دجاج العين الطازجة 500 غرام</p>",
+      "descriptionAr": "أفخاذ دجاج العين الطازجة 500 غرام",
+      "image": "/product-images/chicken-drumstick.png"
+    },
+    {
+      "id": 1063,
+      "title": "Chicken Griller 800g",
+      "titleAr": "طبق دجاج للشوي 800 غرام",
+      "handle": "chicken-griller-800g",
+      "vendor": "Al Ain Farms",
+      "productType": "Poultry",
+      "tags": [
+        "Poultry",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2063,
+          "title": "800 غرام",
+          "price": "22.00",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/chicken-whole.jpg"
+      ],
+      "bodyHtml": "<p>طبق دجاج العين للشوي 800 غرام</p>",
+      "descriptionAr": "طبق دجاج العين للشوي 800 غرام",
+      "image": "/product-images/chicken-whole.jpg"
+    },
+    {
+      "id": 1070,
+      "title": "White Eggs Large 30 pcs",
+      "titleAr": "بيض أبيض كبير 30 بيضة",
+      "handle": "white-eggs-30",
+      "vendor": "Al Ain Farms",
+      "productType": "Eggs",
+      "tags": [
+        "Eggs",
+        "Fresh",
+        "Best Seller"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2070,
+          "title": "30 بيضة",
+          "price": "24.30",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/eggs-30.jpg"
+      ],
+      "bodyHtml": "<p>بيض العين الأبيض الكبير 30 بيضة - طازج</p>",
+      "descriptionAr": "بيض العين الأبيض الكبير 30 بيضة - طازج",
+      "image": "/product-images/eggs-30.jpg"
+    },
+    {
+      "id": 1071,
+      "title": "White Eggs Large 15 pcs",
+      "titleAr": "بيض أبيض كبير 15 بيضة",
+      "handle": "white-eggs-15",
+      "vendor": "Al Ain Farms",
+      "productType": "Eggs",
+      "tags": [
+        "Eggs",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2071,
+          "title": "15 بيضة",
+          "price": "13.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/eggs-15.jpg"
+      ],
+      "bodyHtml": "<p>بيض العين الأبيض الكبير 15 بيضة</p>",
+      "descriptionAr": "بيض العين الأبيض الكبير 15 بيضة",
+      "image": "/product-images/eggs-15.jpg"
+    },
+    {
+      "id": 1072,
+      "title": "White Eggs Large 6 pcs",
+      "titleAr": "بيض أبيض كبير 6 بيضات",
+      "handle": "white-eggs-6",
+      "vendor": "Al Ain Farms",
+      "productType": "Eggs",
+      "tags": [
+        "Eggs",
+        "Fresh"
+      ],
+      "isNew": false,
+      "isOffer": false,
+      "variants": [
+        {
+          "id": 2072,
+          "title": "6 بيضات",
+          "price": "6.50",
+          "compareAtPrice": null,
+          "available": true
+        }
+      ],
+      "images": [
+        "/product-images/eggs-6.jpg"
+      ],
+      "bodyHtml": "<p>بيض العين الأبيض الكبير 6 بيضات</p>",
+      "descriptionAr": "بيض العين الأبيض الكبير 6 بيضات",
+      "image": "/product-images/eggs-6.jpg"
+    }
+  ],
+  "collectionProducts": {
+    "dairy": [
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012,
+      1013,
+      1014
+    ],
+    "dairy_full-cream": [
+      1001,
+      1002,
+      1003,
+      1004
+    ],
+    "dairy_double-cream": [
+      1005,
+      1006
+    ],
+    "dairy_low-fat": [
+      1007,
+      1008
+    ],
+    "dairy_flavored": [
+      1010,
+      1011,
+      1012,
+      1013,
+      1014
+    ],
+    "dairy_uht": [
+      1009
+    ],
+    "yoghurt-laban": [
+      1020,
+      1021,
+      1022,
+      1023,
+      1024,
+      1030,
+      1031,
+      1032
+    ],
+    "yoghurt-laban_yoghurt": [
+      1020,
+      1021,
+      1022,
+      1023,
+      1024
+    ],
+    "yoghurt-laban_laban": [
+      1030,
+      1031,
+      1032
+    ],
+    "cheese": [
+      1040,
+      1041,
+      1042
+    ],
+    "cheese_mozzarella": [
+      1040
+    ],
+    "cheese_labneh": [
+      1041
+    ],
+    "juices": [
+      1050,
+      1051,
+      1052,
+      1053,
+      1054,
+      1055
+    ],
+    "juices_fresh": [
+      1050,
+      1051,
+      1052,
+      1055
+    ],
+    "juices_cocktail": [
+      1053,
+      1054
+    ],
+    "poultry-eggs": [
+      1060,
+      1061,
+      1062,
+      1063,
+      1070,
+      1071,
+      1072
+    ],
+    "poultry-eggs_chicken": [
+      1060,
+      1061,
+      1062,
+      1063
+    ],
+    "poultry-eggs_eggs": [
+      1070,
+      1071,
+      1072
+    ],
+    "promotion": [
+      1024,
+      1054,
+      1062
+    ],
+    "new-arrivals": [
+      1010,
+      1011,
+      1042,
+      1053
+    ],
+    "frontpage": [
+      1001,
+      1002,
+      1003,
+      1004,
+      1005,
+      1006,
+      1007,
+      1008,
+      1009,
+      1010,
+      1011,
+      1012
+    ]
+  },
+  "categories": {
+    "dairy": {
+      "title": "الحليب",
+      "titleEn": "Milk",
+      "handle": "dairy",
+      "subcategories": [
+        {
+          "title": "حليب كامل الدسم",
+          "titleEn": "Full Cream Milk",
+          "handle": "dairy_full-cream"
+        },
+        {
+          "title": "حليب دبل كريم",
+          "titleEn": "Double Cream Milk",
+          "handle": "dairy_double-cream"
+        },
+        {
+          "title": "حليب قليل الدسم",
+          "titleEn": "Low Fat Milk",
+          "handle": "dairy_low-fat"
+        },
+        {
+          "title": "حليب منكه",
+          "titleEn": "Flavored Milk",
+          "handle": "dairy_flavored"
+        },
+        {
+          "title": "حليب طويل الأجل",
+          "titleEn": "UHT Milk",
+          "handle": "dairy_uht"
+        }
+      ]
+    },
+    "yoghurt-laban": {
+      "title": "الزبادي واللبن",
+      "titleEn": "Yoghurt & Laban",
+      "handle": "yoghurt-laban",
+      "subcategories": [
+        {
+          "title": "زبادي طازج",
+          "titleEn": "Fresh Yoghurt",
+          "handle": "yoghurt-laban_yoghurt"
+        },
+        {
+          "title": "لبن طازج",
+          "titleEn": "Fresh Laban",
+          "handle": "yoghurt-laban_laban"
+        }
+      ]
+    },
+    "cheese": {
+      "title": "الأجبان",
+      "titleEn": "Cheese",
+      "handle": "cheese",
+      "subcategories": [
+        {
+          "title": "جبنة موزاريلا",
+          "titleEn": "Mozzarella",
+          "handle": "cheese_mozzarella"
+        },
+        {
+          "title": "لبنة",
+          "titleEn": "Labneh",
+          "handle": "cheese_labneh"
+        }
+      ]
+    },
+    "juices": {
+      "title": "العصائر",
+      "titleEn": "Juices",
+      "handle": "juices",
+      "subcategories": [
+        {
+          "title": "عصائر طازجة",
+          "titleEn": "Fresh Juices",
+          "handle": "juices_fresh"
+        },
+        {
+          "title": "كوكتيل",
+          "titleEn": "Cocktail",
+          "handle": "juices_cocktail"
+        }
+      ]
+    },
+    "poultry-eggs": {
+      "title": "الدواجن والبيض",
+      "titleEn": "Poultry & Eggs",
+      "handle": "poultry-eggs",
+      "subcategories": [
+        {
+          "title": "دجاج طازج",
+          "titleEn": "Fresh Chicken",
+          "handle": "poultry-eggs_chicken"
+        },
+        {
+          "title": "بيض",
+          "titleEn": "Eggs",
+          "handle": "poultry-eggs_eggs"
+        }
+      ]
+    }
+  },
+  "collectionOrder": [
+    "dairy",
+    "yoghurt-laban",
+    "cheese",
+    "juices",
+    "poultry-eggs"
+  ]
+}
