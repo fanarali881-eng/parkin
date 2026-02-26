@@ -1,21 +1,40 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 
-/* ───── SVG Components ───── */
+/* ───── Logo Component ───── */
 function ParkinLogo({ white = false }: { white?: boolean }) {
-  const c1 = white ? "#fff" : "#00565B";
-  const c2 = "#3ECDC6";
   return (
-    <svg viewBox="0 0 200 50" className="h-10 w-auto" fill="none">
-      {/* P icon */}
-      <rect x="2" y="8" width="18" height="34" rx="3" fill={c1}/>
-      <rect x="2" y="8" width="30" height="20" rx="3" fill={c1}/>
-      <rect x="16" y="14" width="9" height="7" rx="2" fill={c2}/>
-      <circle cx="10" cy="38" r="5" fill={c2}/>
-      <circle cx="22" cy="38" r="3" fill={c2}/>
-      {/* Arabic + English text */}
-      <text x="55" y="20" fontFamily="Arial" fontSize="13" fontWeight="bold" fill={c1} textAnchor="start" direction="rtl">باركن</text>
-      <text x="55" y="38" fontFamily="Arial" fontSize="20" fontWeight="bold" fill={c1} textAnchor="start">parkin</text>
+    <img src="/images/parkin-logo.png" alt="Parkin" className="h-[50px] w-auto" style={white ? {filter:'brightness(0) invert(1)'} : {}}/>
+  );
+}
+
+/* ───── Decorative Icons ───── */
+function StarIcon() {
+  return (
+    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+      <path d="M30 0 L35 25 L60 30 L35 35 L30 60 L25 35 L0 30 L25 25 Z" fill="#3ECDC6"/>
+    </svg>
+  );
+}
+function CalendarIcon() {
+  return (
+    <div className="w-[70px] h-[70px] bg-[#3ECDC6] rounded-xl flex items-center justify-center">
+      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
+      </svg>
+    </div>
+  );
+}
+function CarIcon() {
+  return (
+    <svg width="70" height="40" viewBox="0 0 70 40" fill="#00565B">
+      <path d="M10 25 Q5 25 5 20 L10 10 Q12 5 18 5 L52 5 Q58 5 60 10 L65 20 Q65 25 60 25 L55 25 Q55 20 50 20 Q45 20 45 25 L25 25 Q25 20 20 20 Q15 20 15 25 Z"/>
+      <circle cx="20" cy="28" r="5" fill="#3ECDC6"/>
+      <circle cx="50" cy="28" r="5" fill="#3ECDC6"/>
     </svg>
   );
 }
@@ -70,6 +89,12 @@ export default function ParkinHome() {
           </div>
         ))}
 
+
+        {/* Decorative elements */}
+        <div className="absolute z-20" style={{top:'30%',right:'25%'}}><StarIcon/></div>
+        <div className="absolute z-20" style={{top:'12%',right:'15%'}}><CalendarIcon/></div>
+        <div className="absolute z-20" style={{bottom:'25%',right:'18%'}}><CarIcon/></div>
+        <div className="absolute z-20" style={{bottom:'40%',left:'3%'}}><StarIcon/></div>
 
         <div className="absolute right-0 top-0 bottom-0 w-[18px] bg-[#00565B] z-20"/>
 
