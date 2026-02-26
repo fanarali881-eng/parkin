@@ -164,6 +164,21 @@ export default function ParkinHome() {
             <div className="absolute top-0 left-0" style={{width:'calc(100% - 40px)', height:'calc(100% - 50px)'}}>
               <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
               <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
+              {/* Car cutout - carved into the image bottom-right corner */}
+              <svg className="absolute bottom-0 right-0" width="140" height="90" viewBox="0 0 140 90" fill="#00565B" xmlns="http://www.w3.org/2000/svg" style={{zIndex:5}}>
+                {/* Car body */}
+                <path d="M20 55 C20 55 28 30 35 22 C42 14 52 10 70 10 C88 10 98 14 105 22 C112 30 120 55 120 55 Z" fill="#00565B"/>
+                {/* Car bottom/chassis */}
+                <rect x="10" y="52" width="120" height="25" rx="8" fill="#00565B"/>
+                {/* Wheels - circles that show teal bg */}
+                <circle cx="38" cy="75" r="12" fill="#00565B"/>
+                <circle cx="102" cy="75" r="12" fill="#00565B"/>
+                {/* Wheel inner circles */}
+                <circle cx="38" cy="75" r="5" fill="#3ECDC6"/>
+                <circle cx="102" cy="75" r="5" fill="#3ECDC6"/>
+                {/* Window */}
+                <path d="M45 50 C45 50 50 28 55 22 C60 18 65 16 70 16 C75 16 80 18 85 22 C90 28 95 50 95 50 Z" fill="#004A4F" opacity="0.5"/>
+              </svg>
             </div>
             <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
               <h1 className={`text-[#00565B] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
@@ -174,17 +189,7 @@ export default function ParkinHome() {
 
         {/* Right teal strip is now visible as part of bg-[#00565B] background */}
 
-        {/* Car icon on bottom-right teal area */}
-        <div className="absolute z-20 bottom-[60px] right-[0px] flex items-center justify-center" style={{width:'80px', height:'80px'}}>
-          <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10 28C10 28 12 18 14 14C16 10 20 8 26 8H34C40 8 44 10 46 14C48 18 50 28 50 28" stroke="#3ECDC6" strokeWidth="3" strokeLinecap="round" fill="none"/>
-            <path d="M6 28H54C56 28 58 30 58 32V34C58 36 56 38 54 38H6C4 38 2 36 2 34V32C2 30 4 28 6 28Z" stroke="#3ECDC6" strokeWidth="3" fill="none"/>
-            <circle cx="16" cy="34" r="4" stroke="#3ECDC6" strokeWidth="2.5" fill="none"/>
-            <circle cx="44" cy="34" r="4" stroke="#3ECDC6" strokeWidth="2.5" fill="none"/>
-            <circle cx="16" cy="34" r="1.5" fill="#3ECDC6"/>
-            <circle cx="44" cy="34" r="1.5" fill="#3ECDC6"/>
-          </svg>
-        </div>
+
 
         {/* Form */}
         <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
