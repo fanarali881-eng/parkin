@@ -47,7 +47,7 @@ export default function ParkinHome() {
 
   const slides = [
     { title:"Variable parking tariff", desc:"On 4 April 2025, we'll roll out a new parking tariff to help you find parking faster, enjoy better access in busy areas, and pay less when demand is low.", italic:true, bg:"/images/banner1_variable_tariff.jpg" },
-    { title:"Your Gateway to Easy Parking Solutions!", desc:"Enjoy the ease and flexibility of Parkin's top services. Explore hassle-free options designed to make your parking experience as smooth as possible.", italic:false, bg:"/images/banner2_gateway.webp" },
+    { title:"Your Gateway to Easy Parking Solutions!", desc:"Enjoy the ease and flexibility of Parkin's top services. Explore hassle-free options designed to make your parking experience as smooth as possible.", italic:false, bg:"/images/banner2_gateway.jpg" },
   ];
 
   useEffect(() => {
