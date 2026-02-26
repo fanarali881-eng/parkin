@@ -172,7 +172,7 @@ export default function ParkinHome() {
         <div className={`absolute ${isAr?'left':'right'}-0 top-0 bottom-0 w-[18px] bg-[#00565B] z-20`}/>
 
         {/* Form */}
-        <div className={`absolute z-30 ${isAr?'right':'left'}-6 lg:${isAr?'right':'left'}-[calc((100%-1400px)/2+24px)] bottom-[60px] w-[580px]`}>
+        <div className="absolute z-30 bottom-[60px] w-[580px]" style={{right: isAr ? 'calc((100% - 1400px)/2 + 24px)' : 'calc((100% - 1400px)/2 + 24px)', left: 'auto'}}>
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
             <div className="flex bg-[#00565B]">
               {([["pay",L("pay_parking")],["later",L("pay_later")],["fines",L("pay_fines")]] as const).map(([id,label])=>(
