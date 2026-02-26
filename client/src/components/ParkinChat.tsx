@@ -112,11 +112,9 @@ export default function ParkinChat() {
 
         <div className={`transition-all duration-300 hover:scale-110 ${hasNewAdminMessage ? "ring-2 ring-[#4FC3F7] ring-offset-2 rounded-full" : ""}`}>
           <div className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg flex items-center justify-center" style={{background:'#1E88E5'}}>
-            <svg width="38" height="38" viewBox="0 0 38 38" fill="none">
-              <circle cx="19" cy="19" r="12" stroke="white" strokeWidth="2.5" fill="none"/>
-              <circle cx="15" cy="16.5" r="1.2" fill="white"/>
-              <circle cx="23" cy="16.5" r="1.2" fill="white"/>
-              <path d="M13.5 22c1.8 3 9.2 3 11 0" stroke="white" strokeWidth="2.5" strokeLinecap="round" fill="none"/>
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none">
+              <circle cx="18" cy="18" r="12" stroke="white" strokeWidth="2.8" fill="none"/>
+              <path d="M12 21c1.5 3 10.5 3 12 0" stroke="white" strokeWidth="2.8" strokeLinecap="round" fill="none"/>
             </svg>
           </div>
         </div>

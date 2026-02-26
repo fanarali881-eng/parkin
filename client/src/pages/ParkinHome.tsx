@@ -175,7 +175,7 @@ export default function ParkinHome() {
         {/* Right teal strip is now visible as part of bg-[#00565B] background */}
 
         {/* Form */}
-        <div className="absolute z-30 bottom-[60px] w-[580px]" style={{right: isAr ? 'calc((100% - 1400px)/2 + 24px)' : 'calc((100% - 1400px)/2 + 24px)', left: 'auto'}}>
+        <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
             <div className="flex bg-[#00565B]">
               {([["pay",L("pay_parking")],["later",L("pay_later")],["fines",L("pay_fines")]] as const).map(([id,label])=>(
