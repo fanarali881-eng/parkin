@@ -46,8 +46,8 @@ export default function ParkinHome() {
   const [isPaused, setIsPaused] = useState(false);
 
   const slides = [
-    { title:"Variable parking tariff", desc:"On 4 April 2025, we'll roll out a new parking tariff to help you find parking faster, enjoy better access in busy areas, and pay less when demand is low.", italic:true, bg:"/images/Image(5).png" },
-    { title:"Your Gateway to Easy Parking Solutions!", desc:"Enjoy the ease and flexibility of Parkin's top services. Explore hassle-free options designed to make your parking experience as smooth as possible.", italic:false, bg:"/images/hero-bg.jpg" },
+    { title:"Variable parking tariff", desc:"On 4 April 2025, we'll roll out a new parking tariff to help you find parking faster, enjoy better access in busy areas, and pay less when demand is low.", italic:true, bg:"/images/banner1_variable_tariff.jpg" },
+    { title:"Your Gateway to Easy Parking Solutions!", desc:"Enjoy the ease and flexibility of Parkin's top services. Explore hassle-free options designed to make your parking experience as smooth as possible.", italic:false, bg:"/images/banner2_gateway.webp" },
   ];
 
   useEffect(() => {
@@ -90,11 +90,6 @@ export default function ParkinHome() {
         ))}
 
 
-        {/* Decorative elements */}
-        <div className="absolute z-20" style={{top:'30%',right:'25%'}}><StarIcon/></div>
-        <div className="absolute z-20" style={{top:'12%',right:'15%'}}><CalendarIcon/></div>
-        <div className="absolute z-20" style={{bottom:'25%',right:'18%'}}><CarIcon/></div>
-        <div className="absolute z-20" style={{bottom:'40%',left:'3%'}}><StarIcon/></div>
 
         <div className="absolute right-0 top-0 bottom-0 w-[18px] bg-[#00565B] z-20"/>
 
