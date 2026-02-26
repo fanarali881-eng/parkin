@@ -3,9 +3,9 @@ import { useLocation } from "wouter";
 import ParkinChat from "@/components/ParkinChat";
 
 /* ───── Logo Component ───── */
-function ParkinLogo({ white = false }: { white?: boolean }) {
+function ParkinLogo({ white = false, size = 'h-[50px]' }: { white?: boolean; size?: string }) {
   return (
-    <img src="/images/parkin-logo.png" alt="Parkin" className="h-[50px] w-auto" style={white ? {filter:'brightness(0) invert(1)'} : {}}/>
+    <img src="/images/parkin-logo.png" alt="Parkin" className={`${size} w-auto`} style={white ? {filter:'brightness(0) invert(1)'} : {}}/>
   );
 }
 
@@ -251,7 +251,7 @@ export default function ParkinHome() {
             <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
               {/* Logo */}
               <div>
-                <ParkinLogo />
+                <ParkinLogo size="h-[120px]" />
                 <p className="text-gray-600 text-[14px] mt-4 mb-6">Easy Parking Effortless Living</p>
                 <p className="text-gray-700 font-semibold text-[14px] mb-3">Get the App</p>
                 <div className="flex gap-3">

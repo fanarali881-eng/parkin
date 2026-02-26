@@ -110,13 +110,13 @@ export default function ParkinChat() {
           </div>
         )}
 
-        <div className={`transition-all duration-300 hover:scale-110 ${hasNewAdminMessage ? "ring-2 ring-[#0091EA] ring-offset-2 rounded-full" : ""}`}>
-          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg flex items-center justify-center" style={{background:'#0091EA'}}>
-            <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
-              <circle cx="20" cy="20" r="14" stroke="white" strokeWidth="2" fill="none"/>
-              <circle cx="15" cy="17" r="1.5" fill="white"/>
-              <circle cx="25" cy="17" r="1.5" fill="white"/>
-              <path d="M14 24c1.5 3 9.5 3 12 0" stroke="white" strokeWidth="2" strokeLinecap="round" fill="none"/>
+        <div className={`transition-all duration-300 hover:scale-110 ${hasNewAdminMessage ? "ring-2 ring-[#29B6F6] ring-offset-2 rounded-full" : ""}`}>
+          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg flex items-center justify-center" style={{background:'#29B6F6'}}>
+            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
+              <circle cx="15" cy="15" r="10" stroke="white" strokeWidth="1.8" fill="none"/>
+              <circle cx="11.5" cy="13" r="1" fill="white"/>
+              <circle cx="18.5" cy="13" r="1" fill="white"/>
+              <path d="M11 18c1 2 7 2 8 0" stroke="white" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
             </svg>
           </div>
         </div>
