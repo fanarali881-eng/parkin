@@ -140,7 +140,7 @@ export default function ParkinHome() {
           ].map((c,i)=>(
             <a key={i} href="#" className="group block">
               <div className="overflow-hidden rounded-2xl mb-5">
-                <img src={c.img} alt={c.title} className="w-full h-[220px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+                <img src={c.img} alt={c.title} className="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
               </div>
               <h3 className="text-[#00565B] text-[20px] font-bold mb-3">{c.title}</h3>
               <p className="text-gray-500 text-[14px] leading-relaxed mb-4">{c.desc}</p>
