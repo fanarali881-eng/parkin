@@ -110,13 +110,11 @@ export default function ParkinChat() {
           </div>
         )}
 
-        <div className={`transition-all duration-300 hover:scale-110 ${hasNewAdminMessage ? "ring-2 ring-[#29B6F6] ring-offset-2 rounded-full" : ""}`}>
-          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg flex items-center justify-center" style={{background:'#29B6F6'}}>
-            <svg width="30" height="30" viewBox="0 0 30 30" fill="none">
-              <circle cx="15" cy="15" r="10" stroke="white" strokeWidth="1.8" fill="none"/>
-              <circle cx="11.5" cy="13" r="1" fill="white"/>
-              <circle cx="18.5" cy="13" r="1" fill="white"/>
-              <path d="M11 18c1 2 7 2 8 0" stroke="white" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
+        <div className={`transition-all duration-300 hover:scale-110 ${hasNewAdminMessage ? "ring-2 ring-[#4FC3F7] ring-offset-2 rounded-full" : ""}`}>
+          <div className="w-14 h-14 md:w-16 md:h-16 rounded-full shadow-lg flex items-center justify-center" style={{background:'#42A5F5'}}>
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+              <circle cx="16" cy="16" r="10" stroke="white" strokeWidth="1.5" fill="none"/>
+              <path d="M11 18.5c1.5 2.5 8.5 2.5 10 0" stroke="white" strokeWidth="1.5" strokeLinecap="round" fill="none"/>
             </svg>
           </div>
         </div>
