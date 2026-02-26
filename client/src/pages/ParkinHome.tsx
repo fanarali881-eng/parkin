@@ -8,37 +8,6 @@ function ParkinLogo({ white = false }: { white?: boolean }) {
   );
 }
 
-/* ───── Decorative Icons ───── */
-function StarIcon() {
-  return (
-    <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
-      <path d="M30 0 L35 25 L60 30 L35 35 L30 60 L25 35 L0 30 L25 25 Z" fill="#3ECDC6"/>
-    </svg>
-  );
-}
-function CalendarIcon() {
-  return (
-    <div className="w-[70px] h-[70px] bg-[#3ECDC6] rounded-xl flex items-center justify-center">
-      <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
-        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-        <line x1="16" y1="2" x2="16" y2="6"/>
-        <line x1="8" y1="2" x2="8" y2="6"/>
-        <line x1="3" y1="10" x2="21" y2="10"/>
-        <path d="M8 14h.01M12 14h.01M16 14h.01M8 18h.01M12 18h.01"/>
-      </svg>
-    </div>
-  );
-}
-function CarIcon() {
-  return (
-    <svg width="70" height="40" viewBox="0 0 70 40" fill="#00565B">
-      <path d="M10 25 Q5 25 5 20 L10 10 Q12 5 18 5 L52 5 Q58 5 60 10 L65 20 Q65 25 60 25 L55 25 Q55 20 50 20 Q45 20 45 25 L25 25 Q25 20 20 20 Q15 20 15 25 Z"/>
-      <circle cx="20" cy="28" r="5" fill="#3ECDC6"/>
-      <circle cx="50" cy="28" r="5" fill="#3ECDC6"/>
-    </svg>
-  );
-}
-
 export default function ParkinHome() {
   const [, navigate] = useLocation();
   const [activeTab, setActiveTab] = useState<"pay"|"later"|"fines">("pay");
@@ -80,8 +49,16 @@ export default function ParkinHome() {
       <section className="relative w-full overflow-hidden" style={{height:"700px"}}>
         {slides.map((s,i)=>(
           <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i===currentSlide?"opacity-100 z-10":"opacity-0 z-0"}`}>
-            <img src={s.bg} alt="" className="absolute inset-0 w-full h-full object-cover"/>
-            <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/50 to-transparent"/>
+            {/* High quality image with sharp rendering */}
+            <img
+              src={s.bg}
+              alt=""
+              className="absolute inset-0 w-full h-full object-cover"
+              style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }}
+              loading="eager"
+            />
+            {/* Lighter gradient for better image visibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-transparent"/>
             <div className="relative z-20 max-w-[1400px] mx-auto px-6 pt-16">
               <h1 className={`text-[#00565B] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
               <p className="text-gray-700 text-[15px] max-w-[550px] mt-5 leading-relaxed">{s.desc}</p>
@@ -89,8 +66,7 @@ export default function ParkinHome() {
           </div>
         ))}
 
-
-
+        {/* Right teal strip */}
         <div className="absolute right-0 top-0 bottom-0 w-[18px] bg-[#00565B] z-20"/>
 
         {/* Form */}
@@ -163,7 +139,9 @@ export default function ParkinHome() {
             {img:"/images/ParkinMachines.png",title:"Parkin Machines",desc:"Explore available options and familiarise yourself with how to operate offline parking machines, including the payment processes."},
           ].map((c,i)=>(
             <a key={i} href="#" className="group block">
-              <div className="overflow-hidden rounded-2xl mb-5"><img src={c.img} alt={c.title} className="w-full h-[220px] object-cover group-hover:scale-105 transition-transform duration-300"/></div>
+              <div className="overflow-hidden rounded-2xl mb-5">
+                <img src={c.img} alt={c.title} className="w-full h-[220px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+              </div>
               <h3 className="text-[#00565B] text-[20px] font-bold mb-3">{c.title}</h3>
               <p className="text-gray-500 text-[14px] leading-relaxed mb-4">{c.desc}</p>
               <span className="inline-block border border-[#00565B] text-[#00565B] px-6 py-2 rounded-full text-[13px] font-medium hover:bg-[#00565B] hover:text-white transition-colors">Learn More</span>
@@ -183,7 +161,9 @@ export default function ParkinHome() {
               {icon:"/images/24_7CustomerSupport.png",title:"24/7 Customer Support",desc:"Get reliable assistance round the clock for all your parking needs."},
             ].map((f,i)=>(
               <div key={i}>
-                <div className="w-[56px] h-[56px] bg-[#E0F5F3] rounded-xl flex items-center justify-center mb-5"><img src={f.icon} alt="" className="w-7 h-7"/></div>
+                <div className="w-[56px] h-[56px] bg-[#E0F5F3] rounded-xl flex items-center justify-center mb-5">
+                  <img src={f.icon} alt="" className="w-7 h-7" style={{ imageRendering: 'crisp-edges' }}/>
+                </div>
                 <h3 className="text-[#00565B] text-[20px] font-bold mb-3">{f.title}</h3>
                 <p className="text-gray-500 text-[14px] leading-relaxed">{f.desc}</p>
               </div>
@@ -203,7 +183,7 @@ export default function ParkinHome() {
               <img src="/images/Googleplay.svg" alt="Google Play" className="h-[48px] cursor-pointer"/>
             </div>
           </div>
-          <div className="hidden lg:block"><img src="/images/NewFeature.webp" alt="Parkin App" className="h-[300px]"/></div>
+          <div className="hidden lg:block"><img src="/images/NewFeature.webp" alt="Parkin App" className="h-[300px]" loading="lazy"/></div>
         </div>
       </section>
 
@@ -217,7 +197,9 @@ export default function ParkinHome() {
             {img:"/images/Image(4).png",title:"Get a Permit",desc:"Access exclusive parking privileges with permits designed for convenience and comfort.",btn:"Coming Soon"},
           ].map((c,i)=>(
             <a key={i} href="#" className="group block overflow-hidden rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow">
-              <div className="overflow-hidden"><img src={c.img} alt={c.title} className="w-full h-[280px] object-cover group-hover:scale-105 transition-transform duration-300"/></div>
+              <div className="overflow-hidden">
+                <img src={c.img} alt={c.title} className="w-full h-[280px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+              </div>
               <div className="p-6">
                 <h3 className="text-[#00565B] text-[22px] font-bold mb-2">{c.title}</h3>
                 <p className="text-gray-500 text-[14px] leading-relaxed mb-4">{c.desc}</p>
@@ -240,7 +222,9 @@ export default function ParkinHome() {
               {img:"/images/Image(3).png",title:"Contactless Payments",desc:"Experience fast and secure contactless payment options for a hassle-free parking experience."},
             ].map((c,i)=>(
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm">
-                <div className="overflow-hidden"><img src={c.img} alt={c.title} className="w-full h-[300px] object-cover"/></div>
+                <div className="overflow-hidden">
+                  <img src={c.img} alt={c.title} className="w-full h-[300px] object-cover" loading="lazy"/>
+                </div>
                 <div className="p-6">
                   <h3 className="text-[#00565B] text-[18px] font-bold mb-2">{c.title}</h3>
                   <p className="text-gray-500 text-[14px] leading-relaxed">{c.desc}</p>
