@@ -202,7 +202,7 @@ export default function ParkinHome() {
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-400"><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
                   </div>
                 </div>
-                <button className="border border-[#045464] rounded-full px-5 flex items-center gap-2 text-[#045464] text-[14px] font-medium">
+                <button className="border border-[#045464] rounded-full px-4 py-2 flex items-center gap-2 text-[#045464] text-[13px] font-medium">
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
                   {L("now")}
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
