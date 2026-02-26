@@ -124,10 +124,7 @@ export default function ParkinHome() {
           <button onClick={()=>setCurrentSlide(p=>(p+1)%slides.length)} className="text-gray-500 hover:text-[#00565B]"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" strokeWidth="2" strokeLinecap="round"/></svg></button>
         </div>
 
-        {/* Happiness meter */}
-        <div className="absolute z-30 bottom-6 left-6">
-          <img src="/images/HappinessMeter.png" alt="" className="w-[50px] h-[50px]"/>
-        </div>
+
       </section>
 
       {/* ═══════ 3 INFO CARDS WITH IMAGES ═══════ */}
@@ -310,6 +307,17 @@ export default function ParkinHome() {
         {/* Right teal strip */}
         <div className="absolute right-0 top-0 w-[12px] h-full bg-[#00565B]"/>
       </footer>
+
+      {/* ═══════ CHAT BUTTON - Fixed bottom left ═══════ */}
+      <button
+        className="fixed bottom-6 left-6 z-50 w-[60px] h-[60px] bg-[#00565B] rounded-full shadow-lg flex items-center justify-center hover:bg-[#004a4f] transition-colors hover:scale-110 transition-transform"
+        onClick={() => {}}
+        aria-label="Chat with us"
+      >
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </button>
     </div>
   );
 }
