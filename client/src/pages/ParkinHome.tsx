@@ -164,19 +164,8 @@ export default function ParkinHome() {
             <div className="absolute top-0 left-0" style={{width:'calc(100% - 40px)', height:'calc(100% - 50px)'}}>
               <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
               <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
-              {/* Car cutout - matching original parkin.ae exactly */}
-              <svg className="absolute bottom-[-30px] right-[-20px]" width="130" height="110" viewBox="0 0 130 110" xmlns="http://www.w3.org/2000/svg" style={{zIndex:5}}>
-                {/* Car body - front view rounded shape */}
-                <rect x="15" y="20" width="100" height="70" rx="22" fill="#00565B"/>
-                {/* Roof dome */}
-                <path d="M35 25 C35 8 95 8 95 25" fill="#00565B"/>
-                {/* Windshield - lighter teal arch */}
-                <path d="M38 48 C38 28 92 28 92 48 Z" fill="#3ECDC6" opacity="0.7"/>
-                {/* Left headlight */}
-                <circle cx="40" cy="72" r="9" fill="#3ECDC6" opacity="0.7"/>
-                {/* Right headlight */}
-                <circle cx="90" cy="72" r="9" fill="#3ECDC6" opacity="0.7"/>
-              </svg>
+              {/* Car image - original from parkin.ae */}
+              <img src="/car.webp" alt="" className="absolute bottom-[-25px] right-[-15px]" style={{width:'120px', height:'auto', zIndex:5, opacity:0.85}} />
             </div>
             <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
               <h1 className={`text-[#00565B] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
