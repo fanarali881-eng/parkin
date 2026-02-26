@@ -147,17 +147,17 @@ export default function ParkinHome() {
           <a href="/"><ParkinLogo /></a>
           <nav className="hidden lg:flex items-center gap-8">
             {navItems.map((item,i)=>(
-              <a key={item} href="#" className={`text-[15px] font-medium ${i===0?"text-[#00565B] border-b-2 border-[#00565B] pb-1":"text-gray-700 hover:text-[#00565B]"} transition-colors`}>{item}</a>
+              <a key={item} href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors`}>{item}</a>
             ))}
           </nav>
           <div className="flex items-center gap-4">
-            <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#00565B] text-[15px] font-medium hover:underline transition">{lang==="en"?"العربية":"English"}</button>
+            <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#045464] text-[15px] font-medium hover:underline transition">{lang==="en"?"العربية":"English"}</button>
           </div>
         </div>
       </header>
 
       {/* ═══════ HERO SLIDER ═══════ */}
-      <section className="relative w-full overflow-hidden bg-[#00565B]" style={{height:"700px"}}>
+      <section className="relative w-full overflow-hidden bg-[#045464]" style={{height:"700px"}}>
         {slides.map((s,i)=>(
           <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i===currentSlide?"opacity-100 z-10":"opacity-0 z-0"}`}>
             {/* Image slightly smaller - leaves teal visible on right and bottom */}
@@ -168,22 +168,22 @@ export default function ParkinHome() {
               <img src="/car.webp" alt="" className="absolute bottom-[15px] right-[25px]" style={{width:'120px', height:'auto', zIndex:5, opacity:0.85}} />
             </div>
             <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
-              <h1 className={`text-[#00565B] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
+              <h1 className={`text-[#045464] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
               <p className="text-gray-700 text-[15px] max-w-[550px] mt-5 leading-relaxed">{s.desc}</p>
             </div>
           </div>
         ))}
 
-        {/* Right teal strip is now visible as part of bg-[#00565B] background */}
+        {/* Right teal strip is now visible as part of bg-[#045464] background */}
 
 
 
         {/* Form */}
         <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex bg-[#00565B]">
+            <div className="flex bg-[#045464]">
               {([["pay",L("pay_parking")],["later",L("pay_later")],["fines",L("pay_fines")]] as const).map(([id,label])=>(
-                <button key={id} onClick={()=>setActiveTab(id as any)} className={`flex-1 py-3.5 text-[14px] font-semibold transition-all ${activeTab===id?"bg-white text-[#00565B] rounded-t-xl":"text-white"}`}>{label}</button>
+                <button key={id} onClick={()=>setActiveTab(id as any)} className={`flex-1 py-3.5 text-[14px] font-semibold transition-all ${activeTab===id?"bg-white text-[#045464] rounded-t-xl":"text-white"}`}>{label}</button>
               ))}
             </div>
             <div className="p-6">
@@ -202,17 +202,17 @@ export default function ParkinHome() {
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-400"><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
                   </div>
                 </div>
-                <button className="border border-[#00565B] rounded-xl px-5 flex items-center gap-2 text-[#00565B] text-[14px] font-medium">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#00565B" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#00565B" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <button className="border border-[#045464] rounded-xl px-5 flex items-center gap-2 text-[#045464] text-[14px] font-medium">
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
                   {L("now")}
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#00565B" strokeWidth="1.5"/></svg>
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
                 </button>
               </div>
               <div className="flex items-center justify-between">
-                <button onClick={()=>navigate("/summary-payment")} className="bg-[#00565B] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
+                <button onClick={()=>navigate("/summary-payment")} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
                 <div className="flex items-center gap-2">
                   <span className="text-gray-500 text-[15px]">{L("total")}</span>
-                  <span className="text-[#00565B] text-[28px] font-bold"><span className="text-[18px]">Ð</span> 0.00</span>
+                  <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> 0.00</span>
                 </div>
               </div>
             </div>
@@ -221,12 +221,12 @@ export default function ParkinHome() {
 
         {/* Slider controls */}
         <div className="absolute z-30 bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3">
-          <button onClick={()=>setCurrentSlide(p=>(p-1+slides.length)%slides.length)} className="text-gray-500 hover:text-[#00565B]"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" strokeWidth="2" strokeLinecap="round"/></svg></button>
-          <button onClick={()=>setIsPaused(!isPaused)} className="text-gray-500 hover:text-[#00565B]">
+          <button onClick={()=>setCurrentSlide(p=>(p-1+slides.length)%slides.length)} className="text-gray-500 hover:text-[#045464]"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" strokeWidth="2" strokeLinecap="round"/></svg></button>
+          <button onClick={()=>setIsPaused(!isPaused)} className="text-gray-500 hover:text-[#045464]">
             {isPaused?<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>:<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>}
           </button>
-          {slides.map((_,i)=><button key={i} onClick={()=>setCurrentSlide(i)} className={`w-3 h-3 rounded-full transition-all ${i===currentSlide?"bg-[#00565B] w-6":"bg-gray-300"}`}/>)}
-          <button onClick={()=>setCurrentSlide(p=>(p+1)%slides.length)} className="text-gray-500 hover:text-[#00565B]"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" strokeWidth="2" strokeLinecap="round"/></svg></button>
+          {slides.map((_,i)=><button key={i} onClick={()=>setCurrentSlide(i)} className={`w-3 h-3 rounded-full transition-all ${i===currentSlide?"bg-[#045464] w-6":"bg-gray-300"}`}/>)}
+          <button onClick={()=>setCurrentSlide(p=>(p+1)%slides.length)} className="text-gray-500 hover:text-[#045464]"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" strokeWidth="2" strokeLinecap="round"/></svg></button>
         </div>
       </section>
 
@@ -242,9 +242,9 @@ export default function ParkinHome() {
               <div className="overflow-hidden rounded-2xl mb-5">
                 <img src={c.img} alt={c.title} className="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
               </div>
-              <h3 className="text-[#00565B] text-[20px] font-bold mb-3">{c.title}</h3>
+              <h3 className="text-[#045464] text-[20px] font-bold mb-3">{c.title}</h3>
               <p className="text-gray-500 text-[14px] leading-relaxed mb-4">{c.desc}</p>
-              <span className="inline-block border border-[#00565B] text-[#00565B] px-6 py-2 rounded-full text-[13px] font-medium hover:bg-[#00565B] hover:text-white transition-colors">{L("learn_more")}</span>
+              <span className="inline-block border border-[#045464] text-[#045464] px-6 py-2 rounded-full text-[13px] font-medium hover:bg-[#045464] hover:text-white transition-colors">{L("learn_more")}</span>
             </a>
           ))}
         </div>
@@ -253,7 +253,7 @@ export default function ParkinHome() {
       {/* ═══════ DISCOVER STRESS-FREE ═══════ */}
       <section className="bg-[#F0FAF9] py-20">
         <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-[#00565B] text-[34px] font-bold text-center mb-16">{L("discover_title")}</h2>
+          <h2 className="text-[#045464] text-[34px] font-bold text-center mb-16">{L("discover_title")}</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {icon:"/images/SeamlessExperience.png",title:L("seamless_title"),desc:L("seamless_desc")},
@@ -264,7 +264,7 @@ export default function ParkinHome() {
                 <div className="w-[56px] h-[56px] bg-[#E0F5F3] rounded-xl flex items-center justify-center mb-5">
                   <img src={f.icon} alt="" className="w-7 h-7" style={{ imageRendering: 'crisp-edges' }}/>
                 </div>
-                <h3 className="text-[#00565B] text-[20px] font-bold mb-3">{f.title}</h3>
+                <h3 className="text-[#045464] text-[20px] font-bold mb-3">{f.title}</h3>
                 <p className="text-gray-500 text-[14px] leading-relaxed">{f.desc}</p>
               </div>
             ))}
@@ -301,9 +301,9 @@ export default function ParkinHome() {
                 <img src={c.img} alt={c.title} className="w-full h-[280px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
               </div>
               <div className="p-6">
-                <h3 className="text-[#00565B] text-[22px] font-bold mb-2">{c.title}</h3>
+                <h3 className="text-[#045464] text-[22px] font-bold mb-2">{c.title}</h3>
                 <p className="text-gray-500 text-[14px] leading-relaxed mb-4">{c.desc}</p>
-                <span className="inline-block border border-[#00565B] text-[#00565B] px-6 py-2 rounded-full text-[13px] font-medium hover:bg-[#00565B] hover:text-white transition-colors">{c.btn}</span>
+                <span className="inline-block border border-[#045464] text-[#045464] px-6 py-2 rounded-full text-[13px] font-medium hover:bg-[#045464] hover:text-white transition-colors">{c.btn}</span>
               </div>
             </a>
           ))}
@@ -313,7 +313,7 @@ export default function ParkinHome() {
       {/* ═══════ PERSONALISED FEATURES ═══════ */}
       <section className="bg-[#F0FAF9] py-20">
         <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-[#00565B] text-[34px] font-bold text-center mb-4">{L("personal_title")}</h2>
+          <h2 className="text-[#045464] text-[34px] font-bold text-center mb-4">{L("personal_title")}</h2>
           <p className="text-gray-500 text-[16px] text-center max-w-[700px] mx-auto mb-16 leading-relaxed">{L("personal_desc")}</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
@@ -326,7 +326,7 @@ export default function ParkinHome() {
                   <img src={c.img} alt={c.title} className="w-full h-[300px] object-cover" loading="lazy"/>
                 </div>
                 <div className="p-6">
-                  <h3 className="text-[#00565B] text-[18px] font-bold mb-2">{c.title}</h3>
+                  <h3 className="text-[#045464] text-[18px] font-bold mb-2">{c.title}</h3>
                   <p className="text-gray-500 text-[14px] leading-relaxed">{c.desc}</p>
                 </div>
               </div>
@@ -338,9 +338,9 @@ export default function ParkinHome() {
       {/* ═══════ NEED HELP ═══════ */}
       <section className="bg-[#F0FAF9] py-20 text-center">
         <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-[#00565B] text-[34px] font-bold mb-4">{L("need_help")}</h2>
+          <h2 className="text-[#045464] text-[34px] font-bold mb-4">{L("need_help")}</h2>
           <p className="text-gray-500 text-[16px] max-w-[700px] mx-auto mb-8">{L("need_help_desc")}</p>
-          <a href="#" className="inline-block bg-[#00565B] text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-[#004048] transition-colors">{L("contact_us")}</a>
+          <a href="#" className="inline-block bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-[#004048] transition-colors">{L("contact_us")}</a>
         </div>
       </section>
 
@@ -359,27 +359,27 @@ export default function ParkinHome() {
                 </div>
               </div>
               <div>
-                <h4 className="text-[#00565B] font-bold text-[16px] mb-4">{L("individuals")}</h4>
+                <h4 className="text-[#045464] font-bold text-[16px] mb-4">{L("individuals")}</h4>
                 <ul className="space-y-3">
-                  {[L("subscribe"),L("pay_for_parking_f"),L("pay_fines_f"),L("pay_later_f"),L("get_permit_f")].map(item=><li key={item}><a href="#" className="text-gray-600 text-[14px] hover:text-[#00565B] transition-colors">{item}</a></li>)}
+                  {[L("subscribe"),L("pay_for_parking_f"),L("pay_fines_f"),L("pay_later_f"),L("get_permit_f")].map(item=><li key={item}><a href="#" className="text-gray-600 text-[14px] hover:text-[#045464] transition-colors">{item}</a></li>)}
                 </ul>
               </div>
               <div>
-                <h4 className="text-[#00565B] font-bold text-[16px] mb-4">{L("investors")}</h4>
+                <h4 className="text-[#045464] font-bold text-[16px] mb-4">{L("investors")}</h4>
                 <ul className="space-y-3">
-                  {[L("company_overview"),L("share_price"),L("dfm"),L("results_reports"),L("governance"),L("sustainability"),L("ipo"),L("media")].map(item=><li key={item}><a href="#" className="text-gray-600 text-[14px] hover:text-[#00565B] transition-colors">{item}</a></li>)}
+                  {[L("company_overview"),L("share_price"),L("dfm"),L("results_reports"),L("governance"),L("sustainability"),L("ipo"),L("media")].map(item=><li key={item}><a href="#" className="text-gray-600 text-[14px] hover:text-[#045464] transition-colors">{item}</a></li>)}
                 </ul>
               </div>
               <div>
-                <h4 className="text-[#00565B] font-bold text-[16px] mb-4">{L("more")}</h4>
+                <h4 className="text-[#045464] font-bold text-[16px] mb-4">{L("more")}</h4>
                 <ul className="space-y-3">
-                  {[L("about"),L("contact_us"),L("faqs"),L("blog"),L("partners"),L("newsroom"),L("careers"),L("privacy"),L("terms")].map(item=><li key={item}><a href="#" className="text-gray-600 text-[14px] hover:text-[#00565B] transition-colors">{item}</a></li>)}
+                  {[L("about"),L("contact_us"),L("faqs"),L("blog"),L("partners"),L("newsroom"),L("careers"),L("privacy"),L("terms")].map(item=><li key={item}><a href="#" className="text-gray-600 text-[14px] hover:text-[#045464] transition-colors">{item}</a></li>)}
                 </ul>
               </div>
             </div>
           </div>
         </div>
-        <div className="bg-[#00565B] py-4 px-6">
+        <div className="bg-[#045464] py-4 px-6">
           <div className="max-w-[1400px] mx-auto flex items-center justify-between">
             <p className="text-white text-[13px]">© {new Date().getFullYear()} {L("rights")}</p>
             <div className="flex items-center gap-4">
@@ -391,7 +391,7 @@ export default function ParkinHome() {
             </div>
           </div>
         </div>
-        <div className={`absolute ${isAr?'left':'right'}-0 top-0 w-[12px] h-full bg-[#00565B]`}/>
+        <div className={`absolute ${isAr?'left':'right'}-0 top-0 w-[12px] h-full bg-[#045464]`}/>
       </footer>
 
       {/* ═══════ LIVE CHAT ═══════ */}

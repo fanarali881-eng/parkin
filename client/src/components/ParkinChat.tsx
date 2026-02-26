@@ -104,9 +104,9 @@ export default function ParkinChat() {
       >
         {/* New Message Notification Bubble */}
         {hasNewAdminMessage && (
-          <div className="absolute -top-10 left-0 bg-[#00565B] text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
+          <div className="absolute -top-10 left-0 bg-[#045464] text-white text-sm px-3 py-1 rounded-lg shadow-lg animate-bounce whitespace-nowrap">
             New message from support
-            <div className="absolute bottom-0 left-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-[#00565B]"></div>
+            <div className="absolute bottom-0 left-4 transform translate-y-1/2 rotate-45 w-2 h-2 bg-[#045464]"></div>
           </div>
         )}
 
@@ -125,7 +125,7 @@ export default function ParkinChat() {
         <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md h-[500px] flex flex-col overflow-hidden">
             {/* Header */}
-            <div className="bg-[#00565B] text-white p-4 flex items-center justify-between">
+            <div className="bg-[#045464] text-white p-4 flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <img
                   src="/images/parkin-logo.png"
@@ -156,7 +156,7 @@ export default function ParkinChat() {
                     alt="Parkin"
                     className="w-16 h-16 mx-auto mb-4 opacity-50"
                   />
-                  <p className="font-semibold text-[#00565B]">Welcome to Parkin</p>
+                  <p className="font-semibold text-[#045464]">Welcome to Parkin</p>
                   <p className="text-sm">How can we help you today?</p>
                 </div>
               ) : (
@@ -168,7 +168,7 @@ export default function ParkinChat() {
                     <div
                       className={`max-w-[80%] rounded-2xl px-4 py-2 ${
                         msg.sender === "visitor"
-                          ? "bg-[#00565B] text-white rounded-br-none"
+                          ? "bg-[#045464] text-white rounded-br-none"
                           : "bg-white text-gray-800 shadow rounded-bl-none"
                       }`}
                     >
@@ -192,12 +192,12 @@ export default function ParkinChat() {
                   onChange={(e) => setNewMessage(e.target.value)}
                   onKeyPress={handleKeyPress}
                   placeholder="Type your message..."
-                  className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-[#00565B]"
+                  className="flex-1 px-4 py-2 border rounded-full focus:outline-none focus:ring-2 focus:ring-[#045464]"
                 />
                 <button
                   onClick={sendMessage}
                   disabled={!newMessage.trim()}
-                  className="bg-[#00565B] text-white p-2 rounded-full transition hover:bg-[#004a4f] disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="bg-[#045464] text-white p-2 rounded-full transition hover:bg-[#004a4f] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
