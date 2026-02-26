@@ -165,7 +165,7 @@ export default function ParkinHome() {
               <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
               <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
               {/* Car image - original from parkin.ae */}
-              <img src="/car.webp" alt="" className="absolute bottom-[15px] right-[25px]" style={{width:'120px', height:'auto', zIndex:5, opacity:0.85}} />
+              <img src="/car.webp" alt="" className="absolute bottom-[-5px] right-[25px]" style={{width:'160px', height:'auto', zIndex:5, opacity:0.85}} />
             </div>
             <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
               <h1 className={`text-[#045464] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
