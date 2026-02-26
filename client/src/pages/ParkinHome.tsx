@@ -157,11 +157,14 @@ export default function ParkinHome() {
       </header>
 
       {/* ═══════ HERO SLIDER ═══════ */}
-      <section className="relative w-full overflow-hidden" style={{height:"700px"}}>
+      <section className="relative w-full overflow-hidden bg-[#00565B]" style={{height:"700px"}}>
         {slides.map((s,i)=>(
           <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i===currentSlide?"opacity-100 z-10":"opacity-0 z-0"}`}>
-            <img src={s.bg} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
-            <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
+            {/* Image slightly smaller - leaves teal visible on right and bottom */}
+            <div className="absolute top-0 left-0" style={{width:'calc(100% - 18px)', height:'calc(100% - 50px)'}}>
+              <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
+              <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
+            </div>
             <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
               <h1 className={`text-[#00565B] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
               <p className="text-gray-700 text-[15px] max-w-[550px] mt-5 leading-relaxed">{s.desc}</p>
@@ -169,7 +172,7 @@ export default function ParkinHome() {
           </div>
         ))}
 
-        <div className={`absolute ${isAr?'left':'right'}-0 top-0 bottom-0 w-[18px] bg-[#00565B] z-20`}/>
+        {/* Right teal strip is now visible as part of bg-[#00565B] background */}
 
         {/* Form */}
         <div className="absolute z-30 bottom-[60px] w-[580px]" style={{right: isAr ? 'calc((100% - 1400px)/2 + 24px)' : 'calc((100% - 1400px)/2 + 24px)', left: 'auto'}}>
