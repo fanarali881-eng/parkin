@@ -172,8 +172,10 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ APP BANNER ═══════ */}
-      <section className="bg-[#1a1a2e] py-16 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between">
+      <section className="relative overflow-hidden" style={{minHeight:'380px'}}>
+        <img src="/images/NewFeature.webp" alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+        <div className="absolute inset-0 bg-[#1a1a2e]/75"/>
+        <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 flex items-center h-full" style={{minHeight:'380px'}}>
           <div>
             <h2 className="text-white text-[32px] font-bold mb-4">Get the Parkin App</h2>
             <p className="text-gray-300 text-[16px] mb-8 max-w-[400px]">Download the Parkin app for a seamless parking experience. Pay, manage, and track your parking anytime, anywhere.</p>
@@ -182,7 +184,6 @@ export default function ParkinHome() {
               <img src="/images/Googleplay.svg" alt="Google Play" className="h-[48px] cursor-pointer"/>
             </div>
           </div>
-          <div className="hidden lg:block"><img src="/images/NewFeature.webp" alt="Parkin App" className="h-[300px]" loading="lazy"/></div>
         </div>
       </section>
 
