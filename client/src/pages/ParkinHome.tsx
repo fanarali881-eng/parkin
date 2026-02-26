@@ -216,7 +216,7 @@ export default function ParkinHome() {
           <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center whitespace-nowrap">
             {navMenus.map((menu,i)=>(
               <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
-                <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors py-6 inline-block whitespace-nowrap`}>{menu.label}</a>
+                <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464]":"text-gray-700 hover:text-[#045464] border-b-2 border-transparent"} transition-colors py-6 inline-block whitespace-nowrap`}>{menu.label}</a>
               </div>
             ))}
           </nav>
