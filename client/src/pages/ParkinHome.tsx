@@ -171,15 +171,17 @@ export default function ParkinHome() {
         </div>
       </section>
 
-      {/* ═══════ APP BANNER ═══════ */}
-      <section className="relative overflow-hidden" style={{minHeight:'380px'}}>
-        <img src="/images/NewFeature.webp" alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-        <div className="absolute inset-0 bg-[#1a1a2e]/75"/>
-        <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-16 flex items-center h-full" style={{minHeight:'380px'}}>
-          <div>
-            <h2 className="text-white text-[32px] font-bold mb-4">Get the Parkin App</h2>
-            <p className="text-gray-300 text-[16px] mb-8 max-w-[400px]">Download the Parkin app for a seamless parking experience. Pay, manage, and track your parking anytime, anywhere.</p>
-            <a href="#" className="inline-block border border-white text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-white hover:text-[#1a1a2e] transition-colors">Download App</a>
+      {/* ═══════ NEW FEATURE BANNER ═══════ */}
+      <section className="max-w-[1400px] mx-auto px-6 py-10">
+        <div className="relative overflow-hidden rounded-2xl" style={{minHeight:'380px'}}>
+          <img src="/images/NewFeature.webp" alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
+          <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"/>
+          <div className="relative z-10 px-10 py-16 flex items-center h-full" style={{minHeight:'380px'}}>
+            <div>
+              <h2 className="text-white text-[34px] font-bold mb-4">New Feature!</h2>
+              <p className="text-gray-200 text-[15px] mb-8 max-w-[450px] leading-relaxed">Take control and manage your subscription with ease from your Parkin dashboard. Renew your card, Update your vehicle details, or modify your subscription terms with just a few clicks.</p>
+              <a href="#" className="inline-block border border-white text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-white hover:text-[#1a1a2e] transition-colors">Check it Out</a>
+            </div>
           </div>
         </div>
       </section>
