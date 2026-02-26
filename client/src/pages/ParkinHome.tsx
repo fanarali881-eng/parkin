@@ -181,9 +181,9 @@ export default function ParkinHome() {
         {/* Form */}
         <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
-            <div className="flex bg-[#045464]">
-              {([["pay",L("pay_parking")],["later",L("pay_later")],["fines",L("pay_fines")]] as const).map(([id,label])=>(
-                <button key={id} onClick={()=>setActiveTab(id as any)} className={`flex-1 py-3.5 text-[14px] font-semibold transition-all ${activeTab===id?"bg-white text-[#045464] rounded-t-xl":"text-white"}`}>{label}</button>
+            <div className="flex bg-[#045464] rounded-t-2xl p-1.5 gap-1">
+              {([['pay',L('pay_parking')],['later',L('pay_later')],['fines',L('pay_fines')]] as const).map(([id,label])=>(
+                <button key={id} onClick={()=>setActiveTab(id as any)} className={`flex-1 py-3 text-[14px] font-semibold transition-all rounded-full ${activeTab===id?"bg-white text-[#045464] border-2 border-[#045464]":"text-white"}`}>{label}</button>
               ))}
             </div>
             <div className="p-6">
@@ -202,7 +202,7 @@ export default function ParkinHome() {
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-400"><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
                   </div>
                 </div>
-                <button className="border border-[#045464] rounded-xl px-5 flex items-center gap-2 text-[#045464] text-[14px] font-medium">
+                <button className="border border-[#045464] rounded-full px-5 flex items-center gap-2 text-[#045464] text-[14px] font-medium">
                   <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
                   {L("now")}
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
