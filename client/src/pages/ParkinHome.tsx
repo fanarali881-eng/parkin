@@ -161,7 +161,7 @@ export default function ParkinHome() {
         {slides.map((s,i)=>(
           <div key={i} className={`absolute inset-0 transition-opacity duration-700 ${i===currentSlide?"opacity-100 z-10":"opacity-0 z-0"}`}>
             {/* Image slightly smaller - leaves teal visible on right and bottom */}
-            <div className="absolute top-0 left-0" style={{width:'calc(100% - 18px)', height:'calc(100% - 50px)'}}>
+            <div className="absolute top-0 left-0" style={{width:'calc(100% - 40px)', height:'calc(100% - 50px)'}}>
               <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
               <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
             </div>
