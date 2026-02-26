@@ -234,22 +234,12 @@ export default function ParkinHome() {
         </div>
       </section>
 
-      {/* ═══════ CONTACT US ═══════ */}
-      <section className="max-w-[1400px] mx-auto px-6 py-20 text-center">
-        <h2 className="text-[#00565B] text-[34px] font-bold mb-4">Contact Us</h2>
-        <p className="text-gray-500 text-[16px] max-w-[600px] mx-auto mb-12">Have questions or need assistance? Our team is here to help you with all your parking needs.</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[900px] mx-auto">
-          {[
-            {icon:"📞",title:"Call Us",info:"800-PARKIN (727546)"},
-            {icon:"📧",title:"Email Us",info:"info@parkin.ae"},
-            {icon:"📍",title:"Visit Us",info:"Dubai, UAE"},
-          ].map((c,i)=>(
-            <div key={i} className="p-6 rounded-2xl border border-gray-100">
-              <div className="text-3xl mb-4">{c.icon}</div>
-              <h3 className="text-[#00565B] text-[16px] font-bold mb-2">{c.title}</h3>
-              <p className="text-gray-500 text-[14px]">{c.info}</p>
-            </div>
-          ))}
+      {/* ═══════ NEED HELP ═══════ */}
+      <section className="bg-[#F0FAF9] py-20 text-center">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <h2 className="text-[#00565B] text-[34px] font-bold mb-4">Need Help?</h2>
+          <p className="text-gray-500 text-[16px] max-w-[700px] mx-auto mb-8">We're here for you! If you have any questions or need assistance, don't hesitate to reach out. Contact our support team for quick and friendly help.</p>
+          <a href="#" className="inline-block bg-[#00565B] text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-[#004048] transition-colors">Contact Us</a>
         </div>
       </section>
 
