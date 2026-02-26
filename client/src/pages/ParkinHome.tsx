@@ -179,10 +179,7 @@ export default function ParkinHome() {
           <div>
             <h2 className="text-white text-[32px] font-bold mb-4">Get the Parkin App</h2>
             <p className="text-gray-300 text-[16px] mb-8 max-w-[400px]">Download the Parkin app for a seamless parking experience. Pay, manage, and track your parking anytime, anywhere.</p>
-            <div className="flex gap-4">
-              <img src="/images/Appstore.svg" alt="App Store" className="h-[48px] cursor-pointer"/>
-              <img src="/images/Googleplay.svg" alt="Google Play" className="h-[48px] cursor-pointer"/>
-            </div>
+            <a href="#" className="inline-block border border-white text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-white hover:text-[#1a1a2e] transition-colors">Download App</a>
           </div>
         </div>
       </section>
