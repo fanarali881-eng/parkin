@@ -211,17 +211,17 @@ export default function ParkinHome() {
 
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-[72px]">
-          <a href="/" className="flex-shrink-0"><ParkinLogo /></a>
-          <nav className="hidden lg:flex items-center gap-6 flex-shrink-0">
+        <div className="max-w-[1400px] mx-auto px-6 flex flex-nowrap items-center h-[72px]">
+          <a href="/" className="flex-shrink-0 mr-8"><ParkinLogo /></a>
+          <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center whitespace-nowrap">
             {navMenus.map((menu,i)=>(
               <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
-                <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors py-6 inline-block`}>{menu.label}</a>
+                <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors py-6 inline-block whitespace-nowrap`}>{menu.label}</a>
               </div>
             ))}
           </nav>
-          <div className="flex items-center gap-4">
-            <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#045464] text-[15px] font-medium hover:underline transition">{lang==="en"?"العربية":"English"}</button>
+          <div className="flex-shrink-0 ml-8">
+            <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#045464] text-[15px] font-medium hover:underline transition whitespace-nowrap">{lang==="en"?"العربية":"English"}</button>
           </div>
         </div>
         {/* ═══ MEGA MENU DROPDOWN ═══ */}
