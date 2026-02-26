@@ -79,6 +79,16 @@ const t: Record<string, Record<string, string>> = {
   need_help_desc: { en: "We're here for you! If you have any questions or need assistance, don't hesitate to reach out. Contact our support team for quick and friendly help.", ar: "نحن هنا من أجلك! إذا كان لديك أي أسئلة أو تحتاج مساعدة، لا تتردد في التواصل معنا. تواصل مع فريق الدعم للحصول على مساعدة سريعة وودية." },
   contact_us: { en: "Contact Us", ar: "تواصل معنا" },
 
+  // Submenu items
+  seasonal_parking: { en: "Seasonal Parking", ar: "المواقف الموسمية" },
+  multi_storey: { en: "Multi-storey Parking", ar: "مواقف متعددة الطوابق" },
+  valet_parking: { en: "Valet Parking", ar: "خدمة صف السيارات" },
+  fleet_mgmt: { en: "Fleet Management", ar: "إدارة الأسطول" },
+  business_solutions: { en: "Business Solutions", ar: "حلول الأعمال" },
+  corporate_parking: { en: "Corporate Parking", ar: "مواقف الشركات" },
+  govt_services: { en: "Government Services", ar: "الخدمات الحكومية" },
+  public_parking: { en: "Public Parking", ar: "المواقف العامة" },
+
   // Footer
   easy_parking: { en: "Easy Parking Effortless Living", ar: "مواقف سهلة حياة مريحة" },
   get_app: { en: "Get the App", ar: "حمّل التطبيق" },
@@ -119,6 +129,7 @@ export default function ParkinHome() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const [lang, setLang] = useState<"en"|"ar">("en");
+  const [openMenu, setOpenMenu] = useState<string|null>(null);
 
   const L = (key: string) => t[key]?.[lang] || t[key]?.en || key;
   const isAr = lang === "ar";
@@ -128,8 +139,46 @@ export default function ParkinHome() {
     { title: L("slide2_title"), desc: L("slide2_desc"), italic:false, bg:"/images/banner2_gateway.jpg" },
   ];
 
-  const navItems = [
-    L("home"), L("individuals"), L("business"), L("government"), L("investors"), L("more")
+  const navMenus: { key: string; label: string; subs: { key: string; label: string }[] }[] = [
+    { key: "home", label: L("home"), subs: [] },
+    { key: "individuals", label: L("individuals"), subs: [
+      { key: "subscribe", label: L("subscribe") },
+      { key: "pay_for_parking_f", label: L("pay_for_parking_f") },
+      { key: "pay_fines_f", label: L("pay_fines_f") },
+      { key: "pay_later_f", label: L("pay_later_f") },
+      { key: "get_permit_f", label: L("get_permit_f") },
+      { key: "seasonal_parking", label: L("seasonal_parking") },
+      { key: "multi_storey", label: L("multi_storey") },
+      { key: "valet_parking", label: L("valet_parking") },
+    ]},
+    { key: "business", label: L("business"), subs: [
+      { key: "fleet_mgmt", label: L("fleet_mgmt") },
+      { key: "business_solutions", label: L("business_solutions") },
+      { key: "corporate_parking", label: L("corporate_parking") },
+    ]},
+    { key: "government", label: L("government"), subs: [
+      { key: "govt_services", label: L("govt_services") },
+      { key: "public_parking", label: L("public_parking") },
+    ]},
+    { key: "investors", label: L("investors"), subs: [
+      { key: "company_overview", label: L("company_overview") },
+      { key: "share_price", label: L("share_price") },
+      { key: "dfm", label: L("dfm") },
+      { key: "results_reports", label: L("results_reports") },
+      { key: "governance", label: L("governance") },
+      { key: "sustainability", label: L("sustainability") },
+      { key: "ipo", label: L("ipo") },
+      { key: "media", label: L("media") },
+    ]},
+    { key: "more", label: L("more"), subs: [
+      { key: "about", label: L("about") },
+      { key: "contact_us", label: L("contact_us") },
+      { key: "faqs", label: L("faqs") },
+      { key: "blog", label: L("blog") },
+      { key: "partners", label: L("partners") },
+      { key: "newsroom", label: L("newsroom") },
+      { key: "careers", label: L("careers") },
+    ]},
   ];
 
   useEffect(() => {
@@ -146,8 +195,17 @@ export default function ParkinHome() {
         <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-[72px]">
           <a href="/"><ParkinLogo /></a>
           <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item,i)=>(
-              <a key={item} href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors`}>{item}</a>
+            {navMenus.map((menu,i)=>(
+              <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
+                <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors py-6 inline-block`}>{menu.label}</a>
+                {menu.subs.length>0&&openMenu===menu.key&&(
+                  <div className="absolute top-full left-0 bg-white rounded-xl shadow-xl border border-gray-100 py-3 min-w-[240px] z-50" onMouseEnter={()=>setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
+                    {menu.subs.map(sub=>(
+                      <a key={sub.key} href="#" className="block px-5 py-2.5 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-[#045464] transition-colors">{sub.label}</a>
+                    ))}
+                  </div>
+                )}
+              </div>
             ))}
           </nav>
           <div className="flex items-center gap-4">
