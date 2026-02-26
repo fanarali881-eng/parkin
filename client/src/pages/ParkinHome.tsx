@@ -174,6 +174,18 @@ export default function ParkinHome() {
 
         {/* Right teal strip is now visible as part of bg-[#00565B] background */}
 
+        {/* Car icon on bottom-right teal area */}
+        <div className="absolute z-20 bottom-[60px] right-[0px] flex items-center justify-center" style={{width:'80px', height:'80px'}}>
+          <svg width="60" height="40" viewBox="0 0 60 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M10 28C10 28 12 18 14 14C16 10 20 8 26 8H34C40 8 44 10 46 14C48 18 50 28 50 28" stroke="#3ECDC6" strokeWidth="3" strokeLinecap="round" fill="none"/>
+            <path d="M6 28H54C56 28 58 30 58 32V34C58 36 56 38 54 38H6C4 38 2 36 2 34V32C2 30 4 28 6 28Z" stroke="#3ECDC6" strokeWidth="3" fill="none"/>
+            <circle cx="16" cy="34" r="4" stroke="#3ECDC6" strokeWidth="2.5" fill="none"/>
+            <circle cx="44" cy="34" r="4" stroke="#3ECDC6" strokeWidth="2.5" fill="none"/>
+            <circle cx="16" cy="34" r="1.5" fill="#3ECDC6"/>
+            <circle cx="44" cy="34" r="1.5" fill="#3ECDC6"/>
+          </svg>
+        </div>
+
         {/* Form */}
         <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
