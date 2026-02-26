@@ -212,8 +212,8 @@ export default function ParkinHome() {
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-[72px]">
-          <a href="/"><ParkinLogo /></a>
-          <nav className="hidden lg:flex items-center gap-8">
+          <a href="/" className="flex-shrink-0"><ParkinLogo /></a>
+          <nav className="hidden lg:flex items-center gap-6 flex-shrink-0">
             {navMenus.map((menu,i)=>(
               <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
                 <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors py-6 inline-block`}>{menu.label}</a>
