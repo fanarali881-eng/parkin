@@ -6,13 +6,16 @@ function ParkinLogo({ white = false }: { white?: boolean }) {
   const c1 = white ? "#fff" : "#00565B";
   const c2 = "#3ECDC6";
   return (
-    <svg viewBox="0 0 180 50" className="h-12 w-auto" fill="none">
-      <rect x="0" y="5" width="22" height="40" rx="3" fill={c1}/>
-      <rect x="0" y="5" width="35" height="22" rx="3" fill={c1}/>
-      <rect x="18" y="12" width="10" height="8" rx="2" fill={c2}/>
-      <circle cx="12" cy="40" r="6" fill={c2}/>
-      <text x="95" y="20" fontFamily="Arial" fontSize="16" fontWeight="bold" fill={c1} textAnchor="middle" direction="rtl">باركن</text>
-      <text x="95" y="42" fontFamily="Arial" fontSize="22" fontWeight="bold" fill={c1} textAnchor="middle">parkin</text>
+    <svg viewBox="0 0 200 50" className="h-10 w-auto" fill="none">
+      {/* P icon */}
+      <rect x="2" y="8" width="18" height="34" rx="3" fill={c1}/>
+      <rect x="2" y="8" width="30" height="20" rx="3" fill={c1}/>
+      <rect x="16" y="14" width="9" height="7" rx="2" fill={c2}/>
+      <circle cx="10" cy="38" r="5" fill={c2}/>
+      <circle cx="22" cy="38" r="3" fill={c2}/>
+      {/* Arabic + English text */}
+      <text x="55" y="20" fontFamily="Arial" fontSize="13" fontWeight="bold" fill={c1} textAnchor="start" direction="rtl">باركن</text>
+      <text x="55" y="38" fontFamily="Arial" fontSize="20" fontWeight="bold" fill={c1} textAnchor="start">parkin</text>
     </svg>
   );
 }
@@ -67,13 +70,7 @@ export default function ParkinHome() {
           </div>
         ))}
 
-        {/* Decorative */}
-        <svg className="absolute z-20 top-[22%] right-[34%] w-16 h-16 opacity-80" viewBox="0 0 40 40" fill="none"><path d="M20 0L23 17L40 20L23 23L20 40L17 23L0 20L17 17Z" fill="#3ECDC6"/></svg>
-        <svg className="absolute z-20 top-[48%] right-[38%] w-7 h-7 opacity-60" viewBox="0 0 40 40" fill="none"><path d="M20 0L23 17L40 20L23 23L20 40L17 23L0 20L17 17Z" fill="#3ECDC6"/></svg>
-        <div className="absolute z-20 top-[10%] right-[14%] w-[80px] h-[90px] bg-[#3ECDC6] rounded-xl flex items-center justify-center">
-          <svg width="40" height="40" viewBox="0 0 40 40" fill="none"><rect x="5" y="10" width="30" height="25" rx="3" stroke="white" strokeWidth="2" fill="none"/><path d="M12 5V12M28 5V12" stroke="white" strokeWidth="2"/><path d="M15 22L18 25L25 18" stroke="white" strokeWidth="2"/></svg>
-        </div>
-        <img src="/images/Car.webp" alt="" className="absolute z-20 top-[50%] right-[18%] w-[80px] opacity-80"/>
+
         <div className="absolute right-0 top-0 bottom-0 w-[18px] bg-[#00565B] z-20"/>
 
         {/* Form */}
