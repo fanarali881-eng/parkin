@@ -79,15 +79,30 @@ const t: Record<string, Record<string, string>> = {
   need_help_desc: { en: "We're here for you! If you have any questions or need assistance, don't hesitate to reach out. Contact our support team for quick and friendly help.", ar: "نحن هنا من أجلك! إذا كان لديك أي أسئلة أو تحتاج مساعدة، لا تتردد في التواصل معنا. تواصل مع فريق الدعم للحصول على مساعدة سريعة وودية." },
   contact_us: { en: "Contact Us", ar: "تواصل معنا" },
 
-  // Submenu items
+  // Submenu items & descriptions
   seasonal_parking: { en: "Seasonal Parking", ar: "المواقف الموسمية" },
+  seasonal_parking_d: { en: "Secure your parking spot for the season with flexible plans tailored to your needs.", ar: "احجز موقفك للموسم مع خطط مرنة مصممة حسب احتياجاتك." },
   multi_storey: { en: "Multi-storey Parking", ar: "مواقف متعددة الطوابق" },
+  multi_storey_d: { en: "Access convenient multi-storey parking facilities across key locations.", ar: "استخدم مرافق المواقف متعددة الطوابق في المواقع الرئيسية." },
   valet_parking: { en: "Valet Parking", ar: "خدمة صف السيارات" },
+  valet_parking_d: { en: "Enjoy premium valet parking services for a hassle-free experience.", ar: "استمتع بخدمة صف السيارات المميزة لتجربة بدون عناء." },
   fleet_mgmt: { en: "Fleet Management", ar: "إدارة الأسطول" },
+  fleet_mgmt_d: { en: "Manage your fleet parking needs efficiently with our comprehensive solutions.", ar: "أدر احتياجات مواقف أسطولك بكفاءة مع حلولنا الشاملة." },
   business_solutions: { en: "Business Solutions", ar: "حلول الأعمال" },
+  business_solutions_d: { en: "Tailored parking solutions designed to meet your business requirements.", ar: "حلول مواقف مصممة لتلبية متطلبات أعمالك." },
   corporate_parking: { en: "Corporate Parking", ar: "مواقف الشركات" },
+  corporate_parking_d: { en: "Dedicated corporate parking programs for your organization.", ar: "برامج مواقف مخصصة لمؤسستك." },
   govt_services: { en: "Government Services", ar: "الخدمات الحكومية" },
+  govt_services_d: { en: "Parking services and solutions for government entities.", ar: "خدمات وحلول المواقف للجهات الحكومية." },
   public_parking: { en: "Public Parking", ar: "المواقف العامة" },
+  public_parking_d: { en: "Manage and access public parking zones across the city.", ar: "أدر واستخدم مناطق المواقف العامة في أنحاء المدينة." },
+  // Submenu descriptions for individuals
+  pay_parking_sub_d: { en: "Pay for parking only when your business needs it with this fast, easy, and commitment-free option.", ar: "ادفع للمواقف فقط عند الحاجة مع هذا الخيار السريع والسهل." },
+  subscribe_sub_d: { en: "Simplify parking with a subscription that saves costs and ensures a smooth experience for your team, customers, and guests.", ar: "بسّط المواقف مع اشتراك يوفر التكاليف ويضمن تجربة سلسة." },
+  pay_fines_sub_d: { en: "Resolve your corporate parking fines swiftly with our simple, convenient payment process.", ar: "سدد مخالفات المواقف بسرعة مع عملية الدفع البسيطة والمريحة." },
+  pay_later_sub_d: { en: "Park now and pay later with flexible payment options for your convenience.", ar: "اركن الآن وادفع لاحقاً مع خيارات دفع مرنة لراحتك." },
+  get_permit_sub_d: { en: "Claim your FREE parking permit, exclusively for residents in high-density areas and priority groups.", ar: "احصل على تصريح مواقف مجاني، حصرياً لسكان المناطق ذات الكثافة العالية." },
+  reserve_sub_d: { en: "Enjoy exclusive reserved parking and a seamless experience for your team, customers, and guests, with added savings on longer plans.", ar: "استمتع بمواقف محجوزة حصرية وتجربة سلسة مع توفير إضافي على الخطط الطويلة." },
 
   // Footer
   easy_parking: { en: "Easy Parking Effortless Living", ar: "مواقف سهلة حياة مريحة" },
@@ -139,45 +154,49 @@ export default function ParkinHome() {
     { title: L("slide2_title"), desc: L("slide2_desc"), italic:false, bg:"/images/banner2_gateway.jpg" },
   ];
 
-  const navMenus: { key: string; label: string; subs: { key: string; label: string }[] }[] = [
+  const navMenus: { key: string; label: string; subs: { label: string; desc: string }[] }[] = [
     { key: "home", label: L("home"), subs: [] },
     { key: "individuals", label: L("individuals"), subs: [
-      { key: "subscribe", label: L("subscribe") },
-      { key: "pay_for_parking_f", label: L("pay_for_parking_f") },
-      { key: "pay_fines_f", label: L("pay_fines_f") },
-      { key: "pay_later_f", label: L("pay_later_f") },
-      { key: "get_permit_f", label: L("get_permit_f") },
-      { key: "seasonal_parking", label: L("seasonal_parking") },
-      { key: "multi_storey", label: L("multi_storey") },
-      { key: "valet_parking", label: L("valet_parking") },
+      { label: L("pay_for_parking_f"), desc: L("pay_parking_sub_d") },
+      { label: L("subscribe"), desc: L("subscribe_sub_d") },
+      { label: L("pay_fines_f"), desc: L("pay_fines_sub_d") },
+      { label: L("pay_later_f"), desc: L("pay_later_sub_d") },
+      { label: L("get_permit_f"), desc: L("get_permit_sub_d") },
+      { label: L("seasonal_parking"), desc: L("seasonal_parking_d") },
+      { label: L("multi_storey"), desc: L("multi_storey_d") },
+      { label: L("valet_parking"), desc: L("valet_parking_d") },
     ]},
     { key: "business", label: L("business"), subs: [
-      { key: "fleet_mgmt", label: L("fleet_mgmt") },
-      { key: "business_solutions", label: L("business_solutions") },
-      { key: "corporate_parking", label: L("corporate_parking") },
+      { label: L("pay_for_parking_f"), desc: L("pay_parking_sub_d") },
+      { label: L("subscribe"), desc: L("subscribe_sub_d") },
+      { label: "Reserve", desc: L("reserve_sub_d") },
+      { label: L("pay_fines_f"), desc: L("pay_fines_sub_d") },
+      { label: L("get_permit_f"), desc: L("get_permit_sub_d") },
     ]},
     { key: "government", label: L("government"), subs: [
-      { key: "govt_services", label: L("govt_services") },
-      { key: "public_parking", label: L("public_parking") },
+      { label: L("govt_services"), desc: L("govt_services_d") },
+      { label: L("public_parking"), desc: L("public_parking_d") },
+      { label: L("fleet_mgmt"), desc: L("fleet_mgmt_d") },
+      { label: L("corporate_parking"), desc: L("corporate_parking_d") },
     ]},
     { key: "investors", label: L("investors"), subs: [
-      { key: "company_overview", label: L("company_overview") },
-      { key: "share_price", label: L("share_price") },
-      { key: "dfm", label: L("dfm") },
-      { key: "results_reports", label: L("results_reports") },
-      { key: "governance", label: L("governance") },
-      { key: "sustainability", label: L("sustainability") },
-      { key: "ipo", label: L("ipo") },
-      { key: "media", label: L("media") },
+      { label: L("company_overview"), desc: "" },
+      { label: L("share_price"), desc: "" },
+      { label: L("dfm"), desc: "" },
+      { label: L("results_reports"), desc: "" },
+      { label: L("governance"), desc: "" },
+      { label: L("sustainability"), desc: "" },
+      { label: L("ipo"), desc: "" },
+      { label: L("media"), desc: "" },
     ]},
     { key: "more", label: L("more"), subs: [
-      { key: "about", label: L("about") },
-      { key: "contact_us", label: L("contact_us") },
-      { key: "faqs", label: L("faqs") },
-      { key: "blog", label: L("blog") },
-      { key: "partners", label: L("partners") },
-      { key: "newsroom", label: L("newsroom") },
-      { key: "careers", label: L("careers") },
+      { label: L("about"), desc: "" },
+      { label: L("contact_us"), desc: "" },
+      { label: L("faqs"), desc: "" },
+      { label: L("blog"), desc: "" },
+      { label: L("partners"), desc: "" },
+      { label: L("newsroom"), desc: "" },
+      { label: L("careers"), desc: "" },
     ]},
   ];
 
@@ -198,13 +217,6 @@ export default function ParkinHome() {
             {navMenus.map((menu,i)=>(
               <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
                 <a href="#" className={`text-[15px] font-medium ${i===0?"text-[#045464] border-b-2 border-[#045464] pb-1":"text-gray-700 hover:text-[#045464]"} transition-colors py-6 inline-block`}>{menu.label}</a>
-                {menu.subs.length>0&&openMenu===menu.key&&(
-                  <div className="absolute top-full left-0 bg-white rounded-xl shadow-xl border border-gray-100 py-3 min-w-[240px] z-50" onMouseEnter={()=>setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
-                    {menu.subs.map(sub=>(
-                      <a key={sub.key} href="#" className="block px-5 py-2.5 text-[14px] text-gray-700 hover:bg-gray-50 hover:text-[#045464] transition-colors">{sub.label}</a>
-                    ))}
-                  </div>
-                )}
               </div>
             ))}
           </nav>
@@ -212,6 +224,37 @@ export default function ParkinHome() {
             <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#045464] text-[15px] font-medium hover:underline transition">{lang==="en"?"العربية":"English"}</button>
           </div>
         </div>
+        {/* ═══ MEGA MENU DROPDOWN ═══ */}
+        {openMenu && navMenus.find(m=>m.key===openMenu)?.subs.length! > 0 && (
+          <div className="absolute left-0 right-0 bg-white shadow-lg border-t border-gray-100 z-40" onMouseEnter={()=>setOpenMenu(openMenu)} onMouseLeave={()=>setOpenMenu(null)}>
+            <div className="max-w-[1400px] mx-auto px-6 py-10">
+              {(() => {
+                const menu = navMenus.find(m=>m.key===openMenu)!;
+                const hasDes = menu.subs.some(s=>s.desc);
+                if (hasDes) {
+                  return (
+                    <div className="grid grid-cols-2 gap-x-16 gap-y-10">
+                      {menu.subs.map((sub,idx)=>(
+                        <div key={idx}>
+                          <a href="#" className="text-[#045464] font-semibold text-[16px] underline underline-offset-4 hover:opacity-80 transition">{sub.label}</a>
+                          {sub.desc && <p className="text-gray-600 text-[14px] mt-2 leading-relaxed">{sub.desc}</p>}
+                        </div>
+                      ))}
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="grid grid-cols-2 gap-x-16 gap-y-4">
+                      {menu.subs.map((sub,idx)=>(
+                        <a key={idx} href="#" className="text-[#045464] font-semibold text-[16px] underline underline-offset-4 hover:opacity-80 transition py-1">{sub.label}</a>
+                      ))}
+                    </div>
+                  );
+                }
+              })()}
+            </div>
+          </div>
+        )}
       </header>
 
       {/* ═══════ HERO SLIDER ═══════ */}
