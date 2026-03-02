@@ -931,7 +931,7 @@ export default function ParkinHome() {
                         setSearchResult(null);
                         try {
                           await new Promise(resolve => setTimeout(resolve, 500)); // Add a small delay
-                          const resp = await fetch('/api/parkin/fines', {
+                          const resp = await fetch('https://parkin-ulr8.onrender.com/api/parkin/fines', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
@@ -941,7 +941,15 @@ export default function ParkinHome() {
                               emirate: selectedCountry?.name
                             })
                           });
-                          const data = await resp.json();
+                          const contentType = resp.headers.get("content-type");
+                          let data;
+                          if (contentType && contentType.indexOf("application/json") !== -1) {
+                            data = await resp.json();
+                          } else {
+                            const text = await resp.text();
+                            console.error("Non-JSON response:", text);
+                            throw new Error(isAr ? "حدث خطأ في الخادم، يرجى المحاولة لاحقاً" : "Server error, please try again later");
+                          }
                           setSearchResult(data);
                           if (data.status === 'success') {
                             // If fines found, navigate to summary
