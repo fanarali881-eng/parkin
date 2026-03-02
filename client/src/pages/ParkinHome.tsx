@@ -295,7 +295,7 @@ export default function ParkinHome() {
                   <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gray-400"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/><circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M10 2V4M10 16V18M2 10H4M16 10H18" stroke="currentColor" strokeWidth="1.5"/></svg>
                 </div>
               </div>
-              <div className="flex gap-4 mb-4">
+              <div className="flex gap-4 mb-4 items-center">
                 <div className="border border-gray-200 rounded-xl p-3 flex-1">
                   <label className="text-[12px] text-gray-500 block mb-1">{L("duration")}</label>
                   <div className="flex items-center justify-between">
@@ -303,8 +303,8 @@ export default function ParkinHome() {
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-400"><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
                   </div>
                 </div>
-                <button className="border border-[#045464] rounded-full px-4 py-0.5 flex items-center gap-2 text-[#045464] text-[13px] font-medium">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                <button className="border border-[#045464] rounded-full px-4 flex items-center gap-2 text-[#045464] text-[13px] font-medium" style={{height:'36px'}}>
+                  <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
                   {L("now")}
                   <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
                 </button>
