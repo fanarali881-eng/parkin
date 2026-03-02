@@ -714,7 +714,7 @@ export default function ParkinHome() {
 
         {/* Form */}
         <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-visible">
             <div className="flex bg-[#045464] rounded-t-2xl p-1.5 gap-1">
               {([['pay',L('pay_parking')],['later',L('pay_later')],['fines',L('pay_fines')]] as const).map(([id,label])=>(
                 <button key={id} onClick={()=>setActiveTab(id as any)} className={`flex-1 py-3 text-[14px] font-semibold transition-all rounded-full ${activeTab===id?"bg-white text-[#045464] border-2 border-[#045464]":"text-white"}`}>{label}</button>
