@@ -777,7 +777,7 @@ export default function ParkinHome() {
                   </div>
                   {/* Duration dropdown */}
                   {isDurationOpen && durationOptions.length > 0 && (
-                    <div ref={durationDropdownRef} className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[400px] overflow-y-auto">
+                    <div ref={durationDropdownRef} className="absolute left-0 right-0 bottom-full mb-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[400px] overflow-y-auto">
                       {durationOptions.map((opt, idx) => (
                         <button
                           key={idx}
