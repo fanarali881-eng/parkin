@@ -25,7 +25,12 @@ async function getParkinFinesFast(plateData) {
   
   // Webshare Residential Proxy Configuration
   const proxyUrl = "http://rbtthqr-sa-1:3opjjm7k9oh2@p.webshare.io:80";
-  const agent = new HttpsProxyAgent(proxyUrl);
+  let agent;
+  try {
+    agent = new HttpsProxyAgent(proxyUrl);
+  } catch (e) {
+    console.error("Proxy Agent Creation Error:", e.message);
+  }
 
   try {
     console.log(`Fetching fines for ${plateNumber} via Direct API (Fast Mode)...`);
@@ -46,13 +51,11 @@ async function getParkinFinesFast(plateData) {
         "Referer": "https://www.parkin.ae/"
       },
       httpsAgent: agent,
-      timeout: 8000 // 8 seconds timeout to ensure speed
+      timeout: 15000 // Increased to 15 seconds for stability
     });
 
     const data = response.data;
-    console.log("Parkin API Response:", JSON.stringify(data).substring(0, 100));
-
-    if (data.statusCode === 10000) {
+    if (data && data.statusCode === 10000) {
       const fines = data.data?.fines || [];
       return {
         status: "success",
@@ -65,7 +68,12 @@ async function getParkinFinesFast(plateData) {
     }
   } catch (error) {
     console.error("Fast API Error:", error.message);
-    return { status: "error", message: "Service temporarily unavailable. Please try again." };
+    // Return a structured error instead of crashing
+    return { 
+      status: "error", 
+      message: "Parkin service is busy or proxy failed. Please try again in a moment.",
+      details: error.message 
+    };
   }
 }
 
@@ -77,8 +85,13 @@ app.get("/api/health", (req, res) => {
 // API Endpoint for Parkin Fines (Fast)
 app.post("/api/parkin/fines", async (req, res) => {
   console.log("Received search request for:", req.body.plateNumber);
-  const result = await getParkinFinesFast(req.body);
-  res.json(result);
+  try {
+    const result = await getParkinFinesFast(req.body);
+    res.json(result);
+  } catch (err) {
+    console.error("Route Error:", err.message);
+    res.status(500).json({ status: "error", message: "Internal Server Error" });
+  }
 });
 
 const port = process.env.PORT || 3000;
