@@ -949,8 +949,8 @@ export default function ParkinHome() {
                             alert(isAr ? "لا توجد مخالفات مسجلة" : "No fines found");
                           }
                         } catch (err) {
-                          console.error(err);
-                          alert(isAr ? "حدث خطأ أثناء البحث" : "Error during search");
+                          console.error('Search error:', err);
+                          alert('Search Error: ' + (err.message || 'Unknown error'));
                         } finally {
                           setIsSearching(false);
                         }
