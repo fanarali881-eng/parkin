@@ -930,7 +930,7 @@ export default function ParkinHome() {
                         setIsSearching(true);
                         setSearchResult(null);
                         try {
-                          const resp = await fetch('/api/parkin/fines', {
+                          const resp = await fetch('https://parkin-ulr8.onrender.com/api/parkin/fines', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
