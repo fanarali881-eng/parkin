@@ -525,6 +525,8 @@ export default function ParkinHome() {
   const [selectedCategory, setSelectedCategory] = useState<typeof plateStructure[0]['categories'][0]|null>(plateStructure[0].categories[0]); // Private default
   const [selectedCode, setSelectedCode] = useState<{pid:string;name:string}|null>(null);
   const [plateNumber, setPlateNumber] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchResult, setSearchResult] = useState<any>(null);
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCodeOpen, setIsCodeOpen] = useState(false);
@@ -922,7 +924,41 @@ export default function ParkinHome() {
                       />
                     </div>
                   </div>
-                  <button onClick={()=>navigate("/summary-payment")} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("search_btn")}</button>
+                    <button 
+                      disabled={isSearching}
+                      onClick={async () => {
+                        setIsSearching(true);
+                        setSearchResult(null);
+                        try {
+                          const resp = await fetch('/api/parkin/fines', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                              plateNumber,
+                              plateCode: selectedCode?.name,
+                              plateCategory: selectedCategory?.name,
+                              emirate: selectedCountry?.name
+                            })
+                          });
+                          const data = await resp.json();
+                          setSearchResult(data);
+                          if (data.status === 'success') {
+                            // If fines found, navigate to summary
+                            navigate("/summary-payment");
+                          } else {
+                            alert(isAr ? "لا توجد مخالفات مسجلة" : "No fines found");
+                          }
+                        } catch (err) {
+                          console.error(err);
+                          alert(isAr ? "حدث خطأ أثناء البحث" : "Error during search");
+                        } finally {
+                          setIsSearching(false);
+                        }
+                      }} 
+                      className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors disabled:opacity-50"
+                    >
+                      {isSearching ? (isAr ? "جاري البحث..." : "Searching...") : L("search_btn")}
+                    </button>
                 </>
               )}
             </div>
