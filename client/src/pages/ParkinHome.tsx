@@ -486,8 +486,13 @@ export default function ParkinHome() {
   const [zoneQuery, setZoneQuery] = useState("");
   const [showZoneSuggestions, setShowZoneSuggestions] = useState(false);
   const [selectedZone, setSelectedZone] = useState<typeof parkingZones[0]|null>(null);
+  const [durationOptions, setDurationOptions] = useState<{label:string; value:string; amount:string}[]>([]);
+  const [selectedDuration, setSelectedDuration] = useState<{label:string; value:string; amount:string}|null>(null);
+  const [isDurationOpen, setIsDurationOpen] = useState(false);
+  const [isLoadingTariff, setIsLoadingTariff] = useState(false);
   const zoneInputRef = useRef<HTMLInputElement>(null);
   const zoneDropdownRef = useRef<HTMLDivElement>(null);
+  const durationDropdownRef = useRef<HTMLDivElement>(null);
 
   const L = (key: string) => t[key]?.[lang] || t[key]?.en || key;
   const isAr = lang === "ar";
@@ -506,10 +511,65 @@ export default function ParkinHome() {
           zoneInputRef.current && !zoneInputRef.current.contains(e.target as Node)) {
         setShowZoneSuggestions(false);
       }
+      if (durationDropdownRef.current && !durationDropdownRef.current.contains(e.target as Node)) {
+        setIsDurationOpen(false);
+      }
     };
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  // Fetch tariff when a zone is selected
+  useEffect(() => {
+    if (!selectedZone) {
+      setDurationOptions([]);
+      setSelectedDuration(null);
+      return;
+    }
+    const fetchTariff = async () => {
+      setIsLoadingTariff(true);
+      setDurationOptions([]);
+      setSelectedDuration(null);
+      try {
+        const resp = await fetch('https://api.parkin.ae/api/fees/get-dynamic-parking-zone-tariff-v2', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer m3EGd2NT8ypR4e9MjYBvKwJhLCgnqUZ5sbXrcHaDQSkPAfzx6F',
+            'language': lang,
+          },
+          body: JSON.stringify({
+            plate_no: '',
+            plate_source_id: '',
+            plate_type_id: '',
+            plate_color_d: '',
+            duration_in_minutes: '',
+            zone_no: selectedZone.code,
+            booking_type: '0',
+            schedule_date_time: '',
+          }),
+        });
+        const data = await resp.json();
+        if (data.statusCode === 10000 && data.data?.tariff) {
+          const options = data.data.tariff.map((t: any) => {
+            const hours = parseInt(t.duration_in_minutes) / 60;
+            const hourLabel = hours > 1 ? (lang === 'ar' ? 'ساعات' : 'Hours') : (lang === 'ar' ? 'ساعة' : 'Hour');
+            return {
+              label: hours < 1 ? `${t.duration_in_minutes} ${lang === 'ar' ? 'دقيقة' : 'Min'}` : `${hours} ${hourLabel}`,
+              value: t.duration_in_minutes,
+              amount: t.amount,
+            };
+          });
+          setDurationOptions(options);
+        }
+      } catch (err) {
+        console.error('Failed to fetch tariff:', err);
+      } finally {
+        setIsLoadingTariff(false);
+      }
+    };
+    fetchTariff();
+  }, [selectedZone, lang]);
 
   const slides = [
     { title: L("slide1_title"), desc: L("slide1_desc"), italic:true, bg:"/images/banner1_variable_tariff.jpg" },
@@ -693,12 +753,35 @@ export default function ParkinHome() {
                 )}
               </div>
               <div className="flex gap-4 mb-4 items-center">
-                <div className="border border-gray-200 rounded-xl p-3 flex-1">
+                <div className="border border-gray-200 rounded-xl p-3 flex-1 relative">
                   <label className="text-[12px] text-gray-500 block mb-1">{L("duration")}</label>
-                  <div className="flex items-center justify-between">
-                    <span className="text-[14px] text-gray-700">{L("select_duration")}</span>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="text-gray-400"><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
+                  <div
+                    className="flex items-center justify-between cursor-pointer"
+                    onClick={() => { if (durationOptions.length > 0) setIsDurationOpen(!isDurationOpen); }}
+                  >
+                    <span className={`text-[14px] ${selectedDuration ? 'text-gray-700' : 'text-gray-400'}`}>
+                      {isLoadingTariff ? (lang === 'ar' ? '\u062c\u0627\u0631\u064a \u0627\u0644\u062a\u062d\u0645\u064a\u0644...' : 'Loading...') : selectedDuration ? `${selectedDuration.label} - AED ${selectedDuration.amount}` : L("select_duration")}
+                    </span>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`text-gray-400 transition-transform ${isDurationOpen ? 'rotate-180' : ''}`}><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
                   </div>
+                  {/* Duration dropdown */}
+                  {isDurationOpen && durationOptions.length > 0 && (
+                    <div ref={durationDropdownRef} className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[220px] overflow-y-auto">
+                      {durationOptions.map((opt, idx) => (
+                        <button
+                          key={idx}
+                          onClick={() => {
+                            setSelectedDuration(opt);
+                            setIsDurationOpen(false);
+                          }}
+                          className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-center justify-between ${selectedDuration?.value === opt.value ? 'bg-[#f0f9f9]' : ''}`}
+                        >
+                          <span className="text-gray-700 text-[14px]">{opt.label}</span>
+                          <span className="text-[#045464] font-semibold text-[14px]">AED {opt.amount}</span>
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
                 <button className="border border-[#045464] rounded-full px-4 flex items-center gap-2 text-[#045464] text-[13px] font-medium" style={{height:'36px'}}>
                   <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
@@ -710,7 +793,7 @@ export default function ParkinHome() {
                 <button onClick={()=>navigate("/summary-payment")} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
                 <div className="flex items-center gap-2">
                   <span className="text-gray-500 text-[15px]">{L("total")}</span>
-                  <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> 0.00</span>
+                  <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> {selectedDuration ? parseFloat(selectedDuration.amount).toFixed(2) : '0.00'}</span>
                 </div>
               </div>
             </div>
