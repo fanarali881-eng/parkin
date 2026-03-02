@@ -116,7 +116,7 @@
   }
   input::placeholder,
   textarea::placeholder {
-    color: #c0c0c0 !important;
+    color: #4b5563 !important;
     opacity: 1;
   }
 }
