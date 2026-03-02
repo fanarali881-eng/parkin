@@ -48,7 +48,7 @@ async function getParkinFinesFast(plateData) {
     }, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer m3EGd2NT8ypR4e9MjYBvKwJhLCgnqUZ5sbXrcHaDQSkPAfzx6F",
+        "Authorization": "Bearer m3EGd2NT8ypR4e9MjYBvKwJhLCgnqUZ5sbXrcHaDQSkPAfzx6F", // Note: This token should be updated periodically from the website
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Origin": "https://www.parkin.ae",
         "Referer": "https://www.parkin.ae/"
@@ -61,15 +61,20 @@ async function getParkinFinesFast(plateData) {
     console.log("[DEBUG] Parkin API Response Status:", response.status);
     const data = response.data;
     console.log("[DEBUG] Parkin API Response Data:", JSON.stringify(data).substring(0, 200));
-    if (data && data.statusCode === 10000) {
-      const fines = data.data?.fines || [];
+    // Improved response handling
+    if (data && (data.statusCode === 10000 || data.success === true)) {
+      const fines = data.data?.fines || data.fines || [];
       return {
         status: "success",
         fines: fines,
-        totalAmount: data.data?.total_amount || 0,
+        totalAmount: data.data?.total_amount || data.total_amount || 0,
         message: fines.length > 0 ? "Fines found" : "No fines found"
       };
+    } else if (data && data.statusCode === 10001) {
+      // Handle specific "No fines" status code if applicable
+      return { status: "success", fines: [], message: "No fines found" };
     } else {
+      console.log("[DEBUG] Unexpected API Response Format:", JSON.stringify(data));
       return { status: "success", fines: [], message: "No fines found" };
     }
   } catch (error) {
