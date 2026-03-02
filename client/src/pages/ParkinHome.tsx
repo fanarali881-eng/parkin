@@ -1,6 +1,46 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import ParkinChat from "@/components/ParkinChat";
+
+/* ───── Parking Zones Data ───── */
+const parkingZones = [
+  { code: "A101", name: "Deira - Al Rigga", nameAr: "ديرة - الرقة" },
+  { code: "A102", name: "Deira - Naif", nameAr: "ديرة - نايف" },
+  { code: "A103", name: "Deira - Al Murar", nameAr: "ديرة - المرر" },
+  { code: "A104", name: "Deira - Al Sabkha", nameAr: "ديرة - السبخة" },
+  { code: "A201", name: "Bur Dubai - Meena Bazaar", nameAr: "بر دبي - مينا بازار" },
+  { code: "A202", name: "Bur Dubai - Al Fahidi", nameAr: "بر دبي - الفهيدي" },
+  { code: "A203", name: "Bur Dubai - Al Mankhool", nameAr: "بر دبي - المنخول" },
+  { code: "AP01", name: "Premium - Downtown Dubai", nameAr: "متميز - داون تاون دبي" },
+  { code: "AP02", name: "Premium - DIFC", nameAr: "متميز - مركز دبي المالي" },
+  { code: "AP03", name: "Premium - City Walk", nameAr: "متميز - سيتي ووك" },
+  { code: "B101", name: "Al Karama", nameAr: "الكرامة" },
+  { code: "B102", name: "Al Satwa", nameAr: "السطوة" },
+  { code: "B103", name: "Oud Metha", nameAr: "عود ميثاء" },
+  { code: "B104", name: "Al Jaddaf", nameAr: "الجداف" },
+  { code: "BP01", name: "Premium - Jumeirah", nameAr: "متميز - جميرا" },
+  { code: "BP02", name: "Premium - Al Wasl", nameAr: "متميز - الوصل" },
+  { code: "C101", name: "Al Barsha", nameAr: "البرشاء" },
+  { code: "C102", name: "Al Quoz", nameAr: "القوز" },
+  { code: "C103", name: "Umm Suqeim", nameAr: "أم سقيم" },
+  { code: "CP01", name: "Premium - JBR", nameAr: "متميز - جي بي آر" },
+  { code: "D101", name: "Al Qusais", nameAr: "القصيص" },
+  { code: "D102", name: "Al Nahda", nameAr: "النهدة" },
+  { code: "D103", name: "Al Muhaisnah", nameAr: "المحيصنة" },
+  { code: "D104", name: "Al Twar", nameAr: "الطوار" },
+  { code: "E101", name: "Dubai Marina", nameAr: "دبي مارينا" },
+  { code: "E102", name: "Palm Jumeirah", nameAr: "نخلة جميرا" },
+  { code: "F101", name: "Deira Islands", nameAr: "جزر ديرة" },
+  { code: "G101", name: "Dubai Hills", nameAr: "دبي هيلز" },
+  { code: "G102", name: "Dubai Hills Mall", nameAr: "دبي هيلز مول" },
+  { code: "H101", name: "Business Bay", nameAr: "الخليج التجاري" },
+  { code: "H102", name: "Dubai Design District", nameAr: "حي دبي للتصميم" },
+  { code: "M01", name: "Multi-Storey - Al Rigga", nameAr: "متعدد الطوابق - الرقة" },
+  { code: "M02", name: "Multi-Storey - Al Ghubaiba", nameAr: "متعدد الطوابق - الغبيبة" },
+  { code: "M03", name: "Multi-Storey - Zabeel", nameAr: "متعدد الطوابق - زعبيل" },
+  { code: "S01", name: "Seasonal - Deira", nameAr: "موسمي - ديرة" },
+  { code: "S02", name: "Seasonal - Bur Dubai", nameAr: "موسمي - بر دبي" },
+];
 
 /* ───── Translations ───── */
 const t: Record<string, Record<string, string>> = {
@@ -145,9 +185,33 @@ export default function ParkinHome() {
   const [isPaused, setIsPaused] = useState(false);
   const [lang, setLang] = useState<"en"|"ar">("en");
   const [openMenu, setOpenMenu] = useState<string|null>(null);
+  const [zoneQuery, setZoneQuery] = useState("");
+  const [showZoneSuggestions, setShowZoneSuggestions] = useState(false);
+  const [selectedZone, setSelectedZone] = useState<typeof parkingZones[0]|null>(null);
+  const zoneInputRef = useRef<HTMLInputElement>(null);
+  const zoneDropdownRef = useRef<HTMLDivElement>(null);
 
   const L = (key: string) => t[key]?.[lang] || t[key]?.en || key;
   const isAr = lang === "ar";
+
+  const filteredZones = zoneQuery.length > 0
+    ? parkingZones.filter(z =>
+        z.code.toLowerCase().includes(zoneQuery.toLowerCase()) ||
+        z.name.toLowerCase().includes(zoneQuery.toLowerCase()) ||
+        z.nameAr.includes(zoneQuery)
+      )
+    : [];
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (zoneDropdownRef.current && !zoneDropdownRef.current.contains(e.target as Node) &&
+          zoneInputRef.current && !zoneInputRef.current.contains(e.target as Node)) {
+        setShowZoneSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   const slides = [
     { title: L("slide1_title"), desc: L("slide1_desc"), italic:true, bg:"/images/banner1_variable_tariff.jpg" },
@@ -288,12 +352,47 @@ export default function ParkinHome() {
               ))}
             </div>
             <div className="p-6">
-              <div className="border border-gray-200 rounded-xl p-3 mb-4">
+              <div className="border border-gray-200 rounded-xl p-3 mb-4 relative">
                 <label className="text-[12px] text-gray-500 block mb-1">{L("parking_zone")}</label>
                 <div className="flex items-center justify-between">
-                  <input type="text" placeholder={L("enter_zone")} className="bg-transparent text-[14px] text-gray-700 outline-none flex-1" />
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gray-400"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/><circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M10 2V4M10 16V18M2 10H4M16 10H18" stroke="currentColor" strokeWidth="1.5"/></svg>
+                  <input
+                    ref={zoneInputRef}
+                    type="text"
+                    placeholder={L("enter_zone")}
+                    value={zoneQuery}
+                    onChange={(e) => {
+                      setZoneQuery(e.target.value);
+                      setShowZoneSuggestions(true);
+                      setSelectedZone(null);
+                    }}
+                    onFocus={() => { if (zoneQuery.length > 0) setShowZoneSuggestions(true); }}
+                    className="bg-transparent text-[14px] text-gray-700 outline-none flex-1"
+                  />
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gray-400 flex-shrink-0"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/><circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M10 2V4M10 16V18M2 10H4M16 10H18" stroke="currentColor" strokeWidth="1.5"/></svg>
                 </div>
+                {/* Autocomplete dropdown */}
+                {showZoneSuggestions && filteredZones.length > 0 && (
+                  <div ref={zoneDropdownRef} className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[220px] overflow-y-auto">
+                    {filteredZones.map((zone) => (
+                      <button
+                        key={zone.code}
+                        onClick={() => {
+                          setZoneQuery(zone.code);
+                          setSelectedZone(zone);
+                          setShowZoneSuggestions(false);
+                        }}
+                        className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-center justify-between"
+                      >
+                        <div>
+                          <span className="text-[#045464] font-semibold text-[14px]">{zone.code}</span>
+                          <span className="text-gray-500 text-[13px] mx-2">-</span>
+                          <span className="text-gray-700 text-[13px]">{isAr ? zone.nameAr : zone.name}</span>
+                        </div>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-gray-300 flex-shrink-0"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.2" fill="none"/><circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.2" fill="none"/></svg>
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="flex gap-4 mb-4 items-center">
                 <div className="border border-gray-200 rounded-xl p-3 flex-1">
