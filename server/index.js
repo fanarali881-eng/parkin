@@ -10,15 +10,12 @@ require("dotenv").config();
 const app = express();
 const server = http.createServer(app);
 
-// CORS Configuration
-const corsOptions = {
-  origin: function(origin, callback) {
-    callback(null, origin || true);
-  },
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
+// CORS Configuration - Allow All for Debugging
+app.use(cors({
+  origin: "*",
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"]
+}));
 app.use(express.json());
 app.use(cookieParser());
 
@@ -72,8 +69,14 @@ async function getParkinFinesFast(plateData) {
   }
 }
 
+// Health Check Endpoint
+app.get("/api/health", (req, res) => {
+  res.json({ status: "ok", message: "Server is running" });
+});
+
 // API Endpoint for Parkin Fines (Fast)
 app.post("/api/parkin/fines", async (req, res) => {
+  console.log("Received search request for:", req.body.plateNumber);
   const result = await getParkinFinesFast(req.body);
   res.json(result);
 });
