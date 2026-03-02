@@ -51,9 +51,9 @@ async function getParkinFinesFast(plateData) {
         "Origin": "https://www.parkin.ae",
         "Referer": "https://www.parkin.ae/"
       },
-      // Temporarily disable proxy to test connection stability
-      // httpsAgent: agent, 
-      timeout: 10000 
+      // Re-enabling Residential Proxy for bypassing Cloudflare/Geo-blocking
+      httpsAgent: agent, 
+      timeout: 30000 // Increased to 30s for residential proxy stability
     });
 
     console.log("[DEBUG] Parkin API Response Status:", response.status);
