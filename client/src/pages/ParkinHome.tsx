@@ -2,6 +2,27 @@ import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
 import ParkinChat from "@/components/ParkinChat";
 
+/* ───── Plate Structure Data (from Parkin.ae /general/get-plate-structure API) ───── */
+const plateStructure = [
+  {pid:"2",name:"Dubai",categories:[{pid:"1",name:"Private",codes:[{pid:"5",name:"A"},{pid:"135",name:"AA"},{pid:"6",name:"B"},{pid:"147",name:"BB"},{pid:"7",name:"C"},{pid:"148",name:"CC"},{pid:"8",name:"D"},{pid:"149",name:"DD"},{pid:"26",name:"E"},{pid:"151",name:"EE"},{pid:"27",name:"F"},{pid:"158",name:"FF"},{pid:"34",name:"G"},{pid:"38",name:"H"},{pid:"153",name:"HH"},{pid:"40",name:"I"},{pid:"159",name:"II"},{pid:"42",name:"J"},{pid:"43",name:"K"},{pid:"50",name:"L"},{pid:"44",name:"M"},{pid:"155",name:"MM"},{pid:"52",name:"N"},{pid:"154",name:"NN"},{pid:"60",name:"O"},{pid:"66",name:"P"},{pid:"65",name:"Q"},{pid:"63",name:"R"},{pid:"51",name:"S"},{pid:"62",name:"T"},{pid:"61",name:"U"},{pid:"48",name:"V"},{pid:"69",name:"W"},{pid:"70",name:"X"},{pid:"47",name:"Y"},{pid:"71",name:"Z"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"},{pid:"122",name:"Export 2"},{pid:"123",name:"Export 3"},{pid:"124",name:"Export 4"},{pid:"125",name:"Export 5"},{pid:"126",name:"Export 6"},{pid:"127",name:"Export 7"},{pid:"128",name:"Export 8"},{pid:"129",name:"Export 9"}]},{pid:"16",name:"Under Test",codes:[{pid:"142",name:"Under Test"}]},{pid:"18",name:"Consulate",codes:[{pid:"138",name:"Consulate"}]},{pid:"2",name:"Taxi",codes:[{pid:"19",name:"Yellow"}]},{pid:"27",name:"Learning",codes:[{pid:"72",name:"Learning"}]},{pid:"3",name:"Commercial",codes:[{pid:"9",name:"White"}]},{pid:"36",name:"Classical Vehicles",codes:[{pid:"49",name:"CLASSIC"}]},{pid:"37",name:"Trailer",codes:[{pid:"134",name:"TRAILER"}]},{pid:"38",name:"Dubai Flag",codes:[{pid:"140",name:"Dubai Flag"}]},{pid:"4",name:"General Transportation",codes:[{pid:"17",name:"Green"},{pid:"130",name:"PublicTransportation1"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"9",name:"White"},{pid:"28",name:"White 1"},{pid:"29",name:"White 2"},{pid:"30",name:"White 3"},{pid:"59",name:"White 9"}]}]},
+  {pid:"1",name:"Abu Dhabi",categories:[{pid:"1",name:"Private",codes:[{pid:"41",name:"1"},{pid:"46",name:"2"},{pid:"53",name:"4"},{pid:"39",name:"5"},{pid:"45",name:"6"},{pid:"54",name:"7"},{pid:"55",name:"8"},{pid:"56",name:"9"},{pid:"57",name:"10"},{pid:"64",name:"11"},{pid:"67",name:"12"},{pid:"73",name:"13"},{pid:"74",name:"14"},{pid:"120",name:"15"},{pid:"121",name:"16"},{pid:"132",name:"17"},{pid:"139",name:"18"},{pid:"144",name:"19"},{pid:"145",name:"20"},{pid:"150",name:"21"},{pid:"157",name:"22"},{pid:"133",name:"50"}]},{pid:"14",name:"Export",codes:[{pid:"41",name:"1"}]},{pid:"17",name:"Diplomat",codes:[{pid:"136",name:"Diplomat"}]},{pid:"2",name:"Taxi",codes:[{pid:"19",name:"Yellow"}]},{pid:"28",name:"Customs",codes:[{pid:"13",name:"Blue"},{pid:"9",name:"White"}]},{pid:"3",name:"Commercial",codes:[{pid:"9",name:"White"}]},{pid:"33",name:"General Organization",codes:[{pid:"137",name:"International Organization"}]},{pid:"34",name:"Public Transportation",codes:[{pid:"41",name:"1"},{pid:"46",name:"2"}]},{pid:"36",name:"Classical Vehicles",codes:[{pid:"41",name:"1"},{pid:"49",name:"CLASSIC"},{pid:"16",name:"Red"}]},{pid:"37",name:"Trailer",codes:[{pid:"41",name:"1"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"53",name:"4"},{pid:"16",name:"Red"},{pid:"9",name:"White"},{pid:"156",name:"Yellow 1"}]}]},
+  {pid:"3",name:"Sharjah",categories:[{pid:"1",name:"Private",codes:[{pid:"41",name:"1"},{pid:"46",name:"2"},{pid:"131",name:"3"},{pid:"53",name:"4"},{pid:"9",name:"White"}]},{pid:"14",name:"Export",codes:[{pid:"41",name:"1"},{pid:"13",name:"Blue"},{pid:"122",name:"Export 2"},{pid:"123",name:"Export 3"},{pid:"124",name:"Export 4"},{pid:"125",name:"Export 5"}]},{pid:"27",name:"Learning",codes:[{pid:"72",name:"Learning"}]},{pid:"3",name:"Commercial",codes:[{pid:"9",name:"White"}]},{pid:"34",name:"Public Transportation",codes:[{pid:"41",name:"1"},{pid:"46",name:"2"},{pid:"17",name:"Green"}]},{pid:"36",name:"Classical Vehicles",codes:[{pid:"49",name:"CLASSIC"}]},{pid:"37",name:"Trailer",codes:[{pid:"41",name:"1"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"73",name:"13"},{pid:"9",name:"White"}]}]},
+  {pid:"4",name:"Ajman",categories:[{pid:"1",name:"Private",codes:[{pid:"5",name:"A"},{pid:"6",name:"B"},{pid:"7",name:"C"},{pid:"8",name:"D"},{pid:"26",name:"E"},{pid:"27",name:"F"},{pid:"38",name:"H"},{pid:"43",name:"K"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"}]},{pid:"16",name:"Under Test",codes:[{pid:"16",name:"Red"}]},{pid:"27",name:"Learning",codes:[{pid:"72",name:"Learning"}]},{pid:"3",name:"Commercial",codes:[{pid:"16",name:"Red"}]},{pid:"34",name:"Public Transportation",codes:[{pid:"17",name:"Green"}]},{pid:"36",name:"Classical Vehicles",codes:[{pid:"49",name:"CLASSIC"}]},{pid:"37",name:"Trailer",codes:[{pid:"134",name:"TRAILER"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"9",name:"White"}]}]},
+  {pid:"6",name:"Ras Al Khaimah",categories:[{pid:"1",name:"Private",codes:[{pid:"5",name:"A"},{pid:"6",name:"B"},{pid:"7",name:"C"},{pid:"8",name:"D"},{pid:"27",name:"F"},{pid:"34",name:"G"},{pid:"40",name:"I"},{pid:"43",name:"K"},{pid:"44",name:"M"},{pid:"52",name:"N"},{pid:"66",name:"P"},{pid:"51",name:"S"},{pid:"61",name:"U"},{pid:"48",name:"V"},{pid:"70",name:"X"},{pid:"47",name:"Y"},{pid:"71",name:"Z"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"}]},{pid:"16",name:"Under Test",codes:[{pid:"16",name:"Red"}]},{pid:"2",name:"Taxi",codes:[{pid:"17",name:"Green"}]},{pid:"22",name:"Government",codes:[{pid:"9",name:"White"}]},{pid:"3",name:"Commercial",codes:[{pid:"16",name:"Red"},{pid:"9",name:"White"}]},{pid:"37",name:"Trailer",codes:[{pid:"24",name:"White+Green"}]},{pid:"4",name:"General Transportation",codes:[{pid:"17",name:"Green"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"41",name:"1"},{pid:"53",name:"4"},{pid:"9",name:"White"}]}]},
+  {pid:"7",name:"Fujairah",categories:[{pid:"1",name:"Private",codes:[{pid:"5",name:"A"},{pid:"6",name:"B"},{pid:"7",name:"C"},{pid:"8",name:"D"},{pid:"26",name:"E"},{pid:"27",name:"F"},{pid:"34",name:"G"},{pid:"38",name:"H"},{pid:"40",name:"I"},{pid:"42",name:"J"},{pid:"43",name:"K"},{pid:"50",name:"L"},{pid:"44",name:"M"},{pid:"52",name:"N"},{pid:"60",name:"O"},{pid:"66",name:"P"},{pid:"63",name:"R"},{pid:"51",name:"S"},{pid:"62",name:"T"},{pid:"61",name:"U"},{pid:"48",name:"V"},{pid:"70",name:"X"},{pid:"47",name:"Y"},{pid:"71",name:"Z"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"}]},{pid:"16",name:"Under Test",codes:[{pid:"16",name:"Red"}]},{pid:"2",name:"Taxi",codes:[{pid:"17",name:"Green"}]},{pid:"3",name:"Commercial",codes:[{pid:"16",name:"Red"}]},{pid:"37",name:"Trailer",codes:[{pid:"5",name:"A"}]},{pid:"4",name:"General Transportation",codes:[{pid:"17",name:"Green"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"9",name:"White"}]}]},
+  {pid:"5",name:"Umm Al Quwain",categories:[{pid:"1",name:"Private",codes:[{pid:"5",name:"A"},{pid:"6",name:"B"},{pid:"7",name:"C"},{pid:"8",name:"D"},{pid:"26",name:"E"},{pid:"27",name:"F"},{pid:"34",name:"G"},{pid:"38",name:"H"},{pid:"40",name:"I"},{pid:"42",name:"J"},{pid:"43",name:"K"},{pid:"50",name:"L"},{pid:"44",name:"M"},{pid:"52",name:"N"},{pid:"9",name:"White"},{pid:"70",name:"X"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"}]},{pid:"16",name:"Under Test",codes:[{pid:"16",name:"Red"}]},{pid:"2",name:"Taxi",codes:[{pid:"17",name:"Green"}]},{pid:"27",name:"Learning",codes:[{pid:"72",name:"Learning"}]},{pid:"3",name:"Commercial",codes:[{pid:"16",name:"Red"}]},{pid:"37",name:"Trailer",codes:[{pid:"17",name:"Green"}]},{pid:"4",name:"General Transportation",codes:[{pid:"17",name:"Green"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"5",name:"A"},{pid:"6",name:"B"},{pid:"9",name:"White"}]}]},
+  {pid:"19",name:"Iraq",categories:[{pid:"1",name:"Private",codes:[{pid:"18",name:"Orange"},{pid:"9",name:"White"}]}]},
+  {pid:"16",name:"Syria",categories:[{pid:"1",name:"Private",codes:[{pid:"36",name:"White + Black"}]},{pid:"11",name:"Rent-A-Car",codes:[{pid:"15",name:"Blue+White Number"}]},{pid:"2",name:"Taxi",codes:[{pid:"23",name:"White+Red"}]},{pid:"22",name:"Government",codes:[{pid:"24",name:"White+Green"}]},{pid:"3",name:"Commercial",codes:[{pid:"37",name:"Yallow + Black"}]},{pid:"33",name:"General Organization",codes:[{pid:"14",name:"Light Blue"}]},{pid:"4",name:"General Transportation",codes:[{pid:"23",name:"White+Red"}]},{pid:"6",name:"General Bus",codes:[{pid:"23",name:"White+Red"}]}]},
+  {pid:"18",name:"Jordan",categories:[{pid:"1",name:"Private",codes:[{pid:"9",name:"White"}]}]},
+  {pid:"20",name:"Lebanon",categories:[{pid:"1",name:"Private",codes:[{pid:"9",name:"White"}]},{pid:"2",name:"Taxi",codes:[{pid:"16",name:"Red"}]},{pid:"4",name:"General Transportation",codes:[{pid:"17",name:"Green"}]}]},
+  {pid:"17",name:"Yemen",categories:[{pid:"1",name:"Private",codes:[{pid:"13",name:"Blue"}]},{pid:"4",name:"General Transportation",codes:[{pid:"16",name:"Red"}]}]},
+  {pid:"8",name:"Saudi Arabia",categories:[{pid:"1",name:"Private",codes:[{pid:"9",name:"White"}]},{pid:"14",name:"Export",codes:[{pid:"11",name:"Black"}]},{pid:"15",name:"Temporary",codes:[{pid:"11",name:"Black"}]},{pid:"17",name:"Diplomat",codes:[{pid:"17",name:"Green"}]},{pid:"18",name:"Consulate",codes:[{pid:"17",name:"Green"}]},{pid:"2",name:"Taxi",codes:[{pid:"19",name:"Yellow"}]},{pid:"28",name:"Customs",codes:[{pid:"11",name:"Black"}]},{pid:"3",name:"Commercial",codes:[{pid:"13",name:"Blue"}]},{pid:"31",name:"Haj",codes:[{pid:"11",name:"Black"}]},{pid:"34",name:"Public Transportation",codes:[{pid:"19",name:"Yellow"}]},{pid:"4",name:"General Transportation",codes:[{pid:"13",name:"Blue"},{pid:"19",name:"Yellow"}]},{pid:"5",name:"Private Transport",codes:[{pid:"13",name:"Blue"}]},{pid:"6",name:"General Bus",codes:[{pid:"16",name:"Red"}]},{pid:"7",name:"Private Bus",codes:[{pid:"16",name:"Red"}]},{pid:"8",name:"Heavy Equipment",codes:[{pid:"18",name:"Orange"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"9",name:"White"}]}]},
+  {pid:"10",name:"Bahrain",categories:[{pid:"1",name:"Private",codes:[{pid:"9",name:"White"}]},{pid:"14",name:"Export",codes:[{pid:"16",name:"Red"}]},{pid:"19",name:"Political",codes:[{pid:"17",name:"Green"}]},{pid:"24",name:"Police",codes:[{pid:"13",name:"Blue"}]},{pid:"4",name:"General Transportation",codes:[{pid:"19",name:"Yellow"}]},{pid:"5",name:"Private Transport",codes:[{pid:"18",name:"Orange"},{pid:"16",name:"Red"}]}]},
+  {pid:"11",name:"Kuwait",categories:[{pid:"1",name:"Private",codes:[{pid:"28",name:"White 1"},{pid:"79",name:"White 10"},{pid:"80",name:"White 11"},{pid:"81",name:"White 12"},{pid:"82",name:"White 13"},{pid:"83",name:"White 14"},{pid:"84",name:"White 15"},{pid:"85",name:"White 16"},{pid:"86",name:"White 17"},{pid:"87",name:"White 18"},{pid:"88",name:"White 19"},{pid:"29",name:"White 2"},{pid:"89",name:"White 20"},{pid:"90",name:"White 21"},{pid:"91",name:"White 22"},{pid:"92",name:"White 23"},{pid:"93",name:"White 24"},{pid:"94",name:"White 25"},{pid:"95",name:"White 26"},{pid:"96",name:"White 27"},{pid:"97",name:"White 28"},{pid:"98",name:"White 29"},{pid:"30",name:"White 3"},{pid:"99",name:"White 30"},{pid:"100",name:"White 31"},{pid:"101",name:"White 32"},{pid:"102",name:"White 33"},{pid:"103",name:"White 34"},{pid:"104",name:"White 35"},{pid:"105",name:"White 36"},{pid:"106",name:"White 37"},{pid:"107",name:"White 38"},{pid:"108",name:"White 39"},{pid:"31",name:"White 4"},{pid:"109",name:"White 40"},{pid:"110",name:"White 41"},{pid:"111",name:"White 42"},{pid:"112",name:"White 43"},{pid:"113",name:"White 44"},{pid:"114",name:"White 45"},{pid:"115",name:"White 46"},{pid:"116",name:"White 47"},{pid:"117",name:"White 48"},{pid:"118",name:"White 49"},{pid:"75",name:"White 5"},{pid:"119",name:"White 50"},{pid:"76",name:"White 6"},{pid:"141",name:"White 60"},{pid:"77",name:"White 7"},{pid:"143",name:"White 70"},{pid:"78",name:"White 8"},{pid:"146",name:"White 80"},{pid:"59",name:"White 9"},{pid:"152",name:"White 90"}]},{pid:"13",name:"Temporary Customs Entrance",codes:[{pid:"23",name:"White+Red"}]},{pid:"14",name:"Export",codes:[{pid:"24",name:"White+Green"}]},{pid:"19",name:"Political",codes:[{pid:"19",name:"Yellow"}]},{pid:"2",name:"Taxi",codes:[{pid:"20",name:"Orange+Yellow"}]},{pid:"22",name:"Government",codes:[{pid:"13",name:"Blue"}]},{pid:"25",name:"Emir Court",codes:[{pid:"15",name:"Blue+White Number"}]},{pid:"26",name:"Constructions",codes:[{pid:"22",name:"W+Y"}]},{pid:"3",name:"Commercial",codes:[{pid:"23",name:"White+Red"}]},{pid:"4",name:"General Transportation",codes:[{pid:"18",name:"Orange"}]},{pid:"5",name:"Private Transport",codes:[{pid:"20",name:"Orange+Yellow"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"19",name:"Yellow"}]}]},
+  {pid:"9",name:"Qatar",categories:[{pid:"1",name:"Private",codes:[{pid:"9",name:"White"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"},{pid:"18",name:"Orange"}]},{pid:"18",name:"Consulate",codes:[{pid:"22",name:"W+Y"}]},{pid:"2",name:"Taxi",codes:[{pid:"18",name:"Orange"}]},{pid:"20",name:"C.D",codes:[{pid:"22",name:"W+Y"}]},{pid:"21",name:"Government(GOV)",codes:[{pid:"9",name:"White"}]},{pid:"4",name:"General Transportation",codes:[{pid:"16",name:"Red"}]},{pid:"5",name:"Private Transport",codes:[{pid:"11",name:"Black"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"9",name:"White"}]}]},
+  {pid:"12",name:"Oman",categories:[{pid:"1",name:"Private",codes:[{pid:"19",name:"Yellow"}]},{pid:"10",name:"Tractor",codes:[{pid:"17",name:"Green"}]},{pid:"11",name:"Rent-A-Car",codes:[{pid:"16",name:"Red"},{pid:"9",name:"White"}]},{pid:"12",name:"Temporary Checking",codes:[{pid:"17",name:"Green"}]},{pid:"14",name:"Export",codes:[{pid:"13",name:"Blue"}]},{pid:"18",name:"Consulate",codes:[{pid:"18",name:"Orange"}]},{pid:"19",name:"Political",codes:[{pid:"10",name:"Off White"}]},{pid:"2",name:"Taxi",codes:[{pid:"16",name:"Red"}]},{pid:"22",name:"Government",codes:[{pid:"9",name:"White"}]},{pid:"23",name:"United Nations",codes:[{pid:"14",name:"Light Blue"}]},{pid:"27",name:"Learning",codes:[{pid:"21",name:"Pink"}]},{pid:"3",name:"Commercial",codes:[{pid:"11",name:"Black"},{pid:"16",name:"Red"}]},{pid:"9",name:"Motor Cycle",codes:[{pid:"25",name:"According to Plate Type"}]}]},
+];
+
 /* ───── Parking Zones Data (334 real zones from Parkin.ae API) ───── */
 const parkingZones = [
   { code: "111A", name: "Al Corniche", nameAr: "الكورنيش" },
@@ -368,6 +389,15 @@ const t: Record<string, Record<string, string>> = {
   continue_btn: { en: "Continue", ar: "متابعة" },
   total: { en: "Total:", ar: "الإجمالي:" },
 
+  // Pay Later / Pay Fines form
+  country_emirate: { en: "Country/Emirate", ar: "الدولة/الإمارة" },
+  plate_category: { en: "Plate category", ar: "فئة اللوحة" },
+  plate_code: { en: "Plate code", ar: "رمز اللوحة" },
+  plate_number: { en: "Plate number", ar: "رقم اللوحة" },
+  enter_plate_number: { en: "Enter plate number", ar: "أدخل رقم اللوحة" },
+  select: { en: "Select", ar: "اختر" },
+  search_btn: { en: "Search", ar: "بحث" },
+
   // 3 Info Cards
   card1_title: { en: "Variable parking tariff", ar: "تعرفة مواقف متغيرة" },
   card1_desc: { en: "Check parking rates based on zone codes and peak hours to take advantage of variable tariffs so you can plan smarter and save more.", ar: "تحقق من أسعار المواقف بناءً على رموز المناطق وساعات الذروة للاستفادة من التعرفة المتغيرة والتخطيط بذكاء والتوفير أكثر." },
@@ -490,6 +520,17 @@ export default function ParkinHome() {
   const [selectedDuration, setSelectedDuration] = useState<{label:string; value:string; amount:string}|null>(null);
   const [isDurationOpen, setIsDurationOpen] = useState(false);
   const [isLoadingTariff, setIsLoadingTariff] = useState(false);
+  // Pay Later / Pay Fines state
+  const [selectedCountry, setSelectedCountry] = useState(plateStructure[0]); // Dubai default
+  const [selectedCategory, setSelectedCategory] = useState<typeof plateStructure[0]['categories'][0]|null>(plateStructure[0].categories[0]); // Private default
+  const [selectedCode, setSelectedCode] = useState<{pid:string;name:string}|null>(null);
+  const [plateNumber, setPlateNumber] = useState("");
+  const [isCountryOpen, setIsCountryOpen] = useState(false);
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [isCodeOpen, setIsCodeOpen] = useState(false);
+  const countryDropdownRef = useRef<HTMLDivElement>(null);
+  const categoryDropdownRef = useRef<HTMLDivElement>(null);
+  const codeDropdownRef = useRef<HTMLDivElement>(null);
   const zoneInputRef = useRef<HTMLInputElement>(null);
   const zoneDropdownRef = useRef<HTMLDivElement>(null);
   const durationDropdownRef = useRef<HTMLDivElement>(null);
@@ -513,6 +554,15 @@ export default function ParkinHome() {
       }
       if (durationDropdownRef.current && !durationDropdownRef.current.contains(e.target as Node)) {
         setIsDurationOpen(false);
+      }
+      if (countryDropdownRef.current && !countryDropdownRef.current.contains(e.target as Node)) {
+        setIsCountryOpen(false);
+      }
+      if (categoryDropdownRef.current && !categoryDropdownRef.current.contains(e.target as Node)) {
+        setIsCategoryOpen(false);
+      }
+      if (codeDropdownRef.current && !codeDropdownRef.current.contains(e.target as Node)) {
+        setIsCodeOpen(false);
       }
     };
     document.addEventListener('mousedown', handleClickOutside);
@@ -721,92 +771,160 @@ export default function ParkinHome() {
               ))}
             </div>
             <div className="p-6">
-              <div className="border border-gray-200 rounded-xl p-3 mb-4 relative">
-                <label className="text-[12px] text-gray-500 block mb-1">{L("parking_zone")}</label>
-                <div className="flex items-center justify-between">
-                  <input
-                    ref={zoneInputRef}
-                    type="text"
-                    placeholder={L("enter_zone")}
-                    value={zoneQuery}
-                    onChange={(e) => {
-                      setZoneQuery(e.target.value);
-                      setShowZoneSuggestions(true);
-                      setSelectedZone(null);
-                    }}
-                    onFocus={() => { if (zoneQuery.length > 0) setShowZoneSuggestions(true); }}
-                    className="bg-transparent text-[14px] text-gray-700 outline-none flex-1"
-                  />
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gray-400 flex-shrink-0"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/><circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M10 2V4M10 16V18M2 10H4M16 10H18" stroke="currentColor" strokeWidth="1.5"/></svg>
-                </div>
-                {/* Autocomplete dropdown */}
-                {showZoneSuggestions && filteredZones.length > 0 && (
-                  <div ref={zoneDropdownRef} className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[400px] overflow-y-auto">
-                    {filteredZones.map((zone) => (
-                      <button
-                        key={zone.code}
-                        onClick={() => {
-                          setZoneQuery(zone.code);
-                          setSelectedZone(zone);
-                          setShowZoneSuggestions(false);
+              {activeTab === 'pay' ? (
+                /* ══════ PAY FOR PARKING FORM ══════ */
+                <>
+                  <div className="border border-gray-200 rounded-xl p-3 mb-4 relative">
+                    <label className="text-[12px] text-gray-500 block mb-1">{L("parking_zone")}</label>
+                    <div className="flex items-center justify-between">
+                      <input
+                        ref={zoneInputRef}
+                        type="text"
+                        placeholder={L("enter_zone")}
+                        value={zoneQuery}
+                        onChange={(e) => {
+                          setZoneQuery(e.target.value);
+                          setShowZoneSuggestions(true);
+                          setSelectedZone(null);
                         }}
-                        className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-center justify-between"
-                      >
-                        <div>
-                          <span className="text-[#045464] font-semibold text-[14px]">{zone.code}</span>
-                          <span className="text-gray-500 text-[13px] mx-2">-</span>
-                          <span className="text-gray-700 text-[13px]">{isAr ? zone.nameAr : zone.name}</span>
-                        </div>
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-gray-300 flex-shrink-0"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.2" fill="none"/><circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.2" fill="none"/></svg>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-              <div className="flex gap-4 mb-4 items-center">
-                <div className="border border-gray-200 rounded-xl p-3 flex-1 relative">
-                  <label className="text-[12px] text-gray-500 block mb-1">{L("duration")}</label>
-                  <div
-                    className="flex items-center justify-between cursor-pointer"
-                    onClick={() => { if (durationOptions.length > 0) setIsDurationOpen(!isDurationOpen); }}
-                  >
-                    <span className={`text-[14px] ${selectedDuration ? 'text-gray-700' : 'text-gray-400'}`}>
-                      {isLoadingTariff ? (lang === 'ar' ? '\u062c\u0627\u0631\u064a \u0627\u0644\u062a\u062d\u0645\u064a\u0644...' : 'Loading...') : selectedDuration ? `${selectedDuration.label} - AED ${selectedDuration.amount}` : L("select_duration")}
-                    </span>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`text-gray-400 transition-transform ${isDurationOpen ? 'rotate-180' : ''}`}><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
-                  </div>
-                  {/* Duration dropdown */}
-                  {isDurationOpen && durationOptions.length > 0 && (
-                    <div ref={durationDropdownRef} className="absolute left-0 right-0 bottom-full mb-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[400px] overflow-y-auto">
-                      {durationOptions.map((opt, idx) => (
-                        <button
-                          key={idx}
-                          onClick={() => {
-                            setSelectedDuration(opt);
-                            setIsDurationOpen(false);
-                          }}
-                          className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-center justify-between ${selectedDuration?.value === opt.value ? 'bg-[#f0f9f9]' : ''}`}
-                        >
-                          <span className="text-gray-700 text-[14px]">{opt.label}</span>
-                          <span className="text-[#045464] font-semibold text-[14px]">AED {opt.amount}</span>
-                        </button>
-                      ))}
+                        onFocus={() => { if (zoneQuery.length > 0) setShowZoneSuggestions(true); }}
+                        className="bg-transparent text-[14px] text-gray-700 outline-none flex-1"
+                      />
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gray-400 flex-shrink-0"><circle cx="10" cy="10" r="8" stroke="currentColor" strokeWidth="1.5" fill="none"/><circle cx="10" cy="10" r="3" stroke="currentColor" strokeWidth="1.5" fill="none"/><path d="M10 2V4M10 16V18M2 10H4M16 10H18" stroke="currentColor" strokeWidth="1.5"/></svg>
                     </div>
-                  )}
-                </div>
-                <button className="border border-[#045464] rounded-full px-4 flex items-center gap-2 text-[#045464] text-[13px] font-medium" style={{height:'36px'}}>
-                  <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                  {L("now")}
-                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
-                </button>
-              </div>
-              <div className="flex items-center justify-between">
-                <button onClick={()=>navigate("/summary-payment")} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
-                <div className="flex items-center gap-2">
-                  <span className="text-gray-500 text-[15px]">{L("total")}</span>
-                  <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> {selectedDuration ? parseFloat(selectedDuration.amount).toFixed(2) : '0.00'}</span>
-                </div>
-              </div>
+                    {showZoneSuggestions && filteredZones.length > 0 && (
+                      <div ref={zoneDropdownRef} className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[400px] overflow-y-auto">
+                        {filteredZones.map((zone) => (
+                          <button
+                            key={zone.code}
+                            onClick={() => {
+                              setZoneQuery(zone.code);
+                              setSelectedZone(zone);
+                              setShowZoneSuggestions(false);
+                            }}
+                            className="w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-center justify-between"
+                          >
+                            <div>
+                              <span className="text-[#045464] font-semibold text-[14px]">{zone.code}</span>
+                              <span className="text-gray-500 text-[13px] mx-2">-</span>
+                              <span className="text-gray-700 text-[13px]">{isAr ? zone.nameAr : zone.name}</span>
+                            </div>
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="text-gray-300 flex-shrink-0"><circle cx="8" cy="8" r="6" stroke="currentColor" strokeWidth="1.2" fill="none"/><circle cx="8" cy="8" r="2.5" stroke="currentColor" strokeWidth="1.2" fill="none"/></svg>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex gap-4 mb-4 items-center">
+                    <div className="border border-gray-200 rounded-xl p-3 flex-1 relative">
+                      <label className="text-[12px] text-gray-500 block mb-1">{L("duration")}</label>
+                      <div
+                        className="flex items-center justify-between cursor-pointer"
+                        onClick={() => { if (durationOptions.length > 0) setIsDurationOpen(!isDurationOpen); }}
+                      >
+                        <span className={`text-[14px] ${selectedDuration ? 'text-gray-700' : 'text-gray-400'}`}>
+                          {isLoadingTariff ? (lang === 'ar' ? '\u062c\u0627\u0631\u064a \u0627\u0644\u062a\u062d\u0645\u064a\u0644...' : 'Loading...') : selectedDuration ? `${selectedDuration.label} - AED ${selectedDuration.amount}` : L("select_duration")}
+                        </span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`text-gray-400 transition-transform ${isDurationOpen ? 'rotate-180' : ''}`}><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
+                      </div>
+                      {isDurationOpen && durationOptions.length > 0 && (
+                        <div ref={durationDropdownRef} className="absolute left-0 right-0 bottom-full mb-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[400px] overflow-y-auto">
+                          {durationOptions.map((opt, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => {
+                                setSelectedDuration(opt);
+                                setIsDurationOpen(false);
+                              }}
+                              className={`w-full text-left px-4 py-3 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 flex items-center justify-between ${selectedDuration?.value === opt.value ? 'bg-[#f0f9f9]' : ''}`}
+                            >
+                              <span className="text-gray-700 text-[14px]">{opt.label}</span>
+                              <span className="text-[#045464] font-semibold text-[14px]">AED {opt.amount}</span>
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <button className="border border-[#045464] rounded-full px-4 flex items-center gap-2 text-[#045464] text-[13px] font-medium" style={{height:'36px'}}>
+                      <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7.5" stroke="#045464" strokeWidth="1.5" fill="none"/><path d="M9 5V9L12 11" stroke="#045464" strokeWidth="1.5" strokeLinecap="round"/></svg>
+                      {L("now")}
+                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
+                    </button>
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <button onClick={()=>navigate("/summary-payment")} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
+                    <div className="flex items-center gap-2">
+                      <span className="text-gray-500 text-[15px]">{L("total")}</span>
+                      <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> {selectedDuration ? parseFloat(selectedDuration.amount).toFixed(2) : '0.00'}</span>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                /* ══════ PAY LATER / PAY FINES FORM ══════ */
+                <>
+                  <div className="flex gap-4 mb-4">
+                    {/* Country/Emirate dropdown */}
+                    <div className="border border-gray-200 rounded-xl p-3 flex-1 relative" ref={countryDropdownRef}>
+                      <label className="text-[12px] text-gray-500 block mb-1">{L("country_emirate")}</label>
+                      <div className="flex items-center justify-between cursor-pointer" onClick={() => { setIsCountryOpen(!isCountryOpen); setIsCategoryOpen(false); setIsCodeOpen(false); }}>
+                        <span className="text-[14px] text-[#045464] font-medium">{selectedCountry.name}</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`text-gray-400 transition-transform ${isCountryOpen ? 'rotate-180' : ''}`}><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
+                      </div>
+                      {isCountryOpen && (
+                        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[250px] overflow-y-auto">
+                          {plateStructure.map((c) => (
+                            <button key={c.pid} onClick={() => { setSelectedCountry(c); setSelectedCategory(c.categories[0]); setSelectedCode(null); setIsCountryOpen(false); }} className={`w-full text-left px-4 py-2.5 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 text-[14px] ${selectedCountry.pid === c.pid ? 'bg-[#f0f9f9] text-[#045464] font-medium' : 'text-gray-700'}`}>{c.name}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {/* Plate Category dropdown */}
+                    <div className="border border-gray-200 rounded-xl p-3 flex-1 relative" ref={categoryDropdownRef}>
+                      <label className="text-[12px] text-gray-500 block mb-1">{L("plate_category")}</label>
+                      <div className="flex items-center justify-between cursor-pointer" onClick={() => { setIsCategoryOpen(!isCategoryOpen); setIsCountryOpen(false); setIsCodeOpen(false); }}>
+                        <span className="text-[14px] text-[#045464] font-medium">{selectedCategory?.name || L("select")}</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`text-gray-400 transition-transform ${isCategoryOpen ? 'rotate-180' : ''}`}><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
+                      </div>
+                      {isCategoryOpen && (
+                        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[250px] overflow-y-auto">
+                          {selectedCountry.categories.map((cat) => (
+                            <button key={cat.pid} onClick={() => { setSelectedCategory(cat); setSelectedCode(null); setIsCategoryOpen(false); }} className={`w-full text-left px-4 py-2.5 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 text-[14px] ${selectedCategory?.pid === cat.pid ? 'bg-[#f0f9f9] text-[#045464] font-medium' : 'text-gray-700'}`}>{cat.name}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                  <div className="flex gap-4 mb-4">
+                    {/* Plate Code dropdown */}
+                    <div className="border border-gray-200 rounded-xl p-3 flex-1 relative" ref={codeDropdownRef}>
+                      <label className="text-[12px] text-gray-500 block mb-1">{L("plate_code")}</label>
+                      <div className="flex items-center justify-between cursor-pointer" onClick={() => { setIsCodeOpen(!isCodeOpen); setIsCountryOpen(false); setIsCategoryOpen(false); }}>
+                        <span className={`text-[14px] ${selectedCode ? 'text-[#045464] font-medium' : 'text-gray-400'}`}>{selectedCode?.name || L("select")}</span>
+                        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className={`text-gray-400 transition-transform ${isCodeOpen ? 'rotate-180' : ''}`}><path d="M3 5L7 9L11 5" stroke="currentColor" strokeWidth="1.5"/></svg>
+                      </div>
+                      {isCodeOpen && selectedCategory && (
+                        <div className="absolute left-0 right-0 top-full mt-1 bg-white border border-gray-200 rounded-xl shadow-lg z-50 max-h-[250px] overflow-y-auto">
+                          {selectedCategory.codes.map((code) => (
+                            <button key={code.pid} onClick={() => { setSelectedCode(code); setIsCodeOpen(false); }} className={`w-full text-left px-4 py-2.5 hover:bg-gray-50 transition-colors border-b border-gray-100 last:border-b-0 text-[14px] ${selectedCode?.pid === code.pid ? 'bg-[#f0f9f9] text-[#045464] font-medium' : 'text-gray-700'}`}>{code.name}</button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    {/* Plate Number input */}
+                    <div className="border border-gray-200 rounded-xl p-3 flex-1">
+                      <label className="text-[12px] text-gray-500 block mb-1">{L("plate_number")}</label>
+                      <input
+                        type="text"
+                        placeholder={L("enter_plate_number")}
+                        value={plateNumber}
+                        onChange={(e) => setPlateNumber(e.target.value)}
+                        className="bg-transparent text-[14px] text-gray-700 outline-none w-full"
+                      />
+                    </div>
+                  </div>
+                  <button onClick={()=>navigate("/summary-payment")} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("search_btn")}</button>
+                </>
+              )}
             </div>
           </div>
         </div>
