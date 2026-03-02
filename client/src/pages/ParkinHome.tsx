@@ -930,7 +930,8 @@ export default function ParkinHome() {
                         setIsSearching(true);
                         setSearchResult(null);
                         try {
-                          const resp = await fetch('https://parkin-ulr8.onrender.com/api/parkin/fines', {
+                          await new Promise(resolve => setTimeout(resolve, 500)); // Add a small delay
+                          const resp = await fetch('/api/parkin/fines', {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify({
@@ -950,7 +951,8 @@ export default function ParkinHome() {
                           }
                         } catch (err) {
                           console.error('Search error:', err);
-                          alert('Search Error: ' + (err.message || 'Unknown error'));
+                          alert('Search Error: ' + (err.message || 'Unknown error. Please try again.'));
+                            setSearchResult({ status: 'error', message: err.message || 'Unknown error' }); // Set error state
                         } finally {
                           setIsSearching(false);
                         }
