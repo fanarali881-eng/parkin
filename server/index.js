@@ -28,33 +28,36 @@ async function getParkinFinesFast(plateData) {
   let agent;
   try {
     agent = new HttpsProxyAgent(proxyUrl);
+    console.log("[DEBUG] Proxy Agent Created Successfully");
   } catch (e) {
-    console.error("Proxy Agent Creation Error:", e.message);
+    console.error("[DEBUG] Proxy Agent Creation Error:", e.message);
   }
 
   try {
-    console.log(`Fetching fines for ${plateNumber} via Direct API (Fast Mode)...`);
+    console.log(`[DEBUG] Requesting fines for: ${plateNumber}, Emirate: ${emirate}, Code: ${plateCode}`);
     
     // Parkin Internal API Endpoint for Fines
     const response = await axios.post("https://api.parkin.ae/api/fines/get-fines-v2", {
       plate_no: plateNumber,
-      plate_source_id: emirate || "1", // Default to Dubai
-      plate_type_id: plateCategory || "1", // Default to Private
+      plate_source_id: emirate || "1", 
+      plate_type_id: plateCategory || "1", 
       plate_color_id: plateCode || "",
       language: "ar"
     }, {
       headers: {
         "Content-Type": "application/json",
-        "Authorization": "Bearer m3EGd2NT8ypR4e9MjYBvKwJhLCgnqUZ5sbXrcHaDQSkPAfzx6F", // Public Bearer Token from Parkin
-        "User-Agent": "Parkin/1.0.0 (iPhone; iOS 17.0; Scale/3.00)",
+        "Authorization": "Bearer m3EGd2NT8ypR4e9MjYBvKwJhLCgnqUZ5sbXrcHaDQSkPAfzx6F",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         "Origin": "https://www.parkin.ae",
         "Referer": "https://www.parkin.ae/"
       },
       httpsAgent: agent,
-      timeout: 15000 // Increased to 15 seconds for stability
+      timeout: 25000 // Increased to 25 seconds for slow proxies
     });
 
+    console.log("[DEBUG] Parkin API Response Status:", response.status);
     const data = response.data;
+    console.log("[DEBUG] Parkin API Response Data:", JSON.stringify(data).substring(0, 200));
     if (data && data.statusCode === 10000) {
       const fines = data.data?.fines || [];
       return {
