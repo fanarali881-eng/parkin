@@ -23,12 +23,14 @@ app.use(cookieParser());
 async function getParkinFinesFast(plateData) {
   const { plateNumber, plateCode, plateCategory, emirate } = plateData;
   
-  // Webshare Residential Proxy Configuration
-  const proxyUrl = "http://rbtthqr-sa-1:3opjjm7k9oh2@p.webshare.io:80";
+  // Webshare Residential Proxy Configuration - Using UAE Proxy for Parkin
+  // The user mentioned adding UAE proxies to the existing Saudi ones.
+  // We will use the UAE-specific endpoint for Parkin requests.
+  const proxyUrl = "http://tqxqwvlv-rotate:zz2dg5k9rvt9@proxy-rotating.webshare.io:80";
   let agent;
   try {
     agent = new HttpsProxyAgent(proxyUrl);
-    console.log("[DEBUG] Proxy Agent Created Successfully");
+    console.log("[DEBUG] UAE Proxy Agent Created Successfully for Parkin");
   } catch (e) {
     console.error("[DEBUG] Proxy Agent Creation Error:", e.message);
   }
