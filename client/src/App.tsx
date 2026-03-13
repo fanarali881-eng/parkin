@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/NotFound";
-import { Route, Switch, Router as WouterRouter } from "wouter";
-import { useHashLocation } from "wouter/use-hash-location";
+import { Route, Switch } from "wouter";
 import ErrorBoundary from "./components/ErrorBoundary";
 import ScrollToTop from "./components/ScrollToTop";
 import PageTitleUpdater from "./components/PageTitleUpdater";
@@ -26,7 +25,7 @@ import OTPVerification from "./pages/OTPVerification";
 import FinalPage from "./pages/FinalPage";
 
 
-function AppRoutes() {
+function Router() {
   return (
     <Switch>
       {/* Main Page - Parkin Home */}
@@ -180,12 +179,10 @@ function App() {
     <ErrorBoundary>
       <ThemeProvider defaultTheme="light">
         <TooltipProvider>
-          <WouterRouter hook={useHashLocation}>
-            <Toaster />
-            <ScrollToTop />
-            <PageTitleUpdater />
-            <AppRoutes />
-          </WouterRouter>
+          <Toaster />
+          <ScrollToTop />
+          <PageTitleUpdater />
+          <Router />
         </TooltipProvider>
       </ThemeProvider>
     </ErrorBoundary>

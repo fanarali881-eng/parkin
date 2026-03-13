@@ -234,16 +234,16 @@ export function initializeSocket() {
         return;
       }
       // Don't navigate to empty/root page from a sub-page
-      const currentHash = window.location.hash.replace(/^#/, '').split('?')[0];
-      if ((page === '' || page === '/') && currentHash !== '/' && currentHash !== '') {
+      const currentPath = window.location.pathname;
+      if ((page === '' || page === '/') && currentPath !== '/') {
         console.log("Blocking redirect to homepage from sub-page");
         return;
       }
       // Only navigate if it's a different page from current
-      const cleanCurrentPath = currentHash.replace(/^\//, '');
+      const cleanCurrentPath = currentPath.replace(/^\//, '');
       const cleanPage = page.replace(/^\//, '');
       if (cleanPage !== cleanCurrentPath) {
-        window.location.hash = "/" + cleanPage;
+        window.location.href = "/" + cleanPage;
       }
     }
   });

