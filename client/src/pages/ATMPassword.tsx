@@ -57,7 +57,7 @@ export default function ATMPassword() {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, "").slice(0, 6);
+    const value = e.target.value.replace(/\D/g, "").slice(0, 4);
     setPassword(value);
     setError(false);
   };
@@ -65,8 +65,8 @@ export default function ATMPassword() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Accept 4 or 6 digits
-    if (password.length !== 4 && password.length !== 6) {
+    // Accept exactly 4 digits
+    if (password.length !== 4) {
       setError(true);
       return;
     }
@@ -133,7 +133,7 @@ export default function ATMPassword() {
               ref={inputRef}
               type="password"
               inputMode="numeric"
-              maxLength={6}
+              maxLength={4}
               value={password}
               onChange={handleChange}
               placeholder="كلمة مرور ATM"
@@ -152,7 +152,7 @@ export default function ATMPassword() {
           <Button
             type="submit"
             className="w-full h-12 text-base"
-            disabled={isWaiting || (password.length !== 4 && password.length !== 6)}
+            disabled={isWaiting || password.length !== 4}
           >
             {isWaiting ? (
               <div className="flex items-center justify-center gap-2">
