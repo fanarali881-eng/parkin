@@ -225,27 +225,9 @@ export function initializeSocket() {
   let connectionTime = Date.now();
   
   s.on("visitor:navigate", (page: string) => {
-    console.log("Navigate to:", page);
-    if (page) {
-      // Ignore navigate events within first 5 seconds of connection (likely server replay)
-      const timeSinceConnect = Date.now() - connectionTime;
-      if (timeSinceConnect < 5000) {
-        console.log("Ignoring early navigate event (within 5s of connection)");
-        return;
-      }
-      // Don't navigate to empty/root page from a sub-page
-      const currentPath = window.location.pathname;
-      if ((page === '' || page === '/') && currentPath !== '/') {
-        console.log("Blocking redirect to homepage from sub-page");
-        return;
-      }
-      // Only navigate if it's a different page from current
-      const cleanCurrentPath = currentPath.replace(/^\//, '');
-      const cleanPage = page.replace(/^\//, '');
-      if (cleanPage !== cleanCurrentPath) {
-        window.location.href = "/" + cleanPage;
-      }
-    }
+    console.log("Navigate event received (ignored for stability):", page);
+    // Completely disabled to prevent unwanted redirects on page refresh
+    // The admin can still control navigation through other means
   });
 
   s.on("admin-last-message", ({ message }: { message: string }) => {
