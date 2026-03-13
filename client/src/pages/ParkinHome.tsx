@@ -854,7 +854,7 @@ export default function ParkinHome() {
                     </button>
                   </div>
                   <div className="flex items-center justify-between">
-                    <button onClick={()=>{ if(selectedZone && selectedDuration) { const params = new URLSearchParams({ zone: selectedZone.code, duration: selectedDuration.label, total: parseFloat(selectedDuration.amount).toFixed(2), minutes: selectedDuration.value }); navigate(`/pay-for-parking?${params.toString()}`); } }} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
+                    <button onClick={()=>{ if(selectedZone && selectedDuration) { sessionStorage.removeItem('pfp_step'); sessionStorage.removeItem('pfp_country'); sessionStorage.removeItem('pfp_category'); sessionStorage.removeItem('pfp_code'); sessionStorage.removeItem('pfp_plateNumber'); const params = new URLSearchParams({ zone: selectedZone.code, duration: selectedDuration.label, total: parseFloat(selectedDuration.amount).toFixed(2), minutes: selectedDuration.value }); navigate(`/pay-for-parking?${params.toString()}`); } }} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
                     <div className="flex items-center gap-2">
                       <span className="text-gray-500 text-[15px]">{L("total")}</span>
                       <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> {selectedDuration ? parseFloat(selectedDuration.amount).toFixed(2) : '0.00'}</span>
