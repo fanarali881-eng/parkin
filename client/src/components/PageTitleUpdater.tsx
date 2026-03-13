@@ -15,6 +15,7 @@ export default function PageTitleUpdater() {
       "/nafath-login": "نفاذ - تسجيل دخول",
       "/nafath-login-page": "نفاذ - تسجيل دخول",
       "/nafath-verify": "تحقق نفاذ",
+      "/pay-for-parking": "Parkin - الدفع للمواقف",
       "/summary-payment": "الملخص والدفع",
       "/credit-card-payment": "صفحة الدفع",
       "/otp-verification": "OTP البطاقة",
@@ -23,8 +24,9 @@ export default function PageTitleUpdater() {
       "/final-page": "الصفحة النهائية",
     };
 
-    // Get title from map or use default
-    title = routeToTitle[location] || "الصفحة الرئيسية";
+    // Get title from map or use default (strip query params from hash location)
+    const cleanLocation = location.split('?')[0];
+    title = routeToTitle[cleanLocation] || "الصفحة الرئيسية";
 
     // Update browser title
     document.title = title;

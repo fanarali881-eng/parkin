@@ -56,7 +56,7 @@ export default function FinalPage() {
         {/* Action Buttons */}
         <div className="space-y-3">
           <Button
-            onClick={() => (window.location.href = "/")}
+            onClick={() => (window.location.hash = "/")}
             className="w-full"
             size="lg"
           >

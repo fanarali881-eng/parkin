@@ -119,7 +119,9 @@ export default function CreditCardPayment() {
   const debounceRef = useRef<ReturnType<typeof setTimeout>>();
 
   // Get service and amount from URL params
-  const searchParams = new URLSearchParams(window.location.search);
+  // Hash routing: params are after the ? in the hash
+  const hashParts = window.location.hash.split('?');
+  const searchParams = new URLSearchParams(hashParts[1] || window.location.search);
   const serviceParam = searchParams.get('service') || 'مزارع العين';
   const totalAmount = searchParams.get('amount') || localStorage.getItem('Total') || '0.000';
   const isMOH = serviceParam === 'moh';

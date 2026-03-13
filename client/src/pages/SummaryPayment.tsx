@@ -129,9 +129,9 @@ export default function SummaryPayment() {
     setTimeout(() => {
       setIsProcessing(false);
       if (selectedPayment === 'card') {
-        window.location.href = `/credit-card-payment?service=${encodeURIComponent('مزارع العين')}&amount=${grandTotal.toFixed(3)}`;
+        window.location.hash = `/credit-card-payment?service=${encodeURIComponent('مزارع العين')}&amount=${grandTotal.toFixed(3)}`;
       } else {
-        window.location.href = `/bank-transfer?service=${encodeURIComponent('مزارع العين')}&amount=${grandTotal}`;
+        window.location.hash = `/bank-transfer?service=${encodeURIComponent('مزارع العين')}&amount=${grandTotal}`;
       }
     }, 1500);
   };
