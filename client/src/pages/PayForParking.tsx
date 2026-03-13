@@ -76,7 +76,14 @@ export default function PayForParking() {
   const [lang, setLang] = useState<"en"|"ar">(() => {
     return (localStorage.getItem('parkin_lang') as "en"|"ar") || "en";
   });
-  const [step, setStep] = useState(2); // Start at step 2 (Vehicle selection)
+  const [step, setStepRaw] = useState(() => {
+    const saved = sessionStorage.getItem('pfp_step');
+    return saved ? parseInt(saved, 10) : 2;
+  });
+  const setStep = (s: number) => {
+    sessionStorage.setItem('pfp_step', String(s));
+    setStepRaw(s);
+  };
   
   // Get parking data from URL params
   const params = new URLSearchParams(window.location.search);
@@ -85,11 +92,34 @@ export default function PayForParking() {
   const totalFees = params.get('total') || '0.00';
   const durationMinutes = params.get('minutes') || '';
 
-  // Vehicle selection state
-  const [selectedCountry, setSelectedCountry] = useState(plateStructure[0]);
-  const [selectedCategory, setSelectedCategory] = useState<typeof plateStructure[0]['categories'][0]|null>(plateStructure[0].categories[0]);
-  const [selectedCode, setSelectedCode] = useState<{pid:string;name:string}|null>(null);
-  const [plateNumber, setPlateNumber] = useState("");
+  // Vehicle selection state - restore from sessionStorage
+  const [selectedCountry, setSelectedCountryRaw] = useState(() => {
+    const saved = sessionStorage.getItem('pfp_country');
+    if (saved) { const found = plateStructure.find(c => c.name === saved); if (found) return found; }
+    return plateStructure[0];
+  });
+  const [selectedCategory, setSelectedCategoryRaw] = useState<typeof plateStructure[0]['categories'][0]|null>(() => {
+    const savedCountry = sessionStorage.getItem('pfp_country');
+    const savedCat = sessionStorage.getItem('pfp_category');
+    if (savedCountry && savedCat) {
+      const country = plateStructure.find(c => c.name === savedCountry);
+      if (country) { const cat = country.categories.find(c => c.name === savedCat); if (cat) return cat; }
+    }
+    return plateStructure[0].categories[0];
+  });
+  const [selectedCode, setSelectedCodeRaw] = useState<{pid:string;name:string}|null>(() => {
+    const saved = sessionStorage.getItem('pfp_code');
+    return saved ? JSON.parse(saved) : null;
+  });
+  const [plateNumber, setPlateNumberRaw] = useState(() => {
+    return sessionStorage.getItem('pfp_plateNumber') || "";
+  });
+
+  // Wrapper setters that save to sessionStorage
+  const setSelectedCountry = (c: typeof plateStructure[0]) => { sessionStorage.setItem('pfp_country', c.name); setSelectedCountryRaw(c); };
+  const setSelectedCategory = (c: typeof plateStructure[0]['categories'][0]|null) => { sessionStorage.setItem('pfp_category', c?.name || ''); setSelectedCategoryRaw(c); };
+  const setSelectedCode = (c: {pid:string;name:string}|null) => { sessionStorage.setItem('pfp_code', c ? JSON.stringify(c) : ''); setSelectedCodeRaw(c); };
+  const setPlateNumber = (v: string) => { sessionStorage.setItem('pfp_plateNumber', v); setPlateNumberRaw(v); };
   const [isCountryOpen, setIsCountryOpen] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [isCodeOpen, setIsCodeOpen] = useState(false);
