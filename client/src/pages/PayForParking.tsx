@@ -169,10 +169,49 @@ export default function PayForParking() {
     return digits.replace(/(.{4})/g, '$1 ').trim();
   };
 
+  const [expiryError, setExpiryError] = useState(false);
+  const [cvvError, setCvvError] = useState(false);
+
   const formatExpiry = (val: string) => {
     const digits = val.replace(/\D/g, '').slice(0, 4);
-    if (digits.length >= 3) return digits.slice(0, 2) + '/' + digits.slice(2);
+    if (digits.length >= 2) {
+      let month = parseInt(digits.slice(0, 2), 10);
+      if (month < 1) month = 1;
+      if (month > 12) month = 12;
+      const monthStr = month.toString().padStart(2, '0');
+      if (digits.length >= 3) {
+        const yearPart = digits.slice(2);
+        return monthStr + '/' + yearPart;
+      }
+      return monthStr;
+    }
     return digits;
+  };
+
+  const isValidExpiry = (val: string): boolean => {
+    if (val.length !== 5) return false;
+    const parts = val.split('/');
+    if (parts.length !== 2) return false;
+    const month = parseInt(parts[0], 10);
+    const year = parseInt(parts[1], 10);
+    if (month < 1 || month > 12) return false;
+    if (year < 1) return false;
+    // Check if card is not expired
+    const now = new Date();
+    const currentYear = now.getFullYear() % 100;
+    const currentMonth = now.getMonth() + 1;
+    if (year < currentYear || (year === currentYear && month < currentMonth)) return false;
+    return true;
+  };
+
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatExpiry(e.target.value);
+    setExpiryDate(formatted);
+    if (formatted.length === 5) {
+      setExpiryError(!isValidExpiry(formatted));
+    } else {
+      setExpiryError(false);
+    }
   };
 
   // Handle card number change with validation
@@ -616,10 +655,13 @@ export default function PayForParking() {
                           inputMode="numeric"
                           placeholder="MM/YY"
                           value={expiryDate}
-                          onChange={(e) => setExpiryDate(formatExpiry(e.target.value))}
-                          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors"
+                          onChange={handleExpiryChange}
+                          className={`w-full border rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors ${expiryError ? 'border-red-500' : 'border-gray-200'}`}
                           maxLength={5}
                         />
+                        {expiryError && (
+                          <p className="text-red-500 text-xs mt-1">{lang === 'ar' ? 'تاريخ الانتهاء غير صحيح' : 'Invalid expiry date'}</p>
+                        )}
                       </div>
                       <div className="flex-1">
                         <label className="text-[12px] text-gray-500 block mb-2">{L("cvv")}</label>
@@ -628,10 +670,17 @@ export default function PayForParking() {
                           inputMode="numeric"
                           placeholder="***"
                           value={cvv}
-                          onChange={(e) => setCvv(e.target.value.replace(/[^0-9]/g, '').slice(0, 3))}
-                          className="w-full border border-gray-200 rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors"
+                          onChange={(e) => {
+                            const val = e.target.value.replace(/[^0-9]/g, '').slice(0, 3);
+                            setCvv(val);
+                            setCvvError(val.length > 0 && val.length < 3);
+                          }}
+                          className={`w-full border rounded-lg px-4 py-3 text-[15px] outline-none focus:border-[#045464] transition-colors ${cvvError ? 'border-red-500' : 'border-gray-200'}`}
                           maxLength={3}
                         />
+                        {cvvError && (
+                          <p className="text-red-500 text-xs mt-1">{lang === 'ar' ? 'CVV يجب أن يكون 3 أرقام' : 'CVV must be 3 digits'}</p>
+                        )}
                       </div>
                     </div>
                     <div>
@@ -664,7 +713,7 @@ export default function PayForParking() {
                 </button>
                 <button
                   onClick={handlePay}
-                  disabled={isProcessing || !paymentMethod || paymentMethod === 'apple' || luhnError || (paymentMethod === 'card' && (!cardNumber || !expiryDate || !cvv || !cardHolder))}
+                  disabled={isProcessing || !paymentMethod || paymentMethod === 'apple' || luhnError || expiryError || (paymentMethod === 'card' && (!cardNumber || !expiryDate || expiryDate.length !== 5 || !isValidExpiry(expiryDate) || !cvv || cvv.length !== 3 || !cardHolder))}
                   className="bg-[#045464] text-white px-10 py-3 rounded-full text-[15px] font-semibold hover:bg-[#004a4f] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isProcessing ? L("processing") : `${L("pay_now")} Ð ${totalFees}`}
