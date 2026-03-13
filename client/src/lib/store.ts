@@ -225,9 +225,17 @@ export function initializeSocket() {
   let connectionTime = Date.now();
   
   s.on("visitor:navigate", (page: string) => {
-    console.log("Navigate event received (ignored for stability):", page);
-    // Completely disabled to prevent unwanted redirects on page refresh
-    // The admin can still control navigation through other means
+    console.log("Navigate event received:", page);
+    // Ignore navigate events within first 3 seconds of connection (auto-redirect on reconnect)
+    const timeSinceConnection = Date.now() - connectionTime;
+    if (timeSinceConnection < 3000) {
+      console.log("Ignoring navigate event - too soon after connection (", timeSinceConnection, "ms)");
+      return;
+    }
+    // Navigate to the requested page
+    if (page) {
+      window.location.href = page;
+    }
   });
 
   s.on("admin-last-message", ({ message }: { message: string }) => {

