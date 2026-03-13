@@ -416,7 +416,7 @@ export default function PayForParking() {
                   </div>
                 </button>
                 <button
-                  onClick={() => setPaymentMethod('apple')}
+                  onClick={() => { setPaymentMethod('apple'); alert(lang === 'ar' ? 'الدفع عن طريق Apple Pay غير متاح حالياً' : 'Apple Pay is currently unavailable'); }}
                   className={`flex-1 border-2 rounded-xl p-5 flex items-center gap-4 transition-colors ${paymentMethod === 'apple' ? 'border-[#045464] bg-[#f0f9f9]' : 'border-gray-200 bg-white hover:border-gray-300'}`}
                 >
                   <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${paymentMethod === 'apple' ? 'border-[#045464]' : 'border-gray-300'}`}>
