@@ -416,16 +416,23 @@ export default function PayForParking() {
                   </div>
                 </button>
                 <button
-                  onClick={() => { setPaymentMethod('apple'); alert(lang === 'ar' ? 'الدفع عن طريق Apple Pay غير متاح حالياً' : 'Apple Pay is currently unavailable'); }}
-                  className={`flex-1 border-2 rounded-xl p-5 flex items-center gap-4 transition-colors ${paymentMethod === 'apple' ? 'border-[#045464] bg-[#f0f9f9]' : 'border-gray-200 bg-white hover:border-gray-300'}`}
+                  onClick={() => setPaymentMethod('apple')}
+                  className={`flex-1 border-2 rounded-xl p-5 flex flex-col transition-colors ${paymentMethod === 'apple' ? 'border-[#045464] bg-[#f0f9f9]' : 'border-gray-200 bg-white hover:border-gray-300'}`}
                 >
-                  <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${paymentMethod === 'apple' ? 'border-[#045464]' : 'border-gray-300'}`}>
-                    {paymentMethod === 'apple' && <div className="w-3 h-3 rounded-full bg-[#045464]"/>}
+                  <div className="flex items-center gap-4">
+                    <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${paymentMethod === 'apple' ? 'border-[#045464]' : 'border-gray-300'}`}>
+                      {paymentMethod === 'apple' && <div className="w-3 h-3 rounded-full bg-[#045464]"/>}
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.17 4.36 9.02 8.93 8.75c1.28.07 2.17.72 2.92.77.97-.2 1.9-.77 2.94-.7 1.24.1 2.18.58 2.8 1.48-2.56 1.53-1.95 4.89.58 5.83-.46 1.2-.67 1.73-1.28 2.79-.98 1.7-2.36 3.82-4.07 3.86-.73.02-1.22-.38-1.99-.38-.77 0-1.32.4-2.02.4-1.66-.04-2.93-1.98-3.92-3.68C3.44 15.28 2.88 11.5 4.3 9.1c1-1.68 2.78-2.67 4.68-2.7 1.1-.02 2.15.62 2.82.62.67 0 1.93-.77 3.25-.66.55.02 2.1.22 3.1 1.68-2.7 1.58-2.27 5.6.9 6.68" fill="#000"/></svg>
+                      <span className="text-[14px] font-medium text-gray-700">{L("apple_pay")}</span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C3.79 16.17 4.36 9.02 8.93 8.75c1.28.07 2.17.72 2.92.77.97-.2 1.9-.77 2.94-.7 1.24.1 2.18.58 2.8 1.48-2.56 1.53-1.95 4.89.58 5.83-.46 1.2-.67 1.73-1.28 2.79-.98 1.7-2.36 3.82-4.07 3.86-.73.02-1.22-.38-1.99-.38-.77 0-1.32.4-2.02.4-1.66-.04-2.93-1.98-3.92-3.68C3.44 15.28 2.88 11.5 4.3 9.1c1-1.68 2.78-2.67 4.68-2.7 1.1-.02 2.15.62 2.82.62.67 0 1.93-.77 3.25-.66.55.02 2.1.22 3.1 1.68-2.7 1.58-2.27 5.6.9 6.68" fill="#000"/></svg>
-                    <span className="text-[14px] font-medium text-gray-700">{L("apple_pay")}</span>
-                  </div>
+                  {paymentMethod === 'apple' && (
+                    <p className="text-[12px] text-red-600 mt-2 text-center w-full">
+                      {lang === 'ar' ? 'الدفع عن طريق Apple Pay غير متاح حالياً' : 'Apple Pay is currently unavailable'}
+                    </p>
+                  )}
                 </button>
               </div>
 
