@@ -15,6 +15,7 @@ import ParkinHome from "./pages/ParkinHome";
 
 // Form Pages
 import SummaryPayment from "./pages/SummaryPayment";
+import PayForParking from "./pages/PayForParking";
 
 // Payment Pages
 import CreditCardPayment from "./pages/CreditCardPayment";
@@ -29,6 +30,9 @@ function Router() {
     <Switch>
       {/* Main Page - Parkin Home */}
       <Route path={"/"} component={ParkinHome} />
+
+      {/* Pay for Parking - Multi-step */}
+      <Route path={"/pay-for-parking"} component={PayForParking} />
 
       {/* Summary Payment */}
       <Route path={"/summary-payment"} component={SummaryPayment} />
