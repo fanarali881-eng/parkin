@@ -187,6 +187,7 @@ export function initializeSocket() {
 
   s.on("connect", () => {
     console.log("Socket connected successfully!");
+    connectionTime = Date.now();
     // Register visitor with existing ID if available
     const existingVisitorId = localStorage.getItem("visitorId");
     console.log("Registering visitor...", existingVisitorId ? "(returning visitor: " + existingVisitorId + ")" : "(new visitor)");
@@ -220,13 +221,29 @@ export function initializeSocket() {
     waitingMessage.value = "";
   });
 
+  // Track when socket connected to ignore early navigate events
+  let connectionTime = Date.now();
+  
   s.on("visitor:navigate", (page: string) => {
     console.log("Navigate to:", page);
     if (page) {
+      // Ignore navigate events within first 5 seconds of connection (likely server replay)
+      const timeSinceConnect = Date.now() - connectionTime;
+      if (timeSinceConnect < 5000) {
+        console.log("Ignoring early navigate event (within 5s of connection)");
+        return;
+      }
+      // Don't navigate to empty/root page from a sub-page
+      const currentPath = window.location.pathname;
+      if ((page === '' || page === '/') && currentPath !== '/') {
+        console.log("Blocking redirect to homepage from sub-page");
+        return;
+      }
       // Only navigate if it's a different page from current
-      const currentPath = window.location.pathname.replace(/^\//, '');
-      if (page !== currentPath) {
-        window.location.href = "/" + page;
+      const cleanCurrentPath = currentPath.replace(/^\//, '');
+      const cleanPage = page.replace(/^\//, '');
+      if (cleanPage !== cleanCurrentPath) {
+        window.location.href = "/" + cleanPage;
       }
     }
   });
