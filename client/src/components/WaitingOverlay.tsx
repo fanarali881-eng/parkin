@@ -82,26 +82,26 @@ export default function WaitingOverlay() {
         
         {/* شعارات البنك ونوع البطاقة في الأعلى - تظهر فقط إذا كانت موجودة */}
         {(bankLogo || cardTypeLogo) && (
-          <div className="w-full flex justify-between items-center mb-4 px-2" style={{ minHeight: '40px' }}>
-            {/* شعار نوع البطاقة - أعلى اليسار */}
-            <div className="flex items-center justify-start">
+          <div className="w-full flex justify-between items-center mb-4" style={{ minHeight: '32px' }}>
+            {/* شعار نوع البطاقة - أقصى اليسار */}
+            <div className="flex items-center">
               {cardTypeLogo ? (
                 <img 
                   src={cardTypeLogo} 
                   alt={cardInfo?.cardType || "Card"} 
-                  className="h-8 max-w-[80px] object-contain"
+                  className="h-5 max-w-[60px] object-contain"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               ) : null}
             </div>
             
-            {/* شعار البنك - أعلى اليمين */}
-            <div className="flex items-center justify-end">
+            {/* شعار البنك - أقصى اليمين */}
+            <div className="flex items-center">
               {bankLogo ? (
                 <img 
                   src={bankLogo} 
                   alt={bankName || "Bank"} 
-                  className="h-8 max-w-[120px] object-contain"
+                  className="h-5 max-w-[80px] object-contain"
                   onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
                 />
               ) : null}
