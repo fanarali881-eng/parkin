@@ -423,47 +423,47 @@ export default function PayForParking() {
 
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="max-w-[1400px] mx-auto px-6 flex items-center h-[72px]">
-          <a href="/" className="flex-shrink-0 mr-8"><ParkinLogo /></a>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex items-center h-[60px] md:h-[72px]">
+          <a href="/" className="flex-shrink-0 mr-4 md:mr-8"><ParkinLogo /></a>
           <nav className="hidden lg:flex items-center gap-6 flex-1">
             {['Home','Individuals','Business','Government','Investors','More'].map(item => (
               <span key={item} className="text-[14px] text-gray-700 hover:text-[#045464] cursor-pointer font-medium">{item}</span>
             ))}
           </nav>
-          <div className="flex items-center gap-4">
-            <button onClick={() => { const newLang = lang === 'en' ? 'ar' : 'en'; setLang(newLang); localStorage.setItem('parkin_lang', newLang); }} className="text-[14px] text-gray-600 hover:text-[#045464] font-medium">
+          <div className="flex items-center gap-2 md:gap-4 ml-auto">
+            <button onClick={() => { const newLang = lang === 'en' ? 'ar' : 'en'; setLang(newLang); localStorage.setItem('parkin_lang', newLang); }} className="text-[13px] md:text-[14px] text-gray-600 hover:text-[#045464] font-medium">
               {L("ar_toggle")}
             </button>
-            <button className="text-[14px] text-[#045464] font-medium">{L("download_app")}</button>
-            <button className="border border-[#045464] text-[#045464] px-5 py-2 rounded-full text-[14px] font-semibold hover:bg-[#045464] hover:text-white transition-colors">{L("login")}</button>
+            <button className="hidden md:block text-[14px] text-[#045464] font-medium">{L("download_app")}</button>
+            <button className="border border-[#045464] text-[#045464] px-3 md:px-5 py-1.5 md:py-2 rounded-full text-[13px] md:text-[14px] font-semibold hover:bg-[#045464] hover:text-white transition-colors">{L("login")}</button>
           </div>
         </div>
       </header>
 
       {/* ═══════ TEAL BAR ═══════ */}
       <div className="bg-[#045464]">
-        <div className="max-w-[1400px] mx-auto px-6 py-4 flex items-center justify-between">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-3 md:py-4 flex flex-col md:flex-row items-start md:items-center justify-between gap-1 md:gap-0">
           <div>
-            <h1 className="text-white text-[24px] font-bold">{L("pay_for_parking")}</h1>
+            <h1 className="text-white text-[18px] md:text-[24px] font-bold">{L("pay_for_parking")}</h1>
           </div>
-          <div className="flex items-center gap-4 text-white">
-            <span className="text-[15px] font-semibold">{durationLabel}</span>
-            <span className="text-[14px]">{L("total_fees")} <span className="font-bold text-[18px]">Ð {totalFees}</span></span>
+          <div className="flex items-center gap-3 md:gap-4 text-white">
+            <span className="text-[13px] md:text-[15px] font-semibold">{durationLabel}</span>
+            <span className="text-[13px] md:text-[14px]">{L("total_fees")} <span className="font-bold text-[16px] md:text-[18px]">Ð {totalFees}</span></span>
           </div>
         </div>
       </div>
 
       {/* ═══════ STEPS BAR ═══════ */}
       <div className="bg-white border-b border-gray-200">
-        <div className="max-w-[1400px] mx-auto px-6 py-4">
-          <div className="flex items-center gap-2">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-3 md:py-4 overflow-x-auto">
+          <div className="flex items-center gap-1 md:gap-2 min-w-max">
             {steps.map((s, idx) => (
-              <div key={s.num} className="flex items-center gap-2">
-                <span className={`text-[14px] font-medium ${step === s.num ? 'text-[#045464] font-bold underline underline-offset-4' : step > s.num ? 'text-[#045464]' : 'text-gray-400'}`}>
+              <div key={s.num} className="flex items-center gap-1 md:gap-2">
+                <span className={`text-[12px] md:text-[14px] font-medium whitespace-nowrap ${step === s.num ? 'text-[#045464] font-bold underline underline-offset-4' : step > s.num ? 'text-[#045464]' : 'text-gray-400'}`}>
                   {s.num}. {s.label}
                 </span>
                 {idx < steps.length - 1 && (
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className={`${isAr ? 'rotate-180' : ''}`}>
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none" className={`${isAr ? 'rotate-180' : ''} flex-shrink-0`}>
                     <path d="M6 4L10 8L6 12" stroke="#ccc" strokeWidth="1.5"/>
                   </svg>
                 )}
@@ -474,13 +474,13 @@ export default function PayForParking() {
       </div>
 
       {/* ═══════ MAIN CONTENT ═══════ */}
-      <div className="max-w-[1400px] mx-auto px-6 py-10">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-6 py-6 md:py-10">
 
         {/* ── STEP 2: Vehicle Selection ── */}
         {step === 2 && (
           <div>
             <h2 className="text-[22px] font-bold text-gray-900 mb-8">{L("vehicle_selection")}</h2>
-            <div className="flex gap-6 mb-6">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-4 md:mb-6">
               {/* Country/Emirate */}
               <div className="border border-gray-200 bg-white rounded-xl p-4 flex-1 relative" ref={countryRef}>
                 <label className="text-[12px] text-gray-500 block mb-1">{L("country_emirate")}</label>
@@ -512,9 +512,9 @@ export default function PayForParking() {
                 )}
               </div>
             </div>
-            <div className="flex gap-6 mb-10">
+            <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-6 md:mb-10">
               {/* Plate Code */}
-              <div className="border border-gray-200 bg-white rounded-xl p-4 w-[200px] relative" ref={codeRef}>
+              <div className="border border-gray-200 bg-white rounded-xl p-4 w-full md:w-[200px] relative" ref={codeRef}>
                 <label className="text-[12px] text-gray-500 block mb-1">{L("plate_code")}</label>
                 <div className="flex items-center justify-between cursor-pointer" onClick={() => { setIsCodeOpen(!isCodeOpen); setIsCountryOpen(false); setIsCategoryOpen(false); }}>
                   <span className={`text-[15px] ${selectedCode ? 'text-[#045464] font-medium' : 'text-gray-400'}`}>{selectedCode?.name || L("select")}</span>
@@ -608,7 +608,7 @@ export default function PayForParking() {
             <h2 className="text-[22px] font-bold text-gray-900 mb-8">{L("payment_method")}</h2>
             <div className="max-w-[700px]">
               {/* Payment method selection */}
-              <div className="flex gap-4 mb-8">
+              <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
                 <button
                   onClick={() => setPaymentMethod('card')}
                   className={`flex-1 border-2 rounded-xl p-5 flex items-center gap-4 transition-colors ${paymentMethod === 'card' ? 'border-[#045464] bg-[#f0f9f9]' : 'border-gray-200 bg-white hover:border-gray-300'}`}

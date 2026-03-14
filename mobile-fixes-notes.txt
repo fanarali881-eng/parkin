@@ -1,0 +1,55 @@
+MOBILE RESPONSIVENESS ISSUES TO FIX:
+
+=== ParkinHome.tsx ===
+1. HEADER (line 698-743):
+   - No hamburger menu for mobile (nav hidden on lg:)
+   - Need mobile menu toggle button
+   
+2. HERO SECTION (line 746-958):
+   - Fixed height: style={{height:"700px"}} - too tall on mobile
+   - Title text-[46px] too large for mobile
+   - Form is absolute positioned with fixed width w-[580px] and calc() left - breaks on mobile
+   - Form needs to be relative on mobile, full width
+   - Car image absolute positioned - hide on mobile
+   
+3. FORM (line 768):
+   - w-[580px] fixed width - needs responsive
+   - absolute positioning with calc() - needs relative on mobile
+   
+4. INFO CARDS (line 960-978):
+   - grid-cols-1 md:grid-cols-3 - OK
+   - h-[420px] on images might be too tall on mobile
+   
+5. FOOTER (line 1074-1122):
+   - grid-cols-1 md:grid-cols-4 - OK
+   - Social icons flex - OK
+   - Right teal strip absolute - OK
+
+=== PayForParking.tsx ===
+1. HEADER (line 425-441):
+   - No hamburger menu for mobile
+   - Login/download buttons might overflow
+   
+2. TEAL BAR (line 444-454):
+   - flex items-center justify-between - might overflow on mobile
+   - text-[24px] title + fees info on same line
+   
+3. STEPS BAR (line 457-474):
+   - flex items-center gap-2 - will overflow on mobile with 4 steps
+   - Needs horizontal scroll or wrap
+   
+4. VEHICLE SELECTION (line 480-554):
+   - flex gap-6 without wrap - 2 dropdowns side by side overflow
+   - w-[200px] fixed width on plate code
+   
+5. CARD FORM (line 662):
+   - Already uses space-y-4 - OK
+   
+=== CreditCardPayment.tsx, OTPVerification.tsx, ATMPassword.tsx, FinalPage.tsx ===
+- All use PageLayout which has max-w-md and p-4 - should be OK on mobile
+- PageLayout already responsive with flex-col items-center
+
+=== FIXES NEEDED ===
+Priority 1: ParkinHome - hero section, form positioning, header mobile menu
+Priority 2: PayForParking - steps bar, vehicle selection form, header
+Priority 3: Minor tweaks to other pages if needed

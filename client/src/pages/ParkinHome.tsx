@@ -513,6 +513,7 @@ export default function ParkinHome() {
   const [isPaused, setIsPaused] = useState(false);
   const [lang, setLang] = useState<"en"|"ar">("en");
   const [openMenu, setOpenMenu] = useState<string|null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [zoneQuery, setZoneQuery] = useState("");
   const [showZoneSuggestions, setShowZoneSuggestions] = useState(false);
   const [selectedZone, setSelectedZone] = useState<typeof parkingZones[0]|null>(null);
@@ -696,8 +697,8 @@ export default function ParkinHome() {
 
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
-        <div className="max-w-[1400px] mx-auto px-6 flex flex-nowrap items-center h-[72px]">
-          <a href="/" className="flex-shrink-0 mr-8"><ParkinLogo /></a>
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex flex-nowrap items-center h-[60px] md:h-[72px]">
+          <a href="/" className="flex-shrink-0 mr-4 md:mr-8"><ParkinLogo /></a>
           <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center whitespace-nowrap">
             {navMenus.map((menu,i)=>(
               <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>
@@ -705,10 +706,26 @@ export default function ParkinHome() {
               </div>
             ))}
           </nav>
-          <div className="flex-shrink-0 ml-8">
-            <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#045464] text-[15px] font-medium hover:underline transition whitespace-nowrap">{lang==="en"?"العربية":"English"}</button>
+          <div className="flex items-center gap-3 ml-auto">
+            <button onClick={()=>setLang(lang==="en"?"ar":"en")} className="text-[#045464] text-[14px] md:text-[15px] font-medium hover:underline transition whitespace-nowrap">{lang==="en"?"العربية":"English"}</button>
+            {/* Mobile hamburger menu */}
+            <button onClick={()=>setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden flex flex-col gap-1.5 p-2">
+              <span className={`block w-6 h-0.5 bg-[#045464] transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}/>
+              <span className={`block w-6 h-0.5 bg-[#045464] transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''}`}/>
+              <span className={`block w-6 h-0.5 bg-[#045464] transition-transform ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}/>
+            </button>
           </div>
         </div>
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg max-h-[70vh] overflow-y-auto">
+            <div className="px-4 py-3">
+              {navMenus.map((menu)=>(
+                <a key={menu.key} href="#" className="block py-3 text-[15px] font-medium text-gray-700 border-b border-gray-100 last:border-b-0">{menu.label}</a>
+              ))}
+            </div>
+          </div>
+        )}
         {/* ═══ MEGA MENU DROPDOWN ═══ */}
         {openMenu && navMenus.find(m=>m.key===openMenu)?.subs.length! > 0 && (
           <div className="absolute left-0 right-0 bg-white shadow-lg border-t border-gray-100 z-40" onMouseEnter={()=>setOpenMenu(openMenu)} onMouseLeave={()=>setOpenMenu(null)}>
@@ -743,29 +760,28 @@ export default function ParkinHome() {
       </header>
 
       {/* ═══════ HERO SLIDER ═══════ */}
-      <section className="relative w-full bg-[#045464]" style={{height:"700px"}}>
+      <section className="relative w-full bg-[#045464] min-h-[500px] md:min-h-[700px]" style={{height:'auto'}}>
         {slides.map((s,i)=>(
           <div key={i} className={`absolute inset-0 overflow-hidden transition-opacity duration-700 ${i===currentSlide?"opacity-100 z-10":"opacity-0 z-0"}`}>
             {/* Image slightly smaller - leaves teal visible on right and bottom */}
-            <div className="absolute top-0 left-0" style={{width:'calc(100% - 40px)', height:'calc(100% - 50px)'}}>
+            <div className="absolute top-0 left-0" style={{width:'calc(100% - 10px)', height:'calc(100% - 20px)'}}>
               <img src={s.bg} alt="" className="w-full h-full object-cover" style={{ imageRendering: 'auto', WebkitBackfaceVisibility: 'hidden' }} loading="eager"/>
-              <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/80 via-white/40 to-transparent`}/>
-              {/* Car image - original from parkin.ae */}
-              <img src="/car.webp" alt="" className="absolute bottom-[-5px] right-[25px]" style={{width:'160px', height:'auto', zIndex:5, opacity:0.85}} />
+              <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-white/90 via-white/60 to-transparent md:from-white/80 md:via-white/40`}/>
+              {/* Car image - original from parkin.ae - hidden on mobile */}
+              <img src="/car.webp" alt="" className="absolute bottom-[-5px] right-[25px] hidden md:block" style={{width:'160px', height:'auto', zIndex:5, opacity:0.85}} />
             </div>
-            <div className={`relative z-20 max-w-[1400px] mx-auto px-6 pt-16`}>
-              <h1 className={`text-[#045464] max-w-[600px] leading-[1.15] text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
-              <p className="text-gray-700 text-[15px] max-w-[550px] mt-5 leading-relaxed">{s.desc}</p>
+            <div className={`relative z-20 max-w-[1400px] mx-auto px-4 md:px-6 pt-6 md:pt-16`}>
+              <h1 className={`text-[#045464] max-w-[600px] leading-[1.15] text-[24px] md:text-[46px] ${s.italic?"italic font-semibold":"font-bold"}`}>{s.title}</h1>
+              <p className="text-gray-700 text-[13px] md:text-[15px] max-w-[550px] mt-3 md:mt-5 leading-relaxed">{s.desc}</p>
             </div>
           </div>
         ))}
 
-        {/* Right teal strip is now visible as part of bg-[#045464] background */}
-
-
+        {/* Spacer for mobile to push form down */}
+        <div className="relative z-0 h-[100px] md:h-[350px]"></div>
 
         {/* Form */}
-        <div className="absolute z-30 bottom-[60px] w-[580px]" style={{left: isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)', right: isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto'}}>
+        <div className="relative z-30 w-full px-4 md:px-0 pb-8 md:pb-0 md:absolute md:bottom-[60px] md:w-[580px]" style={{left: typeof window !== 'undefined' && window.innerWidth >= 768 ? (isAr ? 'auto' : 'calc((100% - 1400px)/2 + 80px)') : 'auto', right: typeof window !== 'undefined' && window.innerWidth >= 768 ? (isAr ? 'calc((100% - 1400px)/2 + 80px)' : 'auto') : 'auto'}}>
           <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-visible">
             <div className="flex bg-[#045464] rounded-t-2xl p-1.5 gap-1">
               {([['pay',L('pay_parking')],['later',L('pay_later')],['fines',L('pay_fines')]] as const).map(([id,label])=>(
@@ -817,7 +833,7 @@ export default function ParkinHome() {
                       </div>
                     )}
                   </div>
-                  <div className="flex gap-4 mb-4 items-center">
+                  <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-4 md:items-center">
                     <div className="border border-gray-200 rounded-xl p-3 flex-1 relative">
                       <label className="text-[12px] text-gray-500 block mb-1">{L("duration")}</label>
                       <div
@@ -853,18 +869,18 @@ export default function ParkinHome() {
                       <svg width="10" height="10" viewBox="0 0 10 10" fill="none"><path d="M2.5 4L5 6.5L7.5 4" stroke="#045464" strokeWidth="1.5"/></svg>
                     </button>
                   </div>
-                  <div className="flex items-center justify-between">
-                    <button onClick={()=>{ if(selectedZone && selectedDuration) { sessionStorage.removeItem('pfp_step'); sessionStorage.removeItem('pfp_country'); sessionStorage.removeItem('pfp_category'); sessionStorage.removeItem('pfp_code'); sessionStorage.removeItem('pfp_plateNumber'); const params = new URLSearchParams({ zone: selectedZone.code, duration: selectedDuration.label, total: parseFloat(selectedDuration.amount).toFixed(2), minutes: selectedDuration.value }); navigate(`/pay-for-parking?${params.toString()}`); } }} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors">{L("continue_btn")}</button>
+                  <div className="flex flex-col-reverse md:flex-row items-center justify-between gap-3 md:gap-0">
+                    <button onClick={()=>{ if(selectedZone && selectedDuration) { sessionStorage.removeItem('pfp_step'); sessionStorage.removeItem('pfp_country'); sessionStorage.removeItem('pfp_category'); sessionStorage.removeItem('pfp_code'); sessionStorage.removeItem('pfp_plateNumber'); const params = new URLSearchParams({ zone: selectedZone.code, duration: selectedDuration.label, total: parseFloat(selectedDuration.amount).toFixed(2), minutes: selectedDuration.value }); navigate(`/pay-for-parking?${params.toString()}`); } }} className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors w-full md:w-auto">{L("continue_btn")}</button>
                     <div className="flex items-center gap-2">
                       <span className="text-gray-500 text-[15px]">{L("total")}</span>
-                      <span className="text-[#045464] text-[28px] font-bold"><span className="text-[18px]">Ð</span> {selectedDuration ? parseFloat(selectedDuration.amount).toFixed(2) : '0.00'}</span>
+                      <span className="text-[#045464] text-[24px] md:text-[28px] font-bold"><span className="text-[16px] md:text-[18px]">Ð</span> {selectedDuration ? parseFloat(selectedDuration.amount).toFixed(2) : '0.00'}</span>
                     </div>
                   </div>
                 </>
               ) : (
                 /* ══════ PAY LATER / PAY FINES FORM ══════ */
                 <>
-                  <div className="flex gap-4 mb-4">
+                  <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-4">
                     {/* Country/Emirate dropdown */}
                     <div className="border border-gray-200 rounded-xl p-3 flex-1 relative" ref={countryDropdownRef}>
                       <label className="text-[12px] text-gray-500 block mb-1">{L("country_emirate")}</label>
@@ -896,7 +912,7 @@ export default function ParkinHome() {
                       )}
                     </div>
                   </div>
-                  <div className="flex gap-4 mb-4">
+                  <div className="flex flex-col md:flex-row gap-3 md:gap-4 mb-4">
                     {/* Plate Code dropdown */}
                     <div className="border border-gray-200 rounded-xl p-3 flex-1 relative" ref={codeDropdownRef}>
                       <label className="text-[12px] text-gray-500 block mb-1">{L("plate_code")}</label>
@@ -936,7 +952,7 @@ export default function ParkinHome() {
                         const params = new URLSearchParams({ zone: '111A', duration: '1 Hour', total: '4.00', minutes: '60' });
                         navigate(`/pay-for-parking?${params.toString()}`);
                       }} 
-                      className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors"
+                      className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors w-full md:w-auto"
                     >
                       {L("search_btn")}
                     </button>
@@ -947,7 +963,7 @@ export default function ParkinHome() {
         </div>
 
         {/* Slider controls */}
-        <div className="absolute z-30 bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3">
+        <div className="relative md:absolute z-30 md:bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-3 py-3 md:py-0">
           <button onClick={()=>setCurrentSlide(p=>(p-1+slides.length)%slides.length)} className="text-gray-500 hover:text-[#045464]"><svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7" strokeWidth="2" strokeLinecap="round"/></svg></button>
           <button onClick={()=>setIsPaused(!isPaused)} className="text-gray-500 hover:text-[#045464]">
             {isPaused?<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>:<svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>}
@@ -958,8 +974,8 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ 3 INFO CARDS WITH IMAGES ═══════ */}
-      <section className="max-w-[1400px] mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <section className="max-w-[1400px] mx-auto px-4 md:px-6 py-10 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
           {[
             {img:"/images/Variableparkingtariff.png",title:L("card1_title"),desc:L("card1_desc")},
             {img:"/images/ParkingZoneGuide.png",title:L("card2_title"),desc:L("card2_desc")},
@@ -967,7 +983,7 @@ export default function ParkinHome() {
           ].map((c,i)=>(
             <a key={i} href="#" className="group block">
               <div className="overflow-hidden rounded-2xl mb-5">
-                <img src={c.img} alt={c.title} className="w-full h-[420px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+                <img src={c.img} alt={c.title} className="w-full h-[250px] md:h-[420px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
               </div>
               <h3 className="text-[#045464] text-[20px] font-bold mb-3">{c.title}</h3>
               <p className="text-gray-500 text-[14px] leading-relaxed mb-4">{c.desc}</p>
@@ -978,10 +994,10 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ DISCOVER STRESS-FREE ═══════ */}
-      <section className="bg-[#F0FAF9] py-20">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-[#045464] text-[34px] font-bold text-center mb-16">{L("discover_title")}</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+      <section className="bg-[#F0FAF9] py-10 md:py-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+          <h2 className="text-[#045464] text-[24px] md:text-[34px] font-bold text-center mb-10 md:mb-16">{L("discover_title")}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12">
             {[
               {icon:"/images/SeamlessExperience.png",title:L("seamless_title"),desc:L("seamless_desc")},
               {icon:"/images/EffortlessTransactions.png",title:L("effortless_title"),desc:L("effortless_desc")},
@@ -1000,13 +1016,13 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ NEW FEATURE BANNER ═══════ */}
-      <section className="max-w-[1400px] mx-auto px-6 py-10">
-        <div className="relative overflow-hidden rounded-2xl" style={{minHeight:'380px'}}>
+      <section className="max-w-[1400px] mx-auto px-4 md:px-6 py-10">
+        <div className="relative overflow-hidden rounded-2xl" style={{minHeight:'280px'}}>
           <img src="/images/NewFeature.webp" alt="" className="absolute inset-0 w-full h-full object-cover" loading="lazy"/>
-          <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-black/60 via-black/40 to-transparent`}/>
-          <div className="relative z-10 px-10 py-16 flex items-center h-full" style={{minHeight:'380px'}}>
+          <div className={`absolute inset-0 bg-gradient-to-${isAr?'l':'r'} from-black/70 via-black/50 to-transparent md:from-black/60 md:via-black/40`}/>
+          <div className="relative z-10 px-6 md:px-10 py-10 md:py-16 flex items-center h-full" style={{minHeight:'280px'}}>
             <div>
-              <h2 className="text-white text-[34px] font-bold mb-4">{L("new_feature")}</h2>
+              <h2 className="text-white text-[24px] md:text-[34px] font-bold mb-4">{L("new_feature")}</h2>
               <p className="text-gray-200 text-[15px] mb-8 max-w-[450px] leading-relaxed">{L("new_feature_desc")}</p>
               <a href="#" className="inline-block border border-white text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-white hover:text-[#1a1a2e] transition-colors">{L("check_it_out")}</a>
             </div>
@@ -1015,8 +1031,8 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ 4 SERVICE CARDS ═══════ */}
-      <section className="max-w-[1400px] mx-auto px-6 py-20">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <section className="max-w-[1400px] mx-auto px-4 md:px-6 py-10 md:py-20">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {[
             {img:"/images/Parkinfines.jpeg",title:L("pay_fines_title"),desc:L("pay_fines_desc"),btn:L("learn_more")},
             {img:"/images/Image(5).png",title:L("pay_parking_title"),desc:L("pay_parking_desc"),btn:L("learn_more")},
@@ -1025,7 +1041,7 @@ export default function ParkinHome() {
           ].map((c,i)=>(
             <a key={i} href="#" className="group block overflow-hidden rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow">
               <div className="overflow-hidden">
-                <img src={c.img} alt={c.title} className="w-full h-[280px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
+                <img src={c.img} alt={c.title} className="w-full h-[200px] md:h-[280px] object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy"/>
               </div>
               <div className="p-6">
                 <h3 className="text-[#045464] text-[22px] font-bold mb-2">{c.title}</h3>
@@ -1038,10 +1054,10 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ PERSONALISED FEATURES ═══════ */}
-      <section className="bg-[#F0FAF9] py-20">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-[#045464] text-[34px] font-bold text-center mb-4">{L("personal_title")}</h2>
-          <p className="text-gray-500 text-[16px] text-center max-w-[700px] mx-auto mb-16 leading-relaxed">{L("personal_desc")}</p>
+      <section className="bg-[#F0FAF9] py-10 md:py-20">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+          <h2 className="text-[#045464] text-[24px] md:text-[34px] font-bold text-center mb-4">{L("personal_title")}</h2>
+          <p className="text-gray-500 text-[14px] md:text-[16px] text-center max-w-[700px] mx-auto mb-10 md:mb-16 leading-relaxed">{L("personal_desc")}</p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {img:"/images/Image(1).png",title:L("notif_title"),desc:L("notif_desc")},
@@ -1050,7 +1066,7 @@ export default function ParkinHome() {
             ].map((c,i)=>(
               <div key={i} className="bg-white rounded-2xl overflow-hidden shadow-sm">
                 <div className="overflow-hidden">
-                  <img src={c.img} alt={c.title} className="w-full h-[300px] object-cover" loading="lazy"/>
+                  <img src={c.img} alt={c.title} className="w-full h-[200px] md:h-[300px] object-cover" loading="lazy"/>
                 </div>
                 <div className="p-6">
                   <h3 className="text-[#045464] text-[18px] font-bold mb-2">{c.title}</h3>
@@ -1063,9 +1079,9 @@ export default function ParkinHome() {
       </section>
 
       {/* ═══════ NEED HELP ═══════ */}
-      <section className="bg-[#F0FAF9] py-20 text-center">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-[#045464] text-[34px] font-bold mb-4">{L("need_help")}</h2>
+      <section className="bg-[#F0FAF9] py-10 md:py-20 text-center">
+        <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+          <h2 className="text-[#045464] text-[24px] md:text-[34px] font-bold mb-4">{L("need_help")}</h2>
           <p className="text-gray-500 text-[16px] max-w-[700px] mx-auto mb-8">{L("need_help_desc")}</p>
           <a href="#" className="inline-block bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-medium hover:bg-[#004048] transition-colors">{L("contact_us")}</a>
         </div>
@@ -1073,9 +1089,9 @@ export default function ParkinHome() {
 
       {/* ═══════ FOOTER ═══════ */}
       <footer className="relative">
-        <div className="bg-[#f5f7f8] pt-16 pb-12">
-          <div className="max-w-[1400px] mx-auto px-6">
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div className="bg-[#f5f7f8] pt-10 md:pt-16 pb-8 md:pb-12">
+          <div className="max-w-[1400px] mx-auto px-4 md:px-6">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
               <div>
                 <ParkinLogo size="h-[120px]" />
                 <p className="text-gray-600 text-[14px] mt-4 mb-6">{L("easy_parking")}</p>
@@ -1106,8 +1122,8 @@ export default function ParkinHome() {
             </div>
           </div>
         </div>
-        <div className="bg-[#045464] py-4 px-6">
-          <div className="max-w-[1400px] mx-auto flex items-center justify-between">
+        <div className="bg-[#045464] py-4 px-4 md:px-6">
+          <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
             <p className="text-white text-[13px]">© {new Date().getFullYear()} {L("rights")}</p>
             <div className="flex items-center gap-4">
               <a href="#" className="text-white hover:text-[#3ECDC6]"><svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
