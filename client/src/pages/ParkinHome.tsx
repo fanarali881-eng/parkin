@@ -500,10 +500,14 @@ const t: Record<string, Record<string, string>> = {
 };
 
 /* ───── Logo Component ───── */
-function ParkinLogo({ white = false, size = 'h-[50px]', mobileSize = '' }: { white?: boolean; size?: string; mobileSize?: string }) {
-  const sizeClass = mobileSize ? `${mobileSize} md:${size}` : size;
+function ParkinLogo({ white = false, size = 'h-[50px]', inHeader = false }: { white?: boolean; size?: string; inHeader?: boolean }) {
   return (
-    <img src="/images/parkin-logo.png" alt="Parkin" className={`${sizeClass} w-auto max-w-[100px] md:max-w-none`} style={white ? {filter:'brightness(0) invert(1)'} : {}}/>
+    <img 
+      src="/images/parkin-logo.png" 
+      alt="Parkin" 
+      className={`${inHeader ? 'parkin-header-logo' : size} w-auto`} 
+      style={white ? {filter:'brightness(0) invert(1)'} : {}}
+    />
   );
 }
 
@@ -699,7 +703,7 @@ export default function ParkinHome() {
       {/* ═══════ HEADER ═══════ */}
       <header className="sticky top-0 z-50 bg-white shadow-sm">
         <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex flex-nowrap items-center h-[60px] md:h-[72px]">
-          <a href="/" className="flex-shrink-0 mr-4 md:mr-8"><ParkinLogo mobileSize="h-[32px]" /></a>
+          <a href="/" className="flex-shrink-0 mr-4 md:mr-8"><ParkinLogo inHeader /></a>
           <nav className="hidden lg:flex items-center gap-6 flex-1 justify-center whitespace-nowrap">
             {navMenus.map((menu,i)=>(
               <div key={menu.key} className="relative" onMouseEnter={()=>menu.subs.length>0&&setOpenMenu(menu.key)} onMouseLeave={()=>setOpenMenu(null)}>

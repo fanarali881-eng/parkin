@@ -146,6 +146,17 @@
   }
 }
 
+/* Parkin header logo - responsive sizing */
+.parkin-header-logo {
+  height: 28px;
+  width: auto;
+}
+@media (min-width: 768px) {
+  .parkin-header-logo {
+    height: 45px;
+  }
+}
+
 /* Global mobile responsive fixes */
 html {
   -webkit-text-size-adjust: 100%;
