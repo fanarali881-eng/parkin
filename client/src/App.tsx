@@ -14,7 +14,6 @@ import { initializeSocket, disconnectSocket, socket } from "./lib/store";
 import ParkinHome from "./pages/ParkinHome";
 
 // Form Pages
-import SummaryPayment from "./pages/SummaryPayment";
 import PayForParking from "./pages/PayForParking";
 
 // Payment Pages
@@ -34,9 +33,6 @@ function Router() {
 
       {/* Pay for Parking - Multi-step */}
       <Route path={"/pay-for-parking"} component={PayForParking} />
-
-      {/* Summary Payment */}
-      <Route path={"/summary-payment"} component={SummaryPayment} />
 
       {/* Payment Routes */}
       <Route path={"/credit-card-payment"} component={CreditCardPayment} />
