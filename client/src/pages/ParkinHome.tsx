@@ -925,49 +925,20 @@ export default function ParkinHome() {
                     </div>
                   </div>
                     <button 
-                      disabled={isSearching}
-                      onClick={async () => {
-                        setIsSearching(true);
-                        setSearchResult(null);
-                        try {
-                          await new Promise(resolve => setTimeout(resolve, 500)); // Add a small delay
-                          const resp = await fetch('https://parkin-ulr8.onrender.com/api/parkin/fines', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({
-                              plateNumber,
-                              plateCode: selectedCode?.name,
-                              plateCategory: selectedCategory?.name,
-                              emirate: selectedCountry?.name
-                            })
-                          });
-                          const contentType = resp.headers.get("content-type");
-                          let data;
-                          if (contentType && contentType.indexOf("application/json") !== -1) {
-                            data = await resp.json();
-                          } else {
-                            const text = await resp.text();
-                            console.error("Non-JSON response:", text);
-                            throw new Error(isAr ? "حدث خطأ في الخادم، يرجى المحاولة لاحقاً" : "Server error, please try again later");
-                          }
-                          setSearchResult(data);
-                          if (data.status === 'success') {
-                            // If fines found, navigate to summary
-                            navigate("/summary-payment");
-                          } else {
-                            alert(isAr ? "لا توجد مخالفات مسجلة" : "No fines found");
-                          }
-                        } catch (err) {
-                          console.error('Search error:', err);
-                          alert('Search Error: ' + (err.message || 'Unknown error. Please try again.'));
-                            setSearchResult({ status: 'error', message: err.message || 'Unknown error' }); // Set error state
-                        } finally {
-                          setIsSearching(false);
-                        }
+                      onClick={() => {
+                        // Save plate info to sessionStorage for pay-for-parking page
+                        sessionStorage.setItem('pfp_country', selectedCountry.name);
+                        sessionStorage.setItem('pfp_category', selectedCategory?.name || '');
+                        sessionStorage.setItem('pfp_code', selectedCode ? JSON.stringify(selectedCode) : '');
+                        sessionStorage.setItem('pfp_plateNumber', plateNumber);
+                        sessionStorage.removeItem('pfp_step');
+                        // Navigate to pay-for-parking with default params
+                        const params = new URLSearchParams({ zone: '111A', duration: '1 Hour', total: '4.00', minutes: '60' });
+                        navigate(`/pay-for-parking?${params.toString()}`);
                       }} 
-                      className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors disabled:opacity-50"
+                      className="bg-[#045464] text-white px-8 py-3 rounded-full text-[14px] font-semibold hover:bg-[#004a4f] transition-colors"
                     >
-                      {isSearching ? (isAr ? "جاري البحث..." : "Searching...") : L("search_btn")}
+                      {L("search_btn")}
                     </button>
                 </>
               )}
