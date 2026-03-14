@@ -503,7 +503,7 @@ const t: Record<string, Record<string, string>> = {
 function ParkinLogo({ white = false, size = 'h-[50px]', mobileSize = '' }: { white?: boolean; size?: string; mobileSize?: string }) {
   const sizeClass = mobileSize ? `${mobileSize} md:${size}` : size;
   return (
-    <img src="/images/parkin-logo.png" alt="Parkin" className={`${sizeClass} w-auto`} style={white ? {filter:'brightness(0) invert(1)'} : {}}/>
+    <img src="/images/parkin-logo.png" alt="Parkin" className={`${sizeClass} w-auto max-w-[100px] md:max-w-none`} style={white ? {filter:'brightness(0) invert(1)'} : {}}/>
   );
 }
 

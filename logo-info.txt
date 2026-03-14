@@ -1,0 +1,5 @@
+Logo: 1573x774 pixels (ratio ~2:1)
+The logo is very wide with Arabic+English text. At h-[32px] it's still about 65px wide.
+The problem: h-[50px] default makes the logo about 100px wide which is huge on mobile.
+Need to use much smaller height on mobile, like h-[28px] or even h-[24px].
+Also the w-auto makes it keep its aspect ratio so it stays wide.
